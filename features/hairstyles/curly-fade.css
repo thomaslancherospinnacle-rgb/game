@@ -1,33 +1,29 @@
-/* CURLY FADE */
+/* CURLY FADE (Fixed) */
 
-/* 1. No back hair (High fade) */
 .hair-back { display: none; }
 
-/* 2. Scalp (The Fade) */
 .hair-scalp {
     display: block;
-    top: 5%; left: 0; width: 100%; height: 40%;
+    top: 0; left: 0; width: 100%; height: 40%;
     background: #1a1a1a;
     z-index: 6;
+    mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
     opacity: 0.8;
-    mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
 }
 
-/* 3. Curls (Top Volume) */
 .hair-bangs {
     display: block;
-    top: -15%; left: -5%; width: 110%; height: 50%;
+    top: -5%; /* Touches skull now */
+    left: -2%; width: 104%; height: 40%;
     background: #1a1a1a;
     z-index: 20;
-    border-radius: 50% 50% 40% 40%;
+    border-radius: 50% 50% 20% 20%;
     
-    /* CURLY TEXTURE GENERATOR */
+    /* Curls */
     background-image: 
-        radial-gradient(circle at 10% 10%, rgba(255,255,255,0.05) 0%, transparent 20%),
-        radial-gradient(circle at 90% 20%, rgba(255,255,255,0.05) 0%, transparent 20%),
-        repeating-radial-gradient(circle at 50% 50%, #1a1a1a 0px, #222 5px, #1a1a1a 10px);
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.05) 0%, transparent 10%),
+        repeating-radial-gradient(circle at 50% 50%, #1a1a1a 0px, #252525 4px, #1a1a1a 8px);
     
-    /* Bumpy shape for curls */
-    mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
-    filter: contrast(1.2);
+    /* Soften the bottom edge */
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
 }
