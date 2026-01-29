@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="css/core.css">
 
     <link id="load-hair" rel="stylesheet" href="features/hairstyles/afro.css">
+    <link id="load-shape" rel="stylesheet" href="features/faceshapes/oval.css">
     <link id="load-eyes" rel="stylesheet" href="features/eyes/default.css">
     <link id="load-brows" rel="stylesheet" href="features/eyebrows/default.css">
-    <link id="load-mouth" rel="stylesheet" href="features/mouth/default.css">
+    <link id="load-mouth" rel="stylesheet" href="features/mouth/natural.css">
     <link id="load-nose" rel="stylesheet" href="features/nose/default.css">
 </head>
 <body>
@@ -19,7 +20,8 @@
         <div class="face-display">
             <div class="head-rig">
                 
-                <div class="hair-back"></div> <div class="neck"></div>
+                <div class="hair-back"></div> 
+                <div class="neck"></div>
                 <div class="ears">
                     <div class="ear left"></div>
                     <div class="ear right"></div>
@@ -58,37 +60,87 @@
         <div class="controls">
             <h2>Character Lab</h2>
             
+            <div class="control-group">
+                <label>Face Shape</label>
+                <select onchange="swapFeature('faceshapes', this.value)">
+                    <option value="oval">Oval (Default)</option>
+                    <option value="square">Square / Strong</option>
+                    <option value="round">Round / Soft</option>
+                    <option value="heart">Heart Shape</option>
+                    <option value="long">Long / Noble</option>
+                </select>
+            </div>
+
+            <div class="control-group">
                 <label>Hair Style</label>
                 <select onchange="swapFeature('hairstyles', this.value)">
-                    <option value="bald">Bald</option>
+                    <option value="afro">Natural Afro</option>
                     <option value="short">Short Spiked</option>
-                    <option value="crop">Textured Crop</option> <option value="curly-fade">Curly Fade</option> <option value="pompadour">Pompadour</option> <option value="crew">Crew Cut</option> <option value="part">Side Part</option> <option value="afro">Natural Afro</option>
+                    <option value="crop">Textured Crop</option>
+                    <option value="curly-fade">Curly Fade</option>
+                    <option value="pompadour">Pompadour</option>
+                    <option value="crew">Crew Cut</option>
+                    <option value="part">Side Part</option>
                     <option value="long">Long & Straight</option>
+                    <option value="bald">Bald</option>
                 </select>
+            </div>
 
-            <label>Skin Tone</label>
-            <select onchange="updateColor('--skin-base', this.value)">
-                <option value="#ffd7ba">Porcelain</option>
-                <option value="#8b5e45" selected>Tan</option>
-                <option value="#3b241c">Ebony</option>
-            </select>
+            <div class="control-group">
+                <label>Lip Style</label>
+                <select onchange="swapFeature('mouth', this.value)">
+                    <option value="natural">Natural</option>
+                    <option value="full">Full / Plump</option>
+                    <option value="thin">Thin / Stern</option>
+                    <option value="cupid">Cupid's Bow</option>
+                    <option value="wide">Wide Smile</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Skin Tone</label>
+                <select onchange="updateColor('--skin-base', this.value)">
+                    <option value="#ffd7ba">Porcelain</option>
+                    <option value="#e8b599">Light</option>
+                    <option value="#c58c60">Medium</option>
+                    <option value="#8b5e45" selected>Tan</option>
+                    <option value="#5c3a2f">Deep</option>
+                    <option value="#3b241c">Ebony</option>
+                </select>
+            </div>
+
+            <button onclick="randomize()">Randomize DNA</button>
         </div>
     </div>
 
     <script>
-        // 1. Feature Swapper (Changes the CSS file)
-        function swapFeature(category, featureName) {
-            const linkTag = document.getElementById(`load-${category.replace('hairstyles', 'hair')}`); // maps hairstyles -> load-hair
+        // 1. Feature Swapper Engine
+        function swapFeature(folderName, fileName) {
+            // Map folder names to the ID of the <link> tag
+            const idMap = {
+                'hairstyles': 'load-hair',
+                'faceshapes': 'load-shape',
+                'mouth': 'load-mouth',
+                'eyes': 'load-eyes',
+                'eyebrows': 'load-brows',
+                'nose': 'load-nose'
+            };
+
+            const linkId = idMap[folderName];
+            const linkTag = document.getElementById(linkId);
+            
             if (linkTag) {
-                linkTag.href = `features/${category}/${featureName}.css`;
+                linkTag.href = `features/${folderName}/${fileName}.css`;
+            } else {
+                console.error(`Link tag with ID '${linkId}' not found.`);
             }
         }
 
-        // 2. Color Updater (Same as before)
+        // 2. Color Engine
         function updateColor(varName, colorHex) {
             const r = document.documentElement.style;
             
-            // Helper to generate light/dark variants automatically
+            // Helper to generate light/dark variants
             const adjust = (hex, amt) => {
                 const num = parseInt(hex.replace('#',''), 16);
                 let r = (num >> 16) + amt;
@@ -99,13 +151,26 @@
             }
 
             r.setProperty(varName, colorHex);
+            
+            // If skin, update shadow and highlight automatically
             if(varName.includes('skin')) {
                 r.setProperty('--skin-shadow', adjust(colorHex, -40));
                 r.setProperty('--skin-highlight', adjust(colorHex, 30));
             }
         }
         
-        // Init colors
+        // 3. Randomizer
+        function randomize() {
+            const selects = document.querySelectorAll('select');
+            selects.forEach(s => {
+                const randomIdx = Math.floor(Math.random() * s.options.length);
+                s.selectedIndex = randomIdx;
+                // Trigger the change event
+                s.onchange(); 
+            });
+        }
+
+        // Init colors on load
         updateColor('--skin-base', '#8b5e45');
     </script>
 </body>
