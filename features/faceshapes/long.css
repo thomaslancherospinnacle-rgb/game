@@ -1,8 +1,7 @@
-/* LONG FACE (Tall & Narrow) */
+/* LONG FACE (Fixed) */
 .skull {
-    height: 360px; /* Taller */
+    height: 380px; /* Taller */
     width: 240px;  /* Narrower */
-    border-radius: 40% 40% 40% 40% / 30% 30% 50% 50%;
+    border-radius: 40% 40% 45% 45% / 30% 30% 60% 60%;
+    /* No feature repositioning needed - keeping them centered is safer */
 }
-/* Move features down slightly to fit length */
-.face-features { top: 50%; }
