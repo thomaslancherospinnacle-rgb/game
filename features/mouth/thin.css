@@ -1,0 +1,8 @@
+/* THIN LIPS */
+.mouth { 
+    width: 45px; 
+    height: 8px; /* Very short */
+    border-radius: 2px 2px 10px 10px; 
+    background: #4a2e25; 
+    opacity: 0.6;
+}
