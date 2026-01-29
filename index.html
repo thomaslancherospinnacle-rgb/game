@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modular Character Generator</title>
+    
+    <link rel="stylesheet" href="css/core.css">
+
+    <link id="load-hair" rel="stylesheet" href="features/hairstyles/afro.css">
+    <link id="load-eyes" rel="stylesheet" href="features/eyes/default.css">
+    <link id="load-brows" rel="stylesheet" href="features/eyebrows/default.css">
+    <link id="load-mouth" rel="stylesheet" href="features/mouth/default.css">
+    <link id="load-nose" rel="stylesheet" href="features/nose/default.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="face-display">
+            <div class="head-rig">
+                
+                <div class="hair-back"></div> <div class="neck"></div>
+                <div class="ears">
+                    <div class="ear left"></div>
+                    <div class="ear right"></div>
+                </div>
+
+                <div class="skull">
+                    <div class="hair-scalp"></div> <div class="face-features">
+                        <div class="brows">
+                            <div class="brow left"></div>
+                            <div class="brow right"></div>
+                        </div>
+                        <div class="eyes">
+                            <div class="eye left">
+                                <div class="iris"><div class="pupil"></div></div>
+                                <div class="eyelid-upper"></div>
+                            </div>
+                            <div class="eye right">
+                                <div class="iris"><div class="pupil"></div></div>
+                                <div class="eyelid-upper"></div>
+                            </div>
+                        </div>
+                        <div class="nose">
+                            <div class="nose-shadow"></div>
+                            <div class="nostril left"></div>
+                            <div class="nostril right"></div>
+                        </div>
+                        <div class="mouth"></div>
+                    </div>
+                </div>
+
+                <div class="hair-bangs"></div>
+
+            </div>
+        </div>
+
+        <div class="controls">
+            <h2>Character Lab</h2>
+            
+            <label>Hair Style</label>
+            <select onchange="swapFeature('hairstyles', this.value)">
+                <option value="afro">Natural Afro</option>
+                <option value="long">Long & Straight</option>
+                <option value="short">Short Spiked</option>
+                <option value="bald">Bald</option>
+            </select>
+
+            <label>Skin Tone</label>
+            <select onchange="updateColor('--skin-base', this.value)">
+                <option value="#ffd7ba">Porcelain</option>
+                <option value="#8b5e45" selected>Tan</option>
+                <option value="#3b241c">Ebony</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        // 1. Feature Swapper (Changes the CSS file)
+        function swapFeature(category, featureName) {
+            const linkTag = document.getElementById(`load-${category.replace('hairstyles', 'hair')}`); // maps hairstyles -> load-hair
+            if (linkTag) {
+                linkTag.href = `features/${category}/${featureName}.css`;
+            }
+        }
+
+        // 2. Color Updater (Same as before)
+        function updateColor(varName, colorHex) {
+            const r = document.documentElement.style;
+            
+            // Helper to generate light/dark variants automatically
+            const adjust = (hex, amt) => {
+                const num = parseInt(hex.replace('#',''), 16);
+                let r = (num >> 16) + amt;
+                let g = ((num >> 8) & 0x00FF) + amt;
+                let b = (num & 0x0000FF) + amt;
+                const clamp = val => Math.max(0, Math.min(255, val));
+                return `rgb(${clamp(r)},${clamp(g)},${clamp(b)})`;
+            }
+
+            r.setProperty(varName, colorHex);
+            if(varName.includes('skin')) {
+                r.setProperty('--skin-shadow', adjust(colorHex, -40));
+                r.setProperty('--skin-highlight', adjust(colorHex, 30));
+            }
+        }
+        
+        // Init colors
+        updateColor('--skin-base', '#8b5e45');
+    </script>
+</body>
+</html>
