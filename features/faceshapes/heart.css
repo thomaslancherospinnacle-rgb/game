@@ -1,0 +1,5 @@
+/* HEART FACE (Wide Forehead, Narrow Chin) */
+.skull {
+    /* Wide top, very sharp bottom taper */
+    border-radius: 50% 50% 50% 50% / 40% 40% 90% 90%;
+}
