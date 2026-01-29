@@ -3,5 +3,5 @@
     height: 380px; /* Taller */
     width: 240px;  /* Narrower */
     border-radius: 40% 40% 45% 45% / 30% 30% 60% 60%;
-    /* No feature repositioning needed - keeping them centered is safer */
+    /* Removed the rule that pushed features down */
 }
