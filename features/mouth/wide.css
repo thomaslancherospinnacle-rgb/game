@@ -1,0 +1,17 @@
+/* WIDE MOUTH */
+.mouth { 
+    width: 70px; /* Much wider */
+    height: 20px; 
+    border-radius: 5px 5px 30px 30px; 
+    background: #5c3a2f; 
+    opacity: 0.7;
+}
+/* Corner shadows for depth */
+.mouth::before, .mouth::after {
+    content: ''; position: absolute; top: 0; 
+    width: 5px; height: 5px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 50%;
+}
+.mouth::before { left: -2px; }
+.mouth::after { right: -2px; }
