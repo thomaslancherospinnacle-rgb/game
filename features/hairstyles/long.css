@@ -1,0 +1,42 @@
+/* 1. Main Mass (Behind) */
+.hair-back {
+    display: block;
+    top: 0; left: -10%;
+    width: 120%; height: 140%;
+    background: linear-gradient(to bottom, #1a1a1a, #0d0d0d);
+    border-radius: 100px 100px 0 0;
+    z-index: 0;
+}
+
+/* 2. Scalp (Parting) */
+.hair-scalp {
+    display: block;
+    top: 0; left: 0; width: 100%; height: 20%;
+    background: #1a1a1a;
+    /* Middle part fade */
+    mask-image: linear-gradient(to right, black 48%, transparent 50%, black 52%);
+    z-index: 6;
+}
+
+/* 3. Side Strands (In Front) */
+.hair-bangs {
+    display: block;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 20;
+}
+
+/* Left Strand */
+.hair-bangs::before {
+    content: ''; position: absolute;
+    top: 0; left: -2px; width: 40px; height: 120%;
+    background: linear-gradient(90deg, #1a1a1a, #222);
+    border-radius: 20px 0 20px 20px;
+}
+
+/* Right Strand */
+.hair-bangs::after {
+    content: ''; position: absolute;
+    top: 0; right: -2px; width: 40px; height: 120%;
+    background: linear-gradient(-90deg, #1a1a1a, #222);
+    border-radius: 0 20px 20px 20px;
+}
