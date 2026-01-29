@@ -1,0 +1,17 @@
+/* FULL / PLUMP LIPS */
+.mouth { 
+    width: 55px; 
+    height: 24px; 
+    border-radius: 15px; /* Rounder everywhere */
+    background: #7a4a3a; /* Slightly redder */
+    opacity: 0.85;
+    box-shadow: inset 0 5px 5px rgba(0,0,0,0.2); /* Volume shadow */
+}
+/* Highlight for gloss */
+.mouth::after {
+    content: ''; position: absolute;
+    top: 20%; left: 30%; width: 40%; height: 30%;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    filter: blur(2px);
+}
