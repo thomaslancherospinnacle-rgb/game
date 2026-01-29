@@ -1,0 +1,30 @@
+/* SHORT SPIKED (Fixed) */
+
+.hair-back { display: none; }
+
+/* The Fade on the sides */
+.hair-scalp {
+    display: block;
+    top: 0; left: 0; width: 100%; height: 50%;
+    background: linear-gradient(to bottom, #1a1a1a, transparent 90%);
+    z-index: 6;
+    mask-image: radial-gradient(ellipse at center 120%, transparent 60%, black 70%);
+}
+
+/* The Spikes */
+.hair-bangs {
+    display: block;
+    top: -5%; /* Moved down to touch head */
+    left: 2%; width: 96%; height: 45%;
+    background: #1a1a1a;
+    z-index: 20;
+    
+    /* Spiky TOP, Flat BOTTOM */
+    clip-path: polygon(
+        0% 100%, /* Bottom Left */
+        0% 30%, 10% 10%, 20% 30%, 30% 5%, 40% 25%, 50% 0%, 60% 25%, 70% 5%, 80% 30%, 90% 10%, 100% 30%, /* Spikes */
+        100% 100% /* Bottom Right */
+    );
+    
+    background-image: repeating-linear-gradient(95deg, transparent, rgba(255,255,255,0.05) 1px, transparent 3px);
+}
