@@ -1,0 +1,7970 @@
+[
+  {
+    "team_id": "team_0001",
+    "team_name": "Alavés",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0002",
+    "team_name": "Athletic Club",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0003",
+    "team_name": "Athletic Club de Bilbao",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0004",
+    "team_name": "Atlético Madrid",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0005",
+    "team_name": "Atlético de Madrid",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0006",
+    "team_name": "Barcelona",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0007",
+    "team_name": "CA Osasuna",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0008",
+    "team_name": "Celta Vigo",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0009",
+    "team_name": "Cádiz CF",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0010",
+    "team_name": "Deportivo Alavés",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0011",
+    "team_name": "Elche CF",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0012",
+    "team_name": "Espanyol",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0013",
+    "team_name": "FC Barcelona",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0014",
+    "team_name": "Getafe",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0015",
+    "team_name": "Getafe CF",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0016",
+    "team_name": "Girona",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0017",
+    "team_name": "Granada CF",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0018",
+    "team_name": "Las Palmas",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0019",
+    "team_name": "Leganés",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0020",
+    "team_name": "Levante Unión Deportiva",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0021",
+    "team_name": "Mallorca",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0022",
+    "team_name": "Osasuna",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0023",
+    "team_name": "RC Celta de Vigo",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0024",
+    "team_name": "RCD Espanyol de Barcelona",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0025",
+    "team_name": "RCD Mallorca",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0026",
+    "team_name": "Rayo Vallecano",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0027",
+    "team_name": "Real Betis",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0028",
+    "team_name": "Real Betis Balompié",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0029",
+    "team_name": "Real Madrid",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0030",
+    "team_name": "Real Madrid CF",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0031",
+    "team_name": "Real Sociedad",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0032",
+    "team_name": "Real Valladolid",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0033",
+    "team_name": "Sevilla",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0034",
+    "team_name": "Sevilla FC",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0035",
+    "team_name": "Valencia",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0036",
+    "team_name": "Valencia CF",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0037",
+    "team_name": "Villarreal",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0038",
+    "team_name": "Villarreal CF",
+    "country": "Spain",
+    "league_name": "La Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0039",
+    "team_name": "AD Alcorcón",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0040",
+    "team_name": "Albacete",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0041",
+    "team_name": "Almería",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0042",
+    "team_name": "Burgos",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0043",
+    "team_name": "Burgos CF",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0044",
+    "team_name": "CD Leganés",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0045",
+    "team_name": "CD Lugo",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0046",
+    "team_name": "CD Mirandés",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0047",
+    "team_name": "CD Tenerife",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0048",
+    "team_name": "CF Fuenlabrada",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0049",
+    "team_name": "Cartagena",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0050",
+    "team_name": "Castellón",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0051",
+    "team_name": "Cádiz",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0052",
+    "team_name": "Córdoba",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0053",
+    "team_name": "Deportivo La Coruña",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0054",
+    "team_name": "Eibar",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0055",
+    "team_name": "Elche",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0056",
+    "team_name": "Eldense",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0057",
+    "team_name": "FC Cartagena",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0058",
+    "team_name": "Girona FC",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0059",
+    "team_name": "Granada",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0060",
+    "team_name": "Huesca",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0061",
+    "team_name": "Levante",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0062",
+    "team_name": "Mirandés",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0063",
+    "team_name": "Málaga",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0064",
+    "team_name": "Málaga CF",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0065",
+    "team_name": "Racing Ferrol",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0066",
+    "team_name": "Racing Santander",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0067",
+    "team_name": "Real Oviedo",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0068",
+    "team_name": "Real Sociedad B",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0069",
+    "team_name": "Real Sporting de Gijón",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0070",
+    "team_name": "Real Valladolid CF",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0071",
+    "team_name": "Real Zaragoza",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0072",
+    "team_name": "SD Amorebieta",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0073",
+    "team_name": "SD Eibar",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0074",
+    "team_name": "SD Huesca",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0075",
+    "team_name": "SD Ponferradina",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0076",
+    "team_name": "Sporting Gijón",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0077",
+    "team_name": "Tenerife",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0078",
+    "team_name": "UD Ibiza",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0079",
+    "team_name": "Unión Deportiva Almería",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0080",
+    "team_name": "Unión Deportiva Las Palmas",
+    "country": "Spain",
+    "league_name": "Segunda División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0081",
+    "team_name": "AFC Bournemouth",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0082",
+    "team_name": "Barnsley",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0083",
+    "team_name": "Birmingham City",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0084",
+    "team_name": "Blackburn Rovers",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0085",
+    "team_name": "Blackpool",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0086",
+    "team_name": "Bristol City",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0087",
+    "team_name": "Cardiff City",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0088",
+    "team_name": "Coventry City",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0089",
+    "team_name": "Derby County",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0090",
+    "team_name": "Fulham",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0091",
+    "team_name": "Huddersfield Town",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0092",
+    "team_name": "Hull City",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0093",
+    "team_name": "Luton Town",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0094",
+    "team_name": "Middlesbrough",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0095",
+    "team_name": "Millwall",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0096",
+    "team_name": "Nottingham Forest",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0097",
+    "team_name": "Peterborough United",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0098",
+    "team_name": "Preston North End",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0099",
+    "team_name": "Queens Park Rangers",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0100",
+    "team_name": "Reading",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0101",
+    "team_name": "Sheffield United",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0102",
+    "team_name": "Stoke City",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0103",
+    "team_name": "Swansea City",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0104",
+    "team_name": "West Bromwich Albion",
+    "country": "England",
+    "league_name": "Championship",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0105",
+    "team_name": "AFC Wimbledon",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0106",
+    "team_name": "Accrington Stanley",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0107",
+    "team_name": "Bolton Wanderers",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0108",
+    "team_name": "Burton Albion",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0109",
+    "team_name": "Cambridge United",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0110",
+    "team_name": "Charlton Athletic",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0111",
+    "team_name": "Cheltenham Town",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0112",
+    "team_name": "Crewe Alexandra",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0113",
+    "team_name": "Doncaster Rovers",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0114",
+    "team_name": "Fleetwood Town",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0115",
+    "team_name": "Gillingham",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0116",
+    "team_name": "Ipswich Town",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0117",
+    "team_name": "Lincoln City",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0118",
+    "team_name": "Milton Keynes Dons",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0119",
+    "team_name": "Morecambe",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0120",
+    "team_name": "Oxford United",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0121",
+    "team_name": "Plymouth Argyle",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0122",
+    "team_name": "Portsmouth",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0123",
+    "team_name": "Rotherham United",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0124",
+    "team_name": "Sheffield Wednesday",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0125",
+    "team_name": "Shrewsbury Town",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0126",
+    "team_name": "Stockport County",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0127",
+    "team_name": "Sunderland",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0128",
+    "team_name": "Wigan Athletic",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0129",
+    "team_name": "Wrexham",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0130",
+    "team_name": "Wycombe Wanderers",
+    "country": "England",
+    "league_name": "League One",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0131",
+    "team_name": "Barrow",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0132",
+    "team_name": "Bradford City",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0133",
+    "team_name": "Bristol Rovers",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0134",
+    "team_name": "Bromley",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0135",
+    "team_name": "Carlisle United",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0136",
+    "team_name": "Chesterfield",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0137",
+    "team_name": "Colchester United",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0138",
+    "team_name": "Crawley Town",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0139",
+    "team_name": "Exeter City",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0140",
+    "team_name": "Forest Green Rovers",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0141",
+    "team_name": "Grimsby Town",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0142",
+    "team_name": "Harrogate Town",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0143",
+    "team_name": "Hartlepool United",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0144",
+    "team_name": "Leyton Orient",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0145",
+    "team_name": "MK Dons",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0146",
+    "team_name": "Mansfield Town",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0147",
+    "team_name": "Newport County",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0148",
+    "team_name": "Northampton Town",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0149",
+    "team_name": "Notts County",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0150",
+    "team_name": "Oldham Athletic",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0151",
+    "team_name": "Port Vale",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0152",
+    "team_name": "Rochdale",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0153",
+    "team_name": "Salford City",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0154",
+    "team_name": "Scunthorpe United",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0155",
+    "team_name": "Stevenage",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0156",
+    "team_name": "Sutton United",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0157",
+    "team_name": "Swindon Town",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0158",
+    "team_name": "Tranmere Rovers",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0159",
+    "team_name": "Walsall",
+    "country": "England",
+    "league_name": "League Two",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0160",
+    "team_name": "Wrexham AFC",
+    "country": "England",
+    "league_name": "National League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0161",
+    "team_name": "Arsenal",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0162",
+    "team_name": "Aston Villa",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0163",
+    "team_name": "Bournemouth",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0164",
+    "team_name": "Brentford",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0165",
+    "team_name": "Brighton & Hove Albion",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0166",
+    "team_name": "Burnley",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0167",
+    "team_name": "Chelsea",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0168",
+    "team_name": "Crystal Palace",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0169",
+    "team_name": "Everton",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0170",
+    "team_name": "Leeds United",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0171",
+    "team_name": "Leicester City",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0172",
+    "team_name": "Liverpool",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0173",
+    "team_name": "Manchester City",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0174",
+    "team_name": "Manchester United",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0175",
+    "team_name": "Newcastle United",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0176",
+    "team_name": "Norwich City",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0177",
+    "team_name": "Southampton",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0178",
+    "team_name": "Tottenham Hotspur",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0179",
+    "team_name": "Watford",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0180",
+    "team_name": "West Ham United",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0181",
+    "team_name": "Wolverhampton Wanderers",
+    "country": "England",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0182",
+    "team_name": "Albirex Niigata",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0183",
+    "team_name": "Avispa Fukuoka",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0184",
+    "team_name": "Cerezo Osaka",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0185",
+    "team_name": "Consadole Sapporo",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0186",
+    "team_name": "FC Tokyo",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0187",
+    "team_name": "Gamba Osaka",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0188",
+    "team_name": "Hokkaido Consadole Sapporo",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0189",
+    "team_name": "Jubilo Iwata",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0190",
+    "team_name": "Kashima Antlers",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0191",
+    "team_name": "Kashiwa Reysol",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0192",
+    "team_name": "Kawasaki Frontale",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0193",
+    "team_name": "Kyoto Sanga",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0194",
+    "team_name": "Machida Zelvia",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0195",
+    "team_name": "Nagoya Grampus",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0196",
+    "team_name": "Oita Trinita",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0197",
+    "team_name": "Sagan Tosu",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0198",
+    "team_name": "Sanfrecce Hiroshima",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0199",
+    "team_name": "Shimizu S-Pulse",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0200",
+    "team_name": "Shonan Bellmare",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0201",
+    "team_name": "Tokushima Vortis",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0202",
+    "team_name": "Tokyo Verdy",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0203",
+    "team_name": "Urawa Red Diamonds",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0204",
+    "team_name": "Vegalta Sendai",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0205",
+    "team_name": "Vissel Kobe",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0206",
+    "team_name": "Yokohama F. Marinos",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0207",
+    "team_name": "Yokohama FC",
+    "country": "Japan",
+    "league_name": "J1 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0208",
+    "team_name": "Blaublitz Akita",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0209",
+    "team_name": "Ehime FC",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0210",
+    "team_name": "Fagiano Okayama",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0211",
+    "team_name": "Fujieda MYFC",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0212",
+    "team_name": "Grulla Morioka",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0213",
+    "team_name": "Iwaki FC",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0214",
+    "team_name": "JEF United Chiba",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0215",
+    "team_name": "Kagoshima United",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0216",
+    "team_name": "Mito Hollyhock",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0217",
+    "team_name": "Montedio Yamagata",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0218",
+    "team_name": "Renofa Yamaguchi",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0219",
+    "team_name": "Roasso Kumamoto",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0220",
+    "team_name": "ThespaKusatsu Gunma",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0221",
+    "team_name": "Tochigi SC",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0222",
+    "team_name": "V-Varen Nagasaki",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0223",
+    "team_name": "Ventforet Kofu",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0224",
+    "team_name": "Zweigen Kanazawa",
+    "country": "Japan",
+    "league_name": "J2 League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0225",
+    "team_name": "Abha",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0226",
+    "team_name": "Abha Club",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0227",
+    "team_name": "Al Ahli",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0228",
+    "team_name": "Al Batin",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0229",
+    "team_name": "Al Ettifaq",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0230",
+    "team_name": "Al Faisaly",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0231",
+    "team_name": "Al Fateh",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0232",
+    "team_name": "Al Fayha",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0233",
+    "team_name": "Al Hazem",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0234",
+    "team_name": "Al Hilal",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0235",
+    "team_name": "Al Ittihad",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0236",
+    "team_name": "Al Khaleej",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0237",
+    "team_name": "Al Kholood",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0238",
+    "team_name": "Al Nassr",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0239",
+    "team_name": "Al Okhdood",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0240",
+    "team_name": "Al Qadsiah",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0241",
+    "team_name": "Al Raed",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0242",
+    "team_name": "Al Riyadh",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0243",
+    "team_name": "Al Shabab",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0244",
+    "team_name": "Al Taawoun",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0245",
+    "team_name": "Al Tai",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0246",
+    "team_name": "Al Wehda",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0247",
+    "team_name": "Damac FC",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0248",
+    "team_name": "Ettifaq FC",
+    "country": "Saudi Arabia",
+    "league_name": "Saudi Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0249",
+    "team_name": "Atlas",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0250",
+    "team_name": "CF Monterrey",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0251",
+    "team_name": "Chivas Guadalajara",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0252",
+    "team_name": "Club América",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0253",
+    "team_name": "Club Atlas",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0254",
+    "team_name": "Club Atlético de San Luis",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0255",
+    "team_name": "Club Deportivo Guadalajara",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0256",
+    "team_name": "Club León",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0257",
+    "team_name": "Club Necaxa",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0258",
+    "team_name": "Club Tijuana",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0259",
+    "team_name": "Club Universidad Nacional",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0260",
+    "team_name": "Cruz Azul",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0261",
+    "team_name": "Deportivo Toluca",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0262",
+    "team_name": "Fútbol Club Juárez",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0263",
+    "team_name": "Gallos Blancos de Querétaro",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0264",
+    "team_name": "Juárez",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0265",
+    "team_name": "León",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0266",
+    "team_name": "Mazatlán",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0267",
+    "team_name": "Mazatlán Futbol Club",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0268",
+    "team_name": "Monterrey",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0269",
+    "team_name": "Necaxa",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0270",
+    "team_name": "Pachuca",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0271",
+    "team_name": "Puebla",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0272",
+    "team_name": "Puebla FC",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0273",
+    "team_name": "Pumas UNAM",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0274",
+    "team_name": "Querétaro",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0275",
+    "team_name": "San Luis",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0276",
+    "team_name": "Santos Laguna",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0277",
+    "team_name": "Tigres U.A.N.L.",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0278",
+    "team_name": "Tigres UANL",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0279",
+    "team_name": "Tijuana",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0280",
+    "team_name": "Toluca",
+    "country": "Mexico",
+    "league_name": "Liga MX",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0281",
+    "team_name": "Atlanta United",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0282",
+    "team_name": "Austin FC",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0283",
+    "team_name": "CF Montréal",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0284",
+    "team_name": "Charlotte FC",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0285",
+    "team_name": "Chicago Fire",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0286",
+    "team_name": "Chicago Fire Football Club",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0287",
+    "team_name": "Club de Foot Montréal",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0288",
+    "team_name": "Colorado Rapids",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0289",
+    "team_name": "Columbus Crew",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0290",
+    "team_name": "D.C. United",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0291",
+    "team_name": "FC Cincinnati",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0292",
+    "team_name": "FC Dallas",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0293",
+    "team_name": "Houston Dynamo",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0294",
+    "team_name": "Inter Miami",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0295",
+    "team_name": "Inter Miami CF",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0296",
+    "team_name": "LA Galaxy",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0297",
+    "team_name": "LAFC",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0298",
+    "team_name": "Los Angeles FC",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0299",
+    "team_name": "Minnesota United",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0300",
+    "team_name": "Minnesota United FC",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0301",
+    "team_name": "Nashville SC",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0302",
+    "team_name": "New England Revolution",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0303",
+    "team_name": "New York City FC",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0304",
+    "team_name": "New York Red Bulls",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0305",
+    "team_name": "Orlando City",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0306",
+    "team_name": "Orlando City Soccer Club",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0307",
+    "team_name": "Philadelphia Union",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0308",
+    "team_name": "Portland Timbers",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0309",
+    "team_name": "Real Salt Lake",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0310",
+    "team_name": "San Jose Earthquakes",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0311",
+    "team_name": "Seattle Sounders",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0312",
+    "team_name": "Seattle Sounders FC",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0313",
+    "team_name": "Sporting Kansas City",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0314",
+    "team_name": "St. Louis City SC",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0315",
+    "team_name": "Toronto FC",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0316",
+    "team_name": "Vancouver Whitecaps",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0317",
+    "team_name": "Vancouver Whitecaps FC",
+    "country": "United States",
+    "league_name": "MLS",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0318",
+    "team_name": "Argentinos Juniors",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0319",
+    "team_name": "Arsenal de Sarandí",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0320",
+    "team_name": "Atlético Tucumán",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0321",
+    "team_name": "Banfield",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0322",
+    "team_name": "Barracas Central",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0323",
+    "team_name": "Belgrano",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0324",
+    "team_name": "Boca Juniors",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0325",
+    "team_name": "Central Córdoba",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0326",
+    "team_name": "Club Atlético Aldosivi",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0327",
+    "team_name": "Club Atlético Banfield",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0328",
+    "team_name": "Club Atlético Central Córdoba",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0329",
+    "team_name": "Club Atlético Colón",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0330",
+    "team_name": "Club Atlético Huracán",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0331",
+    "team_name": "Club Atlético Independiente",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0332",
+    "team_name": "Club Atlético Lanús",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0333",
+    "team_name": "Club Atlético Sarmiento",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0334",
+    "team_name": "Club Atlético Talleres",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0335",
+    "team_name": "Colón",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0336",
+    "team_name": "Defensa y Justicia",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0337",
+    "team_name": "Deportivo Riestra",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0338",
+    "team_name": "Estudiantes",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0339",
+    "team_name": "Estudiantes de La Plata",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0340",
+    "team_name": "Gimnasia La Plata",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0341",
+    "team_name": "Gimnasia y Esgrima La Plata",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0342",
+    "team_name": "Godoy Cruz",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0343",
+    "team_name": "Huracán",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0344",
+    "team_name": "Independiente",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0345",
+    "team_name": "Instituto",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0346",
+    "team_name": "Lanús",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0347",
+    "team_name": "Newell's Old Boys",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0348",
+    "team_name": "Patronato",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0349",
+    "team_name": "Platense",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0350",
+    "team_name": "Racing Club",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0351",
+    "team_name": "River Plate",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0352",
+    "team_name": "Rosario Central",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0353",
+    "team_name": "San Lorenzo",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0354",
+    "team_name": "San Lorenzo de Almagro",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0355",
+    "team_name": "Sarmiento",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0356",
+    "team_name": "Talleres Córdoba",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0357",
+    "team_name": "Tigre",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0358",
+    "team_name": "Unión Santa Fe",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0359",
+    "team_name": "Unión de Santa Fe",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0360",
+    "team_name": "Vélez Sarsfield",
+    "country": "Argentina",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0361",
+    "team_name": "Associação Chapecoense de Futebol",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0362",
+    "team_name": "Athletico Paranaense",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0363",
+    "team_name": "Atlético Clube Goianiense",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0364",
+    "team_name": "Atlético Mineiro",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0365",
+    "team_name": "Bahia",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0366",
+    "team_name": "Botafogo",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0367",
+    "team_name": "Ceará Sporting Club",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0368",
+    "team_name": "Club Athletico Paranaense",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0369",
+    "team_name": "Clube Atlético Mineiro",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0370",
+    "team_name": "Corinthians",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0371",
+    "team_name": "Criciúma",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0372",
+    "team_name": "Cruzeiro",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0373",
+    "team_name": "Cuiabá",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0374",
+    "team_name": "Flamengo",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0375",
+    "team_name": "Fluminense",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0376",
+    "team_name": "Fortaleza",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0377",
+    "team_name": "Grêmio",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0378",
+    "team_name": "Internacional",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0379",
+    "team_name": "Juventude",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0380",
+    "team_name": "Palmeiras",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0381",
+    "team_name": "RB Bragantino",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0382",
+    "team_name": "Red Bull Bragantino",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0383",
+    "team_name": "Santos",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0384",
+    "team_name": "Sport Club Corinthians Paulista",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0385",
+    "team_name": "São Paulo",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0386",
+    "team_name": "Vasco da Gama",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0387",
+    "team_name": "Vitória",
+    "country": "Brazil",
+    "league_name": "Série A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0388",
+    "team_name": "AC Milan",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0389",
+    "team_name": "Atalanta",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0390",
+    "team_name": "Bologna",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0391",
+    "team_name": "Cagliari",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0392",
+    "team_name": "Como",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0393",
+    "team_name": "Empoli",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0394",
+    "team_name": "Fiorentina",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0395",
+    "team_name": "Genoa",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0396",
+    "team_name": "Hellas Verona",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0397",
+    "team_name": "Inter",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0398",
+    "team_name": "Inter Milan",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0399",
+    "team_name": "Juventus",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0400",
+    "team_name": "Lazio",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0401",
+    "team_name": "Monza",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0402",
+    "team_name": "Napoli",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0403",
+    "team_name": "Roma",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0404",
+    "team_name": "Spezia",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0405",
+    "team_name": "Torino",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0406",
+    "team_name": "Torino F.C.",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0407",
+    "team_name": "U.C. Sampdoria",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0408",
+    "team_name": "U.S. Sassuolo Calcio",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0409",
+    "team_name": "US Salernitana 1919",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0410",
+    "team_name": "Udinese",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0411",
+    "team_name": "Udinese Calcio",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0412",
+    "team_name": "Venezia",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0413",
+    "team_name": "Venezia FC",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0414",
+    "team_name": "Verona",
+    "country": "Italy",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0415",
+    "team_name": "AC Monza",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0416",
+    "team_name": "Bari",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0417",
+    "team_name": "Benevento",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0418",
+    "team_name": "Brescia",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0419",
+    "team_name": "Carrarese",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0420",
+    "team_name": "Catanzaro",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0421",
+    "team_name": "Cesena",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0422",
+    "team_name": "Cittadella",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0423",
+    "team_name": "Cosenza",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0424",
+    "team_name": "Cremonese",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0425",
+    "team_name": "Crotone",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0426",
+    "team_name": "Frosinone",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0427",
+    "team_name": "Juve Stabia",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0428",
+    "team_name": "Lecce",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0429",
+    "team_name": "Mantova",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0430",
+    "team_name": "Modena",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0431",
+    "team_name": "Palermo",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0432",
+    "team_name": "Parma",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0433",
+    "team_name": "Pisa",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0434",
+    "team_name": "Reggiana",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0435",
+    "team_name": "Salernitana",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0436",
+    "team_name": "Sampdoria",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0437",
+    "team_name": "Sassuolo",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0438",
+    "team_name": "Südtirol",
+    "country": "Italy",
+    "league_name": "Serie B",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0439",
+    "team_name": "AS Monaco",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0440",
+    "team_name": "AS Saint-Étienne",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0441",
+    "team_name": "Angers",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0442",
+    "team_name": "Angers SCO",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0443",
+    "team_name": "Auxerre",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0444",
+    "team_name": "Brest",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0445",
+    "team_name": "Clermont Foot 63",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0446",
+    "team_name": "ESTAC Troyes",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0447",
+    "team_name": "FC Girondins de Bordeaux",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0448",
+    "team_name": "FC Lorient",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0449",
+    "team_name": "FC Metz",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0450",
+    "team_name": "FC Nantes",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0451",
+    "team_name": "LOSC Lille",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0452",
+    "team_name": "Le Havre",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0453",
+    "team_name": "Lens",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0454",
+    "team_name": "Lille",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0455",
+    "team_name": "Lyon",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0456",
+    "team_name": "Marseille",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0457",
+    "team_name": "Monaco",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0458",
+    "team_name": "Montpellier",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0459",
+    "team_name": "Montpellier Hérault SC",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0460",
+    "team_name": "Nantes",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0461",
+    "team_name": "Nice",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0462",
+    "team_name": "OGC Nice",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0463",
+    "team_name": "Olympique Lyonnais",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0464",
+    "team_name": "Olympique de Marseille",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0465",
+    "team_name": "Paris Saint-Germain",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0466",
+    "team_name": "RC Strasbourg Alsace",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0467",
+    "team_name": "Racing Club de Lens",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0468",
+    "team_name": "Reims",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0469",
+    "team_name": "Rennes",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0470",
+    "team_name": "Saint-Étienne",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0471",
+    "team_name": "Stade Brestois 29",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0472",
+    "team_name": "Stade Rennais FC",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0473",
+    "team_name": "Stade de Reims",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0474",
+    "team_name": "Strasbourg",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0475",
+    "team_name": "Toulouse",
+    "country": "France",
+    "league_name": "Ligue 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0476",
+    "team_name": "AC Ajaccio",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0477",
+    "team_name": "AJ Auxerre",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0478",
+    "team_name": "AS Nancy Lorraine",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0479",
+    "team_name": "Ajaccio",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0480",
+    "team_name": "Amiens",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0481",
+    "team_name": "Amiens SC",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0482",
+    "team_name": "Bastia",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0483",
+    "team_name": "Bordeaux",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0484",
+    "team_name": "Caen",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0485",
+    "team_name": "Chamois Niortais Football Club",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0486",
+    "team_name": "Clermont",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0487",
+    "team_name": "Dijon FCO",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0488",
+    "team_name": "Dunkerque",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0489",
+    "team_name": "En Avant de Guingamp",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0490",
+    "team_name": "FC Sochaux-Montbéliard",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0491",
+    "team_name": "Grenoble",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0492",
+    "team_name": "Grenoble Foot 38",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0493",
+    "team_name": "Guingamp",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0494",
+    "team_name": "Laval",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0495",
+    "team_name": "Le Havre AC",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0496",
+    "team_name": "Lorient",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0497",
+    "team_name": "Martigues",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0498",
+    "team_name": "Metz",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0499",
+    "team_name": "Nîmes Olympique",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0500",
+    "team_name": "Paris FC",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0501",
+    "team_name": "Pau FC",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0502",
+    "team_name": "Red Star",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0503",
+    "team_name": "Rodez",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0504",
+    "team_name": "Rodez Aveyron Football",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0505",
+    "team_name": "SC Bastia",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0506",
+    "team_name": "Stade Malherbe Caen",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0507",
+    "team_name": "Toulouse Football Club",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0508",
+    "team_name": "Troyes",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0509",
+    "team_name": "US Quevilly Rouen Métropole",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0510",
+    "team_name": "USL Dunkerque",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0511",
+    "team_name": "Valenciennes FC",
+    "country": "France",
+    "league_name": "Ligue 2",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0512",
+    "team_name": "1. FC Heidenheim 1846",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0513",
+    "team_name": "1. FC Nürnberg",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0514",
+    "team_name": "Braunschweig",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0515",
+    "team_name": "Darmstadt 98",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0516",
+    "team_name": "Elversberg",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0517",
+    "team_name": "F.C. Hansa Rostock",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0518",
+    "team_name": "FC Erzgebirge Aue",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0519",
+    "team_name": "FC Ingolstadt 04",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0520",
+    "team_name": "FC Schalke 04",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0521",
+    "team_name": "FC St. Pauli",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0522",
+    "team_name": "Fortuna Düsseldorf",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0523",
+    "team_name": "Greuther Fürth",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0524",
+    "team_name": "Hamburger SV",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0525",
+    "team_name": "Hannover 96",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0526",
+    "team_name": "Holstein Kiel",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0527",
+    "team_name": "Kaiserslautern",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0528",
+    "team_name": "Karlsruher SC",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0529",
+    "team_name": "Magdeburg",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0530",
+    "team_name": "Münster",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0531",
+    "team_name": "Nürnberg",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0532",
+    "team_name": "Paderborn",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0533",
+    "team_name": "Regensburg",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0534",
+    "team_name": "SC Paderborn 07",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0535",
+    "team_name": "SG Dynamo Dresden",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0536",
+    "team_name": "SSV Jahn Regensburg",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0537",
+    "team_name": "SV Darmstadt 98",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0538",
+    "team_name": "SV Sandhausen",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0539",
+    "team_name": "SV Werder Bremen",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0540",
+    "team_name": "Schalke 04",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0541",
+    "team_name": "Ulm",
+    "country": "Germany",
+    "league_name": "2. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0542",
+    "team_name": "1. FC Kaiserslautern",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0543",
+    "team_name": "1. FC Magdeburg",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0544",
+    "team_name": "1. FC Saarbrücken",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0545",
+    "team_name": "Borussia Dortmund II",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0546",
+    "team_name": "Eintracht Braunschweig",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0547",
+    "team_name": "FC Viktoria 1889 Berlin",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0548",
+    "team_name": "FC Würzburger Kickers",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0549",
+    "team_name": "FSV Zwickau",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0550",
+    "team_name": "Hallescher FC",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0551",
+    "team_name": "MSV Duisburg",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0552",
+    "team_name": "SC Freiburg II",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0553",
+    "team_name": "SV Meppen",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0554",
+    "team_name": "SV Waldhof Mannheim 07",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0555",
+    "team_name": "SV Wehen Wiesbaden",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0556",
+    "team_name": "Sportclub Verl",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0557",
+    "team_name": "TSV 1860 München",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0558",
+    "team_name": "TSV Havelse",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0559",
+    "team_name": "Türkgücü München",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0560",
+    "team_name": "VfL Osnabrück",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0561",
+    "team_name": "Viktoria Köln",
+    "country": "Germany",
+    "league_name": "3. Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0562",
+    "team_name": "1. FC Köln",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0563",
+    "team_name": "1. FC Union Berlin",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0564",
+    "team_name": "1. FSV Mainz 05",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0565",
+    "team_name": "Augsburg",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0566",
+    "team_name": "Bayer 04 Leverkusen",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0567",
+    "team_name": "Bayer Leverkusen",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0568",
+    "team_name": "Bayern Munich",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0569",
+    "team_name": "Bochum",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0570",
+    "team_name": "Borussia Dortmund",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0571",
+    "team_name": "Borussia Mönchengladbach",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0572",
+    "team_name": "DSC Arminia Bielefeld",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0573",
+    "team_name": "Eintracht Frankfurt",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0574",
+    "team_name": "FC Augsburg",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0575",
+    "team_name": "FC Bayern München",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0576",
+    "team_name": "Freiburg",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0577",
+    "team_name": "Heidenheim",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0578",
+    "team_name": "Hertha BSC",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0579",
+    "team_name": "Hoffenheim",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0580",
+    "team_name": "Kiel",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0581",
+    "team_name": "Mainz 05",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0582",
+    "team_name": "RB Leipzig",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0583",
+    "team_name": "SpVgg Greuther Fürth",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0584",
+    "team_name": "Sport-Club Freiburg",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0585",
+    "team_name": "St. Pauli",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0586",
+    "team_name": "Stuttgart",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0587",
+    "team_name": "TSG Hoffenheim",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0588",
+    "team_name": "Union Berlin",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0589",
+    "team_name": "VfB Stuttgart",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0590",
+    "team_name": "VfL Bochum 1848",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0591",
+    "team_name": "VfL Wolfsburg",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0592",
+    "team_name": "Werder Bremen",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0593",
+    "team_name": "Wolfsburg",
+    "country": "Germany",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0594",
+    "team_name": "AVS",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0595",
+    "team_name": "Arouca",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0596",
+    "team_name": "Belenenses SAD",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0597",
+    "team_name": "Benfica",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0598",
+    "team_name": "Boavista",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0599",
+    "team_name": "Boavista FC",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0600",
+    "team_name": "Braga",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0601",
+    "team_name": "CD Tondela",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0602",
+    "team_name": "Casa Pia",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0603",
+    "team_name": "Clube Sport Marítimo",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0604",
+    "team_name": "Estoril",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0605",
+    "team_name": "Estoril Praia",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0606",
+    "team_name": "Estrela Amadora",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0607",
+    "team_name": "FC Arouca",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0608",
+    "team_name": "FC Paços de Ferreira",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0609",
+    "team_name": "FC Porto",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0610",
+    "team_name": "FC Vizela",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0611",
+    "team_name": "Famalicão",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0612",
+    "team_name": "Farense",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0613",
+    "team_name": "Futebol Clube de Famalicão",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0614",
+    "team_name": "Gil Vicente",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0615",
+    "team_name": "Gil Vicente FC",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0616",
+    "team_name": "Moreirense",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0617",
+    "team_name": "Moreirense FC",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0618",
+    "team_name": "Nacional",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0619",
+    "team_name": "Portimonense SC",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0620",
+    "team_name": "Porto",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0621",
+    "team_name": "Rio Ave",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0622",
+    "team_name": "SC Braga",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0623",
+    "team_name": "SL Benfica",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0624",
+    "team_name": "Santa Clara",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0625",
+    "team_name": "Sporting CP",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0626",
+    "team_name": "Vitória Guimarães",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0627",
+    "team_name": "Vitória de Guimarães",
+    "country": "Portugal",
+    "league_name": "Primeira Liga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0628",
+    "team_name": "AZ Alkmaar",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0629",
+    "team_name": "Ajax",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0630",
+    "team_name": "Almere City",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0631",
+    "team_name": "FC Groningen",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0632",
+    "team_name": "FC Twente",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0633",
+    "team_name": "FC Utrecht",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0634",
+    "team_name": "Feyenoord",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0635",
+    "team_name": "Fortuna Sittard",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0636",
+    "team_name": "Go Ahead Eagles",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0637",
+    "team_name": "Groningen",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0638",
+    "team_name": "Heerenveen",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0639",
+    "team_name": "Heracles Almelo",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0640",
+    "team_name": "N.E.C. Nijmegen",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0641",
+    "team_name": "NAC Breda",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0642",
+    "team_name": "NEC Nijmegen",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0643",
+    "team_name": "PEC Zwolle",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0644",
+    "team_name": "PSV",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0645",
+    "team_name": "PSV Eindhoven",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0646",
+    "team_name": "RKC Waalwijk",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0647",
+    "team_name": "SC Cambuur",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0648",
+    "team_name": "SC Heerenveen",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0649",
+    "team_name": "Sparta Rotterdam",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0650",
+    "team_name": "Vitesse",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0651",
+    "team_name": "Willem II",
+    "country": "Netherlands",
+    "league_name": "Eredivisie",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0652",
+    "team_name": "Anderlecht",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0653",
+    "team_name": "Beerschot",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0654",
+    "team_name": "Cercle Brugge",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0655",
+    "team_name": "Charleroi",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0656",
+    "team_name": "Club Brugge",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0657",
+    "team_name": "Club Brugge KV",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0658",
+    "team_name": "Dender",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0659",
+    "team_name": "Genk",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0660",
+    "team_name": "Gent",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0661",
+    "team_name": "K Beerschot VA",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0662",
+    "team_name": "KAA Gent",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0663",
+    "team_name": "KAS Eupen",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0664",
+    "team_name": "KRC Genk",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0665",
+    "team_name": "KSV Cercle Brugge",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0666",
+    "team_name": "KV Kortrijk",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0667",
+    "team_name": "KV Mechelen",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0668",
+    "team_name": "KV Oostende",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0669",
+    "team_name": "Kortrijk",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0670",
+    "team_name": "Mechelen",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0671",
+    "team_name": "OH Leuven",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0672",
+    "team_name": "Oud-Heverlee Leuven",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0673",
+    "team_name": "RSC Anderlecht",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0674",
+    "team_name": "Royal Antwerp",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0675",
+    "team_name": "Royal Antwerp FC",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0676",
+    "team_name": "Royal Charleroi S.C.",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0677",
+    "team_name": "Royale Union Saint-Gilloise",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0678",
+    "team_name": "SV Zulte Waregem",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0679",
+    "team_name": "Seraing",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0680",
+    "team_name": "Sint-Truiden",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0681",
+    "team_name": "Sint-Truidense VV",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0682",
+    "team_name": "Standard Liège",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0683",
+    "team_name": "Standard de Liège",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0684",
+    "team_name": "Union Saint-Gilloise",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0685",
+    "team_name": "Westerlo",
+    "country": "Belgium",
+    "league_name": "Belgian Pro League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0686",
+    "team_name": "Adana Demirspor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0687",
+    "team_name": "Alanyaspor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0688",
+    "team_name": "Altay SK",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0689",
+    "team_name": "Antalyaspor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0690",
+    "team_name": "Atakaş Hatayspor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0691",
+    "team_name": "Aytemiz Alanyaspor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0692",
+    "team_name": "Başakşehir",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0693",
+    "team_name": "Beşiktaş",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0694",
+    "team_name": "Beşiktaş JK",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0695",
+    "team_name": "Bodrum FK",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0696",
+    "team_name": "Demir Grup Sivasspor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0697",
+    "team_name": "Eyüpspor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0698",
+    "team_name": "Fatih Karagümrük S.K.",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0699",
+    "team_name": "Fenerbahçe",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0700",
+    "team_name": "Fenerbahçe SK",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0701",
+    "team_name": "GZT Giresunspor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0702",
+    "team_name": "Galatasaray",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0703",
+    "team_name": "Galatasaray SK",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0704",
+    "team_name": "Gaziantep FK",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0705",
+    "team_name": "Gazişehir Gaziantep F.K.",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0706",
+    "team_name": "Göztepe",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0707",
+    "team_name": "Göztepe SK",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0708",
+    "team_name": "Hatayspor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0709",
+    "team_name": "Kasimpaşa SK",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0710",
+    "team_name": "Kasımpaşa",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0711",
+    "team_name": "Kayserispor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0712",
+    "team_name": "Konyaspor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0713",
+    "team_name": "Rizespor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0714",
+    "team_name": "Samsunspor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0715",
+    "team_name": "Sivasspor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0716",
+    "team_name": "Trabzonspor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0717",
+    "team_name": "Yeni Malatyaspor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0718",
+    "team_name": "Yukatel Kayserispor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0719",
+    "team_name": "Çaykur Rizespor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0720",
+    "team_name": "İstanbul Başakşehir FK",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0721",
+    "team_name": "İttifak Holding Konyaspor",
+    "country": "Turkey",
+    "league_name": "Süper Lig",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0722",
+    "team_name": "Aberdeen",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0723",
+    "team_name": "Celtic",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0724",
+    "team_name": "Dundee",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0725",
+    "team_name": "Dundee FC",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0726",
+    "team_name": "Dundee United",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0727",
+    "team_name": "Heart of Midlothian",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0728",
+    "team_name": "Hearts",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0729",
+    "team_name": "Hibernian",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0730",
+    "team_name": "Kilmarnock",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0731",
+    "team_name": "Livingston FC",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0732",
+    "team_name": "Motherwell",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0733",
+    "team_name": "Rangers",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0734",
+    "team_name": "Rangers FC",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0735",
+    "team_name": "Ross County",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0736",
+    "team_name": "Ross County FC",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0737",
+    "team_name": "St Johnstone",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0738",
+    "team_name": "St Mirren",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0739",
+    "team_name": "St. Johnstone FC",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0740",
+    "team_name": "St. Mirren",
+    "country": "Scotland",
+    "league_name": "Scottish Premiership",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0741",
+    "team_name": "Daegu FC",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0742",
+    "team_name": "Daejeon Hana Citizen",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0743",
+    "team_name": "FC Seoul",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0744",
+    "team_name": "Gangwon FC",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0745",
+    "team_name": "Gimcheon Sangmu",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0746",
+    "team_name": "GwangJu FC",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0747",
+    "team_name": "Gwangju FC",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0748",
+    "team_name": "Incheon United",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0749",
+    "team_name": "Incheon United FC",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0750",
+    "team_name": "Jeju United",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0751",
+    "team_name": "Jeju United FC",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0752",
+    "team_name": "Jeonbuk Hyundai Motors",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0753",
+    "team_name": "Pohang Steelers",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0754",
+    "team_name": "Seongnam FC",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0755",
+    "team_name": "Suwon FC",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0756",
+    "team_name": "Suwon Samsung Bluewings",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0757",
+    "team_name": "Ulsan Hyundai",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0758",
+    "team_name": "Ulsan Hyundai FC",
+    "country": "South Korea",
+    "league_name": "K League 1",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0759",
+    "team_name": "Alianza FC",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0760",
+    "team_name": "América de Cali",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0761",
+    "team_name": "Atlético Bucaramanga",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0762",
+    "team_name": "Atlético Nacional",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0763",
+    "team_name": "Boyacá Chicó",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0764",
+    "team_name": "Club Deportes Tolima",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0765",
+    "team_name": "Club Independiente Santa Fe",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0766",
+    "team_name": "Deportes Tolima",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0767",
+    "team_name": "Deportivo Cali",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0768",
+    "team_name": "Deportivo Pasto",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0769",
+    "team_name": "Deportivo Pereira",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0770",
+    "team_name": "Envigado",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0771",
+    "team_name": "Fortaleza CEIF",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0772",
+    "team_name": "Independiente Medellín",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0773",
+    "team_name": "Jaguares de Córdoba",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0774",
+    "team_name": "Junior",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0775",
+    "team_name": "Junior FC",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0776",
+    "team_name": "La Equidad",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0777",
+    "team_name": "Millonarios",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0778",
+    "team_name": "Once Caldas",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0779",
+    "team_name": "Pasto",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0780",
+    "team_name": "Patriotas",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0781",
+    "team_name": "Santa Fe",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0782",
+    "team_name": "Águilas Doradas",
+    "country": "Colombia",
+    "league_name": "Primera A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0783",
+    "team_name": "Adelaide United",
+    "country": "Australia",
+    "league_name": "A-League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0784",
+    "team_name": "Brisbane Roar",
+    "country": "Australia",
+    "league_name": "A-League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0785",
+    "team_name": "Central Coast Mariners",
+    "country": "Australia",
+    "league_name": "A-League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0786",
+    "team_name": "Macarthur FC",
+    "country": "Australia",
+    "league_name": "A-League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0787",
+    "team_name": "Melbourne City FC",
+    "country": "Australia",
+    "league_name": "A-League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0788",
+    "team_name": "Melbourne Victory",
+    "country": "Australia",
+    "league_name": "A-League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0789",
+    "team_name": "Newcastle Jets",
+    "country": "Australia",
+    "league_name": "A-League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0790",
+    "team_name": "Perth Glory",
+    "country": "Australia",
+    "league_name": "A-League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0791",
+    "team_name": "Sydney FC",
+    "country": "Australia",
+    "league_name": "A-League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0792",
+    "team_name": "Wellington Phoenix",
+    "country": "Australia",
+    "league_name": "A-League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0793",
+    "team_name": "Western Sydney Wanderers",
+    "country": "Australia",
+    "league_name": "A-League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0794",
+    "team_name": "Western United FC",
+    "country": "Australia",
+    "league_name": "A-League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0795",
+    "team_name": "FC Flyeralarm Admira",
+    "country": "Austria",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0796",
+    "team_name": "FC Red Bull Salzburg",
+    "country": "Austria",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0797",
+    "team_name": "FK Austria Wien",
+    "country": "Austria",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0798",
+    "team_name": "LASK Linz",
+    "country": "Austria",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0799",
+    "team_name": "RZ Pellets Wolfsberger AC",
+    "country": "Austria",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0800",
+    "team_name": "SC Rheindorf Altach",
+    "country": "Austria",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0801",
+    "team_name": "SK Austria Klagenfurt",
+    "country": "Austria",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0802",
+    "team_name": "SK Rapid Wien",
+    "country": "Austria",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0803",
+    "team_name": "SK Sturm Graz",
+    "country": "Austria",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0804",
+    "team_name": "SV Ried",
+    "country": "Austria",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0805",
+    "team_name": "TSV Egger Glas Hartberg",
+    "country": "Austria",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0806",
+    "team_name": "WSG Tirol",
+    "country": "Austria",
+    "league_name": "Bundesliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0807",
+    "team_name": "Club Always Ready",
+    "country": "Bolivia",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0808",
+    "team_name": "Club Atlético Nacional Potosí",
+    "country": "Bolivia",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0809",
+    "team_name": "Club Atlético Palmaflor",
+    "country": "Bolivia",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0810",
+    "team_name": "Club Bolívar",
+    "country": "Bolivia",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0811",
+    "team_name": "Club Deportivo Guabirá",
+    "country": "Bolivia",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0812",
+    "team_name": "Club Deportivo Jorge Wilstermann",
+    "country": "Bolivia",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0813",
+    "team_name": "Club The Strongest",
+    "country": "Bolivia",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0814",
+    "team_name": "CD Antofagasta",
+    "country": "Chile",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0815",
+    "team_name": "CD Huachipato",
+    "country": "Chile",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0816",
+    "team_name": "Club Deportivo Palestino",
+    "country": "Chile",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0817",
+    "team_name": "Club de Deportes Cobresal",
+    "country": "Chile",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0818",
+    "team_name": "Universidad Católica",
+    "country": "Chile",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0819",
+    "team_name": "Unión La Calera",
+    "country": "Chile",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0820",
+    "team_name": "Beijing Guoan FC",
+    "country": "China",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0821",
+    "team_name": "Changchun Yatai FC",
+    "country": "China",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0822",
+    "team_name": "Chongqing Liangjiang Athletic",
+    "country": "China",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0823",
+    "team_name": "Dalian Professional Football Club",
+    "country": "China",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0824",
+    "team_name": "Guangzhou City",
+    "country": "China",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0825",
+    "team_name": "Guangzhou FC",
+    "country": "China",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0826",
+    "team_name": "Hebei FC",
+    "country": "China",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0827",
+    "team_name": "Henan Songshan Longmen FC",
+    "country": "China",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0828",
+    "team_name": "Qingdao FC",
+    "country": "China",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0829",
+    "team_name": "Shandong Taishan",
+    "country": "China",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0830",
+    "team_name": "Shanghai Port FC",
+    "country": "China",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0831",
+    "team_name": "Shanghai Shenhua FC",
+    "country": "China",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0832",
+    "team_name": "Shenzhen FC",
+    "country": "China",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0833",
+    "team_name": "Shijiazhuang Ever Bright F.C.",
+    "country": "China",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0834",
+    "team_name": "Tianjin Jinmen Tiger FC",
+    "country": "China",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0835",
+    "team_name": "Wuhan FC",
+    "country": "China",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0836",
+    "team_name": "Dinamo Zagreb",
+    "country": "Croatia",
+    "league_name": "Prva HNL",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0837",
+    "team_name": "Hajduk Split",
+    "country": "Croatia",
+    "league_name": "Prva HNL",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0838",
+    "team_name": "APOEL Nicosia FC",
+    "country": "Cyprus",
+    "league_name": "First Division",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0839",
+    "team_name": "AC Sparta Praha",
+    "country": "Czech Republic",
+    "league_name": "First League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0840",
+    "team_name": "FC Viktoria Plzeň",
+    "country": "Czech Republic",
+    "league_name": "First League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0841",
+    "team_name": "SK Slavia Praha",
+    "country": "Czech Republic",
+    "league_name": "First League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0842",
+    "team_name": "Aalborg BK",
+    "country": "Denmark",
+    "league_name": "Superliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0843",
+    "team_name": "Aarhus GF",
+    "country": "Denmark",
+    "league_name": "Superliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0844",
+    "team_name": "Brøndby IF",
+    "country": "Denmark",
+    "league_name": "Superliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0845",
+    "team_name": "F.C. København",
+    "country": "Denmark",
+    "league_name": "Superliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0846",
+    "team_name": "FC Midtjylland",
+    "country": "Denmark",
+    "league_name": "Superliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0847",
+    "team_name": "FC Nordsjælland",
+    "country": "Denmark",
+    "league_name": "Superliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0848",
+    "team_name": "Odense Boldklub",
+    "country": "Denmark",
+    "league_name": "Superliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0849",
+    "team_name": "Randers FC",
+    "country": "Denmark",
+    "league_name": "Superliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0850",
+    "team_name": "Silkeborg IF",
+    "country": "Denmark",
+    "league_name": "Superliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0851",
+    "team_name": "SønderjyskE",
+    "country": "Denmark",
+    "league_name": "Superliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0852",
+    "team_name": "Vejle Boldklub",
+    "country": "Denmark",
+    "league_name": "Superliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0853",
+    "team_name": "Viborg FF",
+    "country": "Denmark",
+    "league_name": "Superliga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0854",
+    "team_name": "Barcelona Sporting Club",
+    "country": "Ecuador",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0855",
+    "team_name": "CS Emelec",
+    "country": "Ecuador",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0856",
+    "team_name": "Club Social y Deportivo Macará",
+    "country": "Ecuador",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0857",
+    "team_name": "Guayaquil City FC",
+    "country": "Ecuador",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0858",
+    "team_name": "Independiente del Valle",
+    "country": "Ecuador",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0859",
+    "team_name": "LDU Quito",
+    "country": "Ecuador",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0860",
+    "team_name": "Sociedad Deportiva Aucas",
+    "country": "Ecuador",
+    "league_name": "Serie A",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0861",
+    "team_name": "HJK Helsinki",
+    "country": "Finland",
+    "league_name": "Veikkausliiga",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0862",
+    "team_name": "AEK Athens",
+    "country": "Greece",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0863",
+    "team_name": "Olympiacos CFP",
+    "country": "Greece",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0864",
+    "team_name": "PAOK",
+    "country": "Greece",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0865",
+    "team_name": "Panathinaikos FC",
+    "country": "Greece",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0866",
+    "team_name": "Ferencvárosi TC",
+    "country": "Hungary",
+    "league_name": "NB I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0867",
+    "team_name": "ATK Mohun Bagan FC",
+    "country": "India",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0868",
+    "team_name": "Bengaluru FC",
+    "country": "India",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0869",
+    "team_name": "Chennaiyin FC",
+    "country": "India",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0870",
+    "team_name": "FC Goa",
+    "country": "India",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0871",
+    "team_name": "Hyderabad FC",
+    "country": "India",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0872",
+    "team_name": "Jamshedpur FC",
+    "country": "India",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0873",
+    "team_name": "Kerala Blasters FC",
+    "country": "India",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0874",
+    "team_name": "Mumbai City FC",
+    "country": "India",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0875",
+    "team_name": "NorthEast United FC",
+    "country": "India",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0876",
+    "team_name": "Odisha FC",
+    "country": "India",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0877",
+    "team_name": "SC East Bengal FC",
+    "country": "India",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0878",
+    "team_name": "Bohemian FC",
+    "country": "Ireland",
+    "league_name": "Premier Division",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0879",
+    "team_name": "Derry City",
+    "country": "Ireland",
+    "league_name": "Premier Division",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0880",
+    "team_name": "Drogheda United",
+    "country": "Ireland",
+    "league_name": "Premier Division",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0881",
+    "team_name": "Dundalk FC",
+    "country": "Ireland",
+    "league_name": "Premier Division",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0882",
+    "team_name": "Finn Harps",
+    "country": "Ireland",
+    "league_name": "Premier Division",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0883",
+    "team_name": "Longford Town",
+    "country": "Ireland",
+    "league_name": "Premier Division",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0884",
+    "team_name": "Shamrock Rovers",
+    "country": "Ireland",
+    "league_name": "Premier Division",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0885",
+    "team_name": "Sligo Rovers",
+    "country": "Ireland",
+    "league_name": "Premier Division",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0886",
+    "team_name": "St. Patrick's Athletic",
+    "country": "Ireland",
+    "league_name": "Premier Division",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0887",
+    "team_name": "Waterford FC",
+    "country": "Ireland",
+    "league_name": "Premier Division",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0888",
+    "team_name": "FK Bodø/Glimt",
+    "country": "Norway",
+    "league_name": "Eliteserien",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0889",
+    "team_name": "FK Haugesund",
+    "country": "Norway",
+    "league_name": "Eliteserien",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0890",
+    "team_name": "Kristiansund BK",
+    "country": "Norway",
+    "league_name": "Eliteserien",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0891",
+    "team_name": "Lillestrøm SK",
+    "country": "Norway",
+    "league_name": "Eliteserien",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0892",
+    "team_name": "Mjøndalen IF",
+    "country": "Norway",
+    "league_name": "Eliteserien",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0893",
+    "team_name": "Molde FK",
+    "country": "Norway",
+    "league_name": "Eliteserien",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0894",
+    "team_name": "Odds BK",
+    "country": "Norway",
+    "league_name": "Eliteserien",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0895",
+    "team_name": "Rosenborg BK",
+    "country": "Norway",
+    "league_name": "Eliteserien",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0896",
+    "team_name": "SK Brann",
+    "country": "Norway",
+    "league_name": "Eliteserien",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0897",
+    "team_name": "Sandefjord Fotball",
+    "country": "Norway",
+    "league_name": "Eliteserien",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0898",
+    "team_name": "Sarpsborg 08 FF",
+    "country": "Norway",
+    "league_name": "Eliteserien",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0899",
+    "team_name": "Stabæk Fotball",
+    "country": "Norway",
+    "league_name": "Eliteserien",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0900",
+    "team_name": "Strømsgodset IF",
+    "country": "Norway",
+    "league_name": "Eliteserien",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0901",
+    "team_name": "Tromsø IL",
+    "country": "Norway",
+    "league_name": "Eliteserien",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0902",
+    "team_name": "Viking FK",
+    "country": "Norway",
+    "league_name": "Eliteserien",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0903",
+    "team_name": "Vålerenga Fotball",
+    "country": "Norway",
+    "league_name": "Eliteserien",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0904",
+    "team_name": "12 de Octubre FC",
+    "country": "Paraguay",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0905",
+    "team_name": "Club Cerro Porteño",
+    "country": "Paraguay",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0906",
+    "team_name": "Club Libertad",
+    "country": "Paraguay",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0907",
+    "team_name": "Club Nacional",
+    "country": "Paraguay",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0908",
+    "team_name": "Club Olimpia",
+    "country": "Paraguay",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0909",
+    "team_name": "Club River Plate Asunción",
+    "country": "Paraguay",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0910",
+    "team_name": "Guaireña FC",
+    "country": "Paraguay",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0911",
+    "team_name": "Carlos A. Mannucci",
+    "country": "Peru",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0912",
+    "team_name": "Club Sporting Cristal",
+    "country": "Peru",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0913",
+    "team_name": "Club Universitario de Deportes",
+    "country": "Peru",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0914",
+    "team_name": "FBC Melgar",
+    "country": "Peru",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0915",
+    "team_name": "Sport Huancayo",
+    "country": "Peru",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0916",
+    "team_name": "Universidad Técnica de Cajamarca",
+    "country": "Peru",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0917",
+    "team_name": "Bruk-Bet Termalica Nieciecza",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0918",
+    "team_name": "Cracovia",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0919",
+    "team_name": "Górnik Zabrze",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0920",
+    "team_name": "Górnik Łęczna",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0921",
+    "team_name": "Jagiellonia Białystok",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0922",
+    "team_name": "Lech Poznań",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0923",
+    "team_name": "Lechia Gdańsk",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0924",
+    "team_name": "Legia Warszawa",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0925",
+    "team_name": "PGE FKS Stal Mielec",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0926",
+    "team_name": "Piast Gliwice",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0927",
+    "team_name": "Pogoń Szczecin",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0928",
+    "team_name": "Radomiak Radom",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0929",
+    "team_name": "Raków Częstochowa",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0930",
+    "team_name": "Warta Poznań",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0931",
+    "team_name": "Wisła Kraków",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0932",
+    "team_name": "Wisła Płock",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0933",
+    "team_name": "Zagłębie Lubin",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0934",
+    "team_name": "Śląsk Wrocław",
+    "country": "Poland",
+    "league_name": "Ekstraklasa",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0935",
+    "team_name": "AFC Chindia Târgoviște",
+    "country": "Romania",
+    "league_name": "Liga I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0936",
+    "team_name": "AFC UTA Arad",
+    "country": "Romania",
+    "league_name": "Liga I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0937",
+    "team_name": "CFR Cluj",
+    "country": "Romania",
+    "league_name": "Liga I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0938",
+    "team_name": "CS Mioveni",
+    "country": "Romania",
+    "league_name": "Liga I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0939",
+    "team_name": "Campionii FC Arges",
+    "country": "Romania",
+    "league_name": "Liga I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0940",
+    "team_name": "FC Academica Clinceni",
+    "country": "Romania",
+    "league_name": "Liga I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0941",
+    "team_name": "FC Botoşani",
+    "country": "Romania",
+    "league_name": "Liga I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0942",
+    "team_name": "FC Dinamo 1948 Bucureşti",
+    "country": "Romania",
+    "league_name": "Liga I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0943",
+    "team_name": "FC Farul Constanța",
+    "country": "Romania",
+    "league_name": "Liga I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0944",
+    "team_name": "FC U Craiova 1948",
+    "country": "Romania",
+    "league_name": "Liga I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0945",
+    "team_name": "FC Voluntari",
+    "country": "Romania",
+    "league_name": "Liga I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0946",
+    "team_name": "FCSB (Steaua)",
+    "country": "Romania",
+    "league_name": "Liga I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0947",
+    "team_name": "Gaz Metan Mediaş",
+    "country": "Romania",
+    "league_name": "Liga I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0948",
+    "team_name": "Rapid București",
+    "country": "Romania",
+    "league_name": "Liga I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0949",
+    "team_name": "Sepsi OSK Sf. Gheorghe",
+    "country": "Romania",
+    "league_name": "Liga I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0950",
+    "team_name": "Universitatea Craiova",
+    "country": "Romania",
+    "league_name": "Liga I",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0951",
+    "team_name": "FC Lokomotiv Moscow",
+    "country": "Russia",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0952",
+    "team_name": "PFC CSKA Moscow",
+    "country": "Russia",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0953",
+    "team_name": "Spartak Moskva",
+    "country": "Russia",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0954",
+    "team_name": "Kaizer Chiefs",
+    "country": "South Africa",
+    "league_name": "Premier Division",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0955",
+    "team_name": "Orlando Pirates",
+    "country": "South Africa",
+    "league_name": "Premier Division",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0956",
+    "team_name": "AIK",
+    "country": "Sweden",
+    "league_name": "Allsvenskan",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0957",
+    "team_name": "BK Häcken",
+    "country": "Sweden",
+    "league_name": "Allsvenskan",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0958",
+    "team_name": "Degerfors IF",
+    "country": "Sweden",
+    "league_name": "Allsvenskan",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0959",
+    "team_name": "Djurgårdens IF",
+    "country": "Sweden",
+    "league_name": "Allsvenskan",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0960",
+    "team_name": "Halmstads BK",
+    "country": "Sweden",
+    "league_name": "Allsvenskan",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0961",
+    "team_name": "Hammarby IF",
+    "country": "Sweden",
+    "league_name": "Allsvenskan",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0962",
+    "team_name": "IF Elfsborg",
+    "country": "Sweden",
+    "league_name": "Allsvenskan",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0963",
+    "team_name": "IFK Göteborg",
+    "country": "Sweden",
+    "league_name": "Allsvenskan",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0964",
+    "team_name": "IFK Norrköping",
+    "country": "Sweden",
+    "league_name": "Allsvenskan",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0965",
+    "team_name": "IK Sirius",
+    "country": "Sweden",
+    "league_name": "Allsvenskan",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0966",
+    "team_name": "Kalmar FF",
+    "country": "Sweden",
+    "league_name": "Allsvenskan",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0967",
+    "team_name": "Malmö FF",
+    "country": "Sweden",
+    "league_name": "Allsvenskan",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0968",
+    "team_name": "Mjällby AIF",
+    "country": "Sweden",
+    "league_name": "Allsvenskan",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0969",
+    "team_name": "Varbergs BoIS FC",
+    "country": "Sweden",
+    "league_name": "Allsvenskan",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0970",
+    "team_name": "Örebro SK",
+    "country": "Sweden",
+    "league_name": "Allsvenskan",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0971",
+    "team_name": "Östersunds FK",
+    "country": "Sweden",
+    "league_name": "Allsvenskan",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0972",
+    "team_name": "BSC Young Boys",
+    "country": "Switzerland",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0973",
+    "team_name": "FC Basel 1893",
+    "country": "Switzerland",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0974",
+    "team_name": "FC Lausanne-Sport",
+    "country": "Switzerland",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0975",
+    "team_name": "FC Lugano",
+    "country": "Switzerland",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0976",
+    "team_name": "FC Luzern",
+    "country": "Switzerland",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0977",
+    "team_name": "FC Sion",
+    "country": "Switzerland",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0978",
+    "team_name": "FC St. Gallen 1879",
+    "country": "Switzerland",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0979",
+    "team_name": "FC Zürich",
+    "country": "Switzerland",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0980",
+    "team_name": "Grasshopper Club Zürich",
+    "country": "Switzerland",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0981",
+    "team_name": "Servette FC",
+    "country": "Switzerland",
+    "league_name": "Super League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0982",
+    "team_name": "Al Ain FC",
+    "country": "UAE",
+    "league_name": "Arabian Gulf League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0983",
+    "team_name": "Dynamo Kyiv",
+    "country": "Ukraine",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0984",
+    "team_name": "Shakhtar Donetsk",
+    "country": "Ukraine",
+    "league_name": "Premier League",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0985",
+    "team_name": "Centro Atlético Fénix",
+    "country": "Uruguay",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0986",
+    "team_name": "Cerro Largo Fútbol Club",
+    "country": "Uruguay",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0987",
+    "team_name": "Club Atlético Peñarol",
+    "country": "Uruguay",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0988",
+    "team_name": "Club Atlético Rentistas",
+    "country": "Uruguay",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0989",
+    "team_name": "Club Nacional de Football",
+    "country": "Uruguay",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0990",
+    "team_name": "Montevideo City Torque",
+    "country": "Uruguay",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0991",
+    "team_name": "AC Mineros de Guayana",
+    "country": "Venezuela",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0992",
+    "team_name": "Academia Puerto Cabello",
+    "country": "Venezuela",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0993",
+    "team_name": "Aragua Fútbol Club",
+    "country": "Venezuela",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0994",
+    "team_name": "Deportivo La Guaira FC",
+    "country": "Venezuela",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0995",
+    "team_name": "Deportivo Táchira FC",
+    "country": "Venezuela",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  },
+  {
+    "team_id": "team_0996",
+    "team_name": "Metropolitanos de Caracas FC",
+    "country": "Venezuela",
+    "league_name": "Primera División",
+    "budget": 50000000,
+    "overall_rating": 75
+  }
+]

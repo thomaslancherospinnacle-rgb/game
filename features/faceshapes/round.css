@@ -1,7 +1,0 @@
-/* ROUND FACE (Soft Edges) */
-.skull {
-    /* Almost a perfect circle */
-    border-radius: 50% 50% 50% 50%;
-    width: 280px; /* Wider cheeks */
-    height: 320px; /* Shorter height */
-}
