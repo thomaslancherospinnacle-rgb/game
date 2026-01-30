@@ -56,7 +56,23 @@ async function init() {
         // Initialize match simulator
         matchSimulator = new MatchSimulation();
         
-        // Hide loading, show team selection
+        // Check if team was selected from index.html
+        const selectedTeamData = localStorage.getItem('selectedTeam');
+        
+        if (selectedTeamData) {
+            // Team was selected, load it directly
+            const teamData = JSON.parse(selectedTeamData);
+            const team = gameState.allTeams.find(t => t.team_name === teamData.team_name);
+            
+            if (team) {
+                hideLoading();
+                await selectTeam(team);
+                console.log('✅ Game initialized with pre-selected team');
+                return;
+            }
+        }
+        
+        // No team selected, show team selection
         hideLoading();
         showTeamSelection();
         

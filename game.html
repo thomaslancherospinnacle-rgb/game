@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIFA Manager - Career Mode</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading FIFA Manager...</div>
+        <div class="loading-progress" id="loadingProgress">Initializing...</div>
+    </div>
+
+    <!-- Team Selection Modal -->
+    <div id="teamSelectModal" class="modal hidden">
+        <div class="modal-content">
+            <h1 class="modal-title">SELECT YOUR TEAM</h1>
+            <p class="modal-subtitle">Choose a club to begin your managerial career</p>
+            <div class="league-filter" id="leagueFilter"></div>
+            <div id="teamGrid" class="team-grid"></div>
+        </div>
+    </div>
+
+    <!-- Match Result Modal -->
+    <div id="matchResultModal" class="modal hidden">
+        <div class="modal-content match-result-modal">
+            <div id="matchResultContent"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="club-badge" id="clubBadge">⚽</div>
+            <div class="manager-info">
+                <div class="manager-name">Manager</div>
+                <div class="club-name" id="clubName">Select a Team</div>
+            </div>
+            <div class="header-stats">
+                <div class="header-stat">
+                    <div class="header-stat-label">Budget</div>
+                    <div class="header-stat-value" id="clubBudget">£0M</div>
+                </div>
+                <div class="header-stat">
+                    <div class="header-stat-label">Season</div>
+                    <div class="header-stat-value" id="currentSeason">2024/25</div>
+                </div>
+            </div>
+            <div class="overall-badge" id="teamOverall">--</div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="nav-bar">
+            <div class="nav-item active" onclick="showTab('central')">Central</div>
+            <div class="nav-item" onclick="showTab('squad')">Squad</div>
+            <div class="nav-item" onclick="showTab('table')">Table</div>
+            <div class="nav-item" onclick="showTab('fixtures')">Fixtures</div>
+            <div class="nav-item" onclick="showTab('news')">News</div>
+        </nav>
+
+        <!-- Central Tab -->
+        <div id="tab-central" class="tab-content active">
+            <div class="main-content">
+                <div class="training-card">
+                    <div class="training-header">Training Day</div>
+                    <div class="training-date" id="currentDate">Monday, January 30, 2025</div>
+                    <div class="training-stats">
+                        <div class="training-stat">
+                            <div class="training-icon">⚽</div>
+                            <div>
+                                <div id="nextOpponent">--</div>
+                                <div class="training-label">Next Opponent</div>
+                            </div>
+                        </div>
+                        <div class="training-stat">
+                            <div class="training-icon">📅</div>
+                            <div>
+                                <div id="daysUntilMatch">--</div>
+                                <div class="training-label">Days Until Match</div>
+                            </div>
+                        </div>
+                        <div class="training-stat">
+                            <div class="training-icon">👥</div>
+                            <div>
+                                <div id="availablePlayers">--</div>
+                                <div class="training-label">Available Players</div>
+                            </div>
+                        </div>
+                        <div class="training-stat">
+                            <div class="training-icon">🏥</div>
+                            <div>
+                                <div id="injuredPlayers">0</div>
+                                <div class="training-label">Injured</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-grid">
+                    <div class="card next-match">
+                        <div class="card-title" style="color: #ff3366;">Next Match</div>
+                        <div class="match-date" id="nextMatchDate">Saturday, February 3, 2025</div>
+                        <div class="match-teams">
+                            <div class="match-team">
+                                <div class="match-team-badge" id="homeTeamBadge">⚽</div>
+                                <div id="homeTeamName">--</div>
+                            </div>
+                            <div class="match-vs">VS</div>
+                            <div class="match-team">
+                                <div class="match-team-badge" id="awayTeamBadge">⚽</div>
+                                <div id="awayTeamName">--</div>
+                            </div>
+                        </div>
+                        <button class="simulate-btn" id="simulateMatchBtn" onclick="simulateMatch()">Simulate Match</button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">Latest News</div>
+                        <div id="centralNewsGrid" class="news-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Squad Tab -->
+        <div id="tab-squad" class="tab-content">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-title">Your Squad</div>
+                    <div class="card-subtitle" id="squadSubtitle">Loading...</div>
+                    <div id="squadGrid" class="squad-grid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Tab -->
+        <div id="tab-table" class="tab-content">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-title" id="leagueName">League Table</div>
+                    <div class="card-subtitle">Season 2024/25</div>
+                    <div id="leagueTable" class="league-table"></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Season Statistics</div>
+                    <div class="content-grid">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; font-weight: 700; color: #00d4ff;" id="matchesPlayed">0</div>
+                            <div style="color: rgba(255,255,255,0.6); margin-top: 5px;">Matches Played</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; font-weight: 700; color: #00d4ff;" id="wins">0</div>
+                            <div style="color: rgba(255,255,255,0.6); margin-top: 5px;">Wins</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; font-weight: 700; color: #00d4ff;" id="draws">0</div>
+                            <div style="color: rgba(255,255,255,0.6); margin-top: 5px;">Draws</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; font-weight: 700; color: #00d4ff;" id="losses">0</div>
+                            <div style="color: rgba(255,255,255,0.6); margin-top: 5px;">Losses</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; font-weight: 700; color: #00d4ff;" id="goalsScored">0</div>
+                            <div style="color: rgba(255,255,255,0.6); margin-top: 5px;">Goals Scored</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; font-weight: 700; color: #00d4ff;" id="goalsConceded">0</div>
+                            <div style="color: rgba(255,255,255,0.6); margin-top: 5px;">Goals Conceded</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fixtures Tab -->
+        <div id="tab-fixtures" class="tab-content">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-title">Upcoming Fixtures</div>
+                    <div id="fixturesContent" class="content-grid">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- News Tab -->
+        <div id="tab-news" class="tab-content">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-title">Latest News</div>
+                    <div class="card-subtitle">Stay updated with the latest football news</div>
+                    <div id="newsGrid" class="news-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="MatchSimulation.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
