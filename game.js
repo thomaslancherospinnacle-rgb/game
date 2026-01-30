@@ -56,18 +56,31 @@ async function init() {
         // Initialize match simulator
         matchSimulator = new MatchSimulation();
         
-        // Check if team was selected from index.html
-        const selectedTeamData = localStorage.getItem('selectedTeam');
+        // Check if data was preloaded from index.html
+        const preloadedPlayers = localStorage.getItem('fifaAllPlayers');
+        const preloadedTeams = localStorage.getItem('fifaAllTeams');
+        const selectedTeamData = localStorage.getItem('fifaSelectedTeam');
         
-        if (selectedTeamData) {
-            // Team was selected, load it directly
+        // Use preloaded data if available
+        if (preloadedPlayers && preloadedPlayers !== 'undefined') {
+            gameState.allPlayers = JSON.parse(preloadedPlayers);
+            console.log(`✅ Used preloaded players: ${gameState.allPlayers.length}`);
+        }
+        
+        if (preloadedTeams && preloadedTeams !== 'undefined') {
+            gameState.allTeams = JSON.parse(preloadedTeams);
+            console.log(`✅ Used preloaded teams: ${gameState.allTeams.length}`);
+        }
+        
+        if (selectedTeamData && selectedTeamData !== 'undefined') {
+            // Team was selected from index.html, load it directly
             const teamData = JSON.parse(selectedTeamData);
             const team = gameState.allTeams.find(t => t.team_name === teamData.team_name);
             
             if (team) {
                 hideLoading();
                 await selectTeam(team);
-                console.log('✅ Game initialized with pre-selected team');
+                console.log('✅ Game initialized with pre-selected team:', team.team_name);
                 return;
             }
         }
