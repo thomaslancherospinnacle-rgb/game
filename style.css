@@ -1064,16 +1064,33 @@
     padding: 2px 7px;
     border-radius: 4px;
 }
-.intel-tier.full    { background: rgba(57,255,20,0.2);  color: #39ff14; }
-.intel-tier.partial { background: rgba(255,217,0,0.2);  color: #ffd900; }
-.intel-tier.limited { background: rgba(0,212,255,0.2);  color: #00d4ff; }
-.intel-tier.unknown { background: rgba(150,150,150,0.2); color: #aaa; }
+.intel-tier.full        { background: rgba(57,255,20,0.2);  color: #39ff14; }
+.intel-tier.partial     { background: rgba(255,217,0,0.2);  color: #ffd900; }
+.intel-tier.continental { background: rgba(0,212,255,0.2);  color: #00d4ff; }
+.intel-tier.distant     { background: rgba(180,100,255,0.2); color: #b464ff; }
+.intel-tier.unknown     { background: rgba(150,150,150,0.2); color: #aaa; }
 
 .scout-card-top {
     display: flex;
     align-items: flex-start;
     gap: 11px;
     margin-bottom: 10px;
+}
+.scout-card-face {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+    border: 2px solid rgba(0,212,255,0.25);
+}
+.scout-card-right {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    flex: 1;
+    min-width: 0;
 }
 .scout-card-ovr {
     background: linear-gradient(135deg, #1a3a6a, #0d2240);
@@ -1124,9 +1141,18 @@
 }
 .detail-header {
     display: flex;
-    gap: 20px;
+    gap: 16px;
     align-items: flex-start;
     margin-bottom: 24px;
+}
+.detail-face-wrap {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+    border: 2px solid rgba(0,212,255,0.3);
 }
 .detail-ovr-block {
     background: linear-gradient(135deg, #1a3a6a, #0d2240);

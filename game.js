@@ -1054,6 +1054,22 @@ function renderSearchResults(reports) {
         // Overall display
         const ovrDisplay = typeof r.overall === 'object' ? `${r.overall.min}-${r.overall.max}` : r.overall;
 
+        // ── Face image – ALWAYS rendered, with SVG silhouette fallback ──
+        const faceId = 'face_' + (r.player_id || '').replace(/[^a-zA-Z0-9]/g,'');
+        let faceHtml;
+        if (r.face_url) {
+            faceHtml = `<img id="${faceId}" src="${r.face_url}" alt="${r.short_name}"
+                style="width:100%;height:100%;object-fit:cover;border-radius:50%;"
+                onerror="this.onerror=null;this.style.display='none';document.getElementById('${faceId}_fb').style.display='flex';">
+                <div id="${faceId}_fb" style="display:none;width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#1a3a6a,#0d2240);align-items:center;justify-content:center;">
+                    <svg width="32" height="36" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
+                </div>`;
+        } else {
+            faceHtml = `<div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#1a3a6a,#0d2240);display:flex;align-items:center;justify-content:center;">
+                <svg width="32" height="36" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
+                </div>`;
+        }
+
         // Stats row
         const statsHtml = r.stats_known
             ? ['pace','shooting','passing','dribbling','defending','physic'].map(key => {
@@ -1063,34 +1079,40 @@ function renderSearchResults(reports) {
                 if (typeof val === 'object') return `<div class="scout-stat"><div class="scout-stat-label">${labels[key]}</div><div class="scout-stat-value range">${val.min}-${val.max}</div></div>`;
                 return `<div class="scout-stat"><div class="scout-stat-label">${labels[key]}</div><div class="scout-stat-value">${val}</div></div>`;
             }).join('')
-            : '<div style="grid-column:1/-1;text-align:center;font-size:0.72rem;color:rgba(255,255,255,0.28);font-style:italic;padding:4px 0;">Scout the player for detailed stats</div>';
+            : '<div style="grid-column:1/-1;text-align:center;font-size:0.72rem;color:rgba(255,255,255,0.28);font-style:italic;padding:4px 0;">Scouts have limited information</div>';
 
         // Price
         let priceHtml;
-        if (r.value_known) {
+        if (r.value_known && r.market_value !== null) {
             const mv = typeof r.market_value === 'object' ? `${transferSystem.formatMoney(r.market_value.min)}-${transferSystem.formatMoney(r.market_value.max)}` : transferSystem.formatMoney(r.market_value);
             priceHtml = `<div class="scout-price">€${mv}</div>`;
         } else {
             priceHtml = `<div class="scout-price unknown-price">Value unknown</div>`;
         }
 
+        // Age display
+        const ageStr = r.age ? `Age ${r.age}` : '—';
+
         card.innerHTML = `
             <span class="intel-tier ${r.tier}">${r.tier}</span>
             <div class="scout-card-top">
-                <div class="scout-card-ovr">
-                    <div class="ovr-num">${ovrDisplay}</div>
-                    <div class="ovr-label">OVR</div>
-                </div>
-                <div class="scout-card-info">
-                    <div class="scout-card-name">${r.short_name}</div>
-                    <div class="scout-card-club">${r.club} · ${r.league}</div>
-                    <div class="scout-card-pos">${r.position}</div>
+                <div class="scout-card-face">${faceHtml}</div>
+                <div class="scout-card-right">
+                    <div class="scout-card-ovr">
+                        <div class="ovr-num">${ovrDisplay}</div>
+                        <div class="ovr-label">OVR</div>
+                    </div>
+                    <div class="scout-card-info">
+                        <div class="scout-card-name">${r.short_name}</div>
+                        <div class="scout-card-club">${r.club} · ${r.league}</div>
+                        <div class="scout-card-pos">${r.position} · ${ageStr}</div>
+                    </div>
                 </div>
             </div>
             <div class="scout-card-stats">${statsHtml}</div>
             <div class="scout-card-footer">
                 ${priceHtml}
-                <div class="scout-wage">Wage: ${r.value_known ? '€' + transferSystem.formatMoney(typeof r.wage === 'object' ? r.wage.min : r.wage) + '/wk' : '?'}</div>
+                <div class="scout-wage">${r.value_known && r.wage !== null ? 'Wage: €' + transferSystem.formatMoney(typeof r.wage === 'object' ? r.wage.min : r.wage) + '/wk' : 'Wage unknown'}</div>
             </div>`;
 
         grid.appendChild(card);
@@ -1136,9 +1158,25 @@ function openPlayerDetail(report) {
     // Release clause
     const releaseHtml = report.release_clause ? `<div class="detail-fin-item"><div class="detail-fin-label">Release Clause</div><div class="detail-fin-value">€${transferSystem.formatMoney(report.release_clause)}</div></div>` : '';
 
+    // Face image for modal header – always rendered with SVG silhouette fallback
+    let modalFaceHtml;
+    if (report.face_url) {
+        modalFaceHtml = `<img src="${report.face_url}" alt="${report.short_name}"
+            style="width:100%;height:100%;object-fit:cover;border-radius:50%;"
+            onerror="this.onerror=null;this.style.display='none';this.parentElement.querySelector('.detail-face-fb').style.display='flex';">
+            <div class="detail-face-fb" style="display:none;width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#1a3a6a,#0d2240);align-items:center;justify-content:center;">
+                <svg width="44" height="50" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
+            </div>`;
+    } else {
+        modalFaceHtml = `<div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#1a3a6a,#0d2240);display:flex;align-items:center;justify-content:center;">
+            <svg width="44" height="50" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
+            </div>`;
+    }
+
     content.innerHTML = `
         <button class="modal-close-btn" onclick="closePlayerDetail()">×</button>
         <div class="detail-header">
+            <div class="detail-face-wrap">${modalFaceHtml}</div>
             <div class="detail-ovr-block">
                 <div class="d-ovr">${fmtOvr(report.overall)}</div>
                 <div class="d-pot">POT ${fmtOvr(report.potential)}</div>
@@ -1154,6 +1192,7 @@ function openPlayerDetail(report) {
                 <div class="detail-meta" style="margin-top:3px;">
                     <span>📋 ${report.position}</span>
                     ${report.age ? `<span>🎂 Age ${report.age}</span>` : ''}
+                    <span class="intel-tier ${report.tier}" style="display:inline-block;margin-left:4px;">${report.tier}</span>
                 </div>
             </div>
         </div>

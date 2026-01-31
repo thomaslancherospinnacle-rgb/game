@@ -63,33 +63,115 @@ class TransferSystem {
     }
 
     /* ────────────────────────────────────────────
-       SCOUTING INTEL  –  what info does the user see?
+       CONTINENT MAP
        ──────────────────────────────────────────── */
+    static CONTINENT_MAP = {
+        // Europe
+        'England':'Europe','Scotland':'Europe','Ireland':'Europe','Northern Ireland':'Europe',
+        'France':'Europe','Germany':'Europe','Spain':'Europe','Italy':'Europe',
+        'Portugal':'Europe','Netherlands':'Europe','Belgium':'Europe','Austria':'Europe',
+        'Switzerland':'Europe','Sweden':'Europe','Norway':'Europe','Denmark':'Europe',
+        'Finland':'Europe','Poland':'Europe','Czech Republic':'Europe','Slovakia':'Europe',
+        'Hungary':'Europe','Romania':'Europe','Bulgaria':'Europe','Greece':'Europe',
+        'Croatia':'Europe','Serbia':'Europe','Slovenia':'Europe','Bosnia and Herzegovina':'Europe',
+        'Montenegro':'Europe','North Macedonia':'Europe','Albania':'Europe',
+        'Ukraine':'Europe','Russia':'Europe','Belarus':'Europe','Moldova':'Europe',
+        'Turkey':'Europe','Cyprus':'Europe','Luxembourg':'Europe','Iceland':'Europe',
+        'Latvia':'Europe','Lithuania':'Europe','Estonia':'Europe','Malta':'Europe',
+        'Kosovo':'Europe','Montenegro':'Europe','Wales':'Europe',
+        // South America
+        'Brazil':'South America','Argentina':'South America','Uruguay':'South America',
+        'Colombia':'South America','Chile':'South America','Peru':'South America',
+        'Ecuador':'South America','Bolivia':'South America','Paraguay':'South America',
+        'Venezuela':'South America','Suriname':'South America','Guyana':'South America',
+        // North America / Central America / Caribbean
+        'United States':'North America','Mexico':'North America','Canada':'North America',
+        'Costa Rica':'North America','Panama':'North America','Honduras':'North America',
+        'El Salvador':'North America','Guatemala':'North America','Haiti':'North America',
+        'Jamaica':'North America','Trinidad and Tobago':'North America',
+        'Cuba':'North America','Dominican Republic':'North America',
+        // Africa
+        'Nigeria':'Africa','Egypt':'Africa','South Africa':'Africa','Ghana':'Africa',
+        'Senegal':'Africa','Ivory Coast':'Africa','Cameroon':'Africa','Mali':'Africa',
+        'Guinea':'Africa','Algeria':'Africa','Morocco':'Africa','Tunisia':'Africa',
+        'Democratic Republic of Congo':'Africa','Congo':'Africa','Gabon':'Africa',
+        'Mali':'Africa','Burkina Faso':'Africa','Niger':'Africa',
+        'Mozambique':'Africa','Zimbabwe':'Africa','Kenya':'Africa',
+        'Tanzania':'Africa','Ethiopia':'Africa','Rwanda':'Africa',
+        'Madagascar':'Africa','Angola':'Africa','Zambia':'Africa',
+        // Asia
+        'Japan':'Asia','South Korea':'Asia','China':'Asia','India':'Asia',
+        'Saudi Arabia':'Asia','UAE':'Asia','Iran':'Asia','Iraq':'Asia',
+        'Indonesia':'Asia','Thailand':'Asia','Vietnam':'Asia','Philippines':'Asia',
+        'Malaysia':'Asia','Singapore':'Asia','Pakistan':'Asia','Bangladesh':'Asia',
+        'Uzbekistan':'Asia','Kazakhstan':'Asia','North Korea':'Asia',
+        'Israel':'Asia','Jordan':'Asia','Lebanon':'Asia','Qatar':'Asia',
+        'Kuwait':'Asia','Bahrain':'Asia','Oman':'Asia','Yemen':'Asia',
+        'Myanmar':'Asia','Cambodia':'Asia','Taiwan':'Asia','Mongolia':'Asia',
+        // Oceania
+        'Australia':'Oceania','New Zealand':'Oceania',
+        'Fiji':'Oceania','Papua New Guinea':'Oceania'
+    };
 
-    /**
-     * Returns the intel TIER for a given player relative to the user's club.
-     *   "full"    – same league  (you see everything)
-     *   "partial" – same country but different league (most stats, some blurred)
-     *   "limited" – different country, top-tier league (name, position, OVR range, price range)
-     *   "unknown" – deep abroad, low reputation (very little shown)
+    /** Returns continent string for a country, defaults to 'Unknown' */
+    getContinent(country) {
+        if (!country) return 'Unknown';
+        return TransferSystem.CONTINENT_MAP[country] || 'Unknown';
+    }
+
+    /* ────────────────────────────────────────────
+       SCOUTING INTEL  –  proximity-based 5-tier system
+       ──────────────────────────────────────────
+     * Tiers (checked in order):
+     *   "full"         – same league                          → everything visible
+     *   "partial"      – same country, different league       → stats as tight ranges ±4
+     *   "continental"  – same continent, different country    → stats as wide ranges ±8, value as range
+     *   "distant"      – different continent                  → name, age, position, OVR ?-?, value unknown
+     *   "unknown"      – different continent + low prospect  → name, position only. OVR ?-?, age hidden
+     *
+     * WORLD-CLASS PROSPECT OVERRIDE:
+     *   If a player is outside your continent but has high potential, scouts
+     *   will have heard of them. Potential thresholds bump the tier UP by one:
+     *     POT ≥ 92  →  bump two tiers  (unknown → continental, distant → partial)
+     *     POT ≥ 88  →  bump one tier   (unknown → distant,     distant → continental)
      */
     getIntelTier(player) {
         const myLeague  = this.gs.selectedTeam.league_name;
         const myCountry = this.gs.selectedTeam.country;
+        const myContinent = this.getContinent(myCountry);
+
         const pLeague   = player.club?.league;
         const pCountry  = player.basic_info?.nationality;
+        const pContinent = this.getContinent(pCountry);
+        const pot       = player.ratings?.potential || player.ratings?.overall || 70;
 
-        if (pLeague === myLeague)           return 'full';
-        if (pCountry === myCountry)         return 'partial';
-        // Check if the player's league is a "top 5" league — scouts know more
-        const top5 = ['English Premier League','La Liga','Serie A','1. Bundesliga','Ligue 1','French Ligue 1','German 1. Bundesliga'];
-        if (top5.includes(pLeague))         return 'limited';
-        return 'unknown';
+        // ── Base tier from proximity ──
+        let tier;
+        if (pLeague === myLeague)                          tier = 'full';
+        else if (pCountry === myCountry)                   tier = 'partial';
+        else if (pContinent === myContinent && pContinent !== 'Unknown') tier = 'continental';
+        else if (pot >= 80)                                tier = 'distant';   // decent prospect, scouts noticed
+        else                                               tier = 'unknown';   // truly off the radar
+
+        // ── World-class prospect override (only applies across continents) ──
+        if (pContinent !== myContinent || pContinent === 'Unknown') {
+            if (pot >= 92) {
+                // Elite prospect — bump two tiers
+                if (tier === 'unknown')   tier = 'continental';
+                else if (tier === 'distant') tier = 'partial';
+            } else if (pot >= 88) {
+                // Top prospect — bump one tier
+                if (tier === 'unknown')   tier = 'distant';
+                else if (tier === 'distant') tier = 'continental';
+            }
+        }
+
+        return tier;
     }
 
     /**
-     * Build a scout report object.  Attributes are either exact numbers or
-     * { min, max } range objects depending on the tier.
+     * Build a scout report.  Attributes are exact numbers or { min, max }
+     * range objects depending on the tier.  Face image is ALWAYS included.
      */
     buildScoutReport(player) {
         const tier  = this.getIntelTier(player);
@@ -98,80 +180,169 @@ class TransferSystem {
         const attrs = player.core_attributes || {};
         const info  = player.basic_info || {};
 
+        // Face URL — always passed through regardless of tier
+        const faceUrl = player.media?.face_url || player.media?.player_face_url || player.face_url || null;
+
+        // Start the report with fields that are ALWAYS present
         const report = {
-            player_id   : player.player_id,
-            tier        : tier,
-            short_name  : info.short_name || 'Unknown',
-            long_name   : info.long_name  || info.short_name || 'Unknown',
-            age         : info.age,
-            nationality : info.nationality,
-            position    : player.player_positions || 'Unknown',
-            club        : player.club?.name || 'Free Agent',
-            league      : player.club?.league || '—',
-            face_url    : player.media?.face_url || null,
-            club_logo   : player.media?.club_logo_url || null,
-            nation_flag : player.media?.nation_flag_url || null,
-            preferred_foot: info.preferred_foot || '—',
-            work_rate   : info.work_rate || '—',
-            traits      : player.traits || '',
-            contract_until: player.club?.contract_until || 2025,
-            // These are always shown (headline stats)
-            overall     : ovr,
-            potential   : pot,
-            market_value: player.value?.market_value_eur || this.estimateMarketValue(player),
-            wage        : player.value?.wage_eur || this.estimateWage(player),
+            player_id     : player.player_id,
+            tier          : tier,
+            face_url      : faceUrl,                                   // ← always included
+            club_logo     : player.media?.club_logo_url || null,
+            nation_flag   : player.media?.nation_flag_url || null,
             release_clause: player.value?.release_clause_eur || null,
         };
 
-        // Now layer in attribute detail based on tier
+        // ─────────────────────────────────────────────────────────
+        // TIER: full  –  same league.  Everything visible.
+        // ─────────────────────────────────────────────────────────
         if (tier === 'full') {
-            // Everything visible
-            report.pace       = attrs.pace || 70;
-            report.shooting   = attrs.shooting || 70;
-            report.passing    = attrs.passing || 70;
-            report.dribbling  = attrs.dribbling || 70;
-            report.defending  = attrs.defending || 70;
-            report.physic     = attrs.physic || 70;
-            report.stats_known = true;
-            report.value_known = true;
-        } else if (tier === 'partial') {
-            // Stats as ranges ± 4
-            report.pace       = this.toRange(attrs.pace || 70, 4);
-            report.shooting   = this.toRange(attrs.shooting || 70, 4);
-            report.passing    = this.toRange(attrs.passing || 70, 4);
-            report.dribbling  = this.toRange(attrs.dribbling || 70, 4);
-            report.defending  = this.toRange(attrs.defending || 70, 4);
-            report.physic     = this.toRange(attrs.physic || 70, 4);
-            report.stats_known = true;   // shown but as ranges
-            report.value_known = true;
-        } else if (tier === 'limited') {
-            // OVR shown, individual stats hidden, value as range
-            report.pace       = null;
-            report.shooting   = null;
-            report.passing    = null;
-            report.dribbling  = null;
-            report.defending  = null;
-            report.physic     = null;
-            report.stats_known = false;
-            report.value_known = true;   // market value still visible (top league)
-            // Show overall as a range ± 2
-            report.overall    = this.toRange(ovr, 2);
-            report.potential  = this.toRange(pot, 3);
-        } else {
-            // 'unknown' – almost nothing
-            report.pace       = null;
-            report.shooting   = null;
-            report.passing    = null;
-            report.dribbling  = null;
-            report.defending  = null;
-            report.physic     = null;
-            report.stats_known = false;
-            report.value_known = false;
-            report.overall    = this.toRange(ovr, 5);
-            report.potential  = this.toRange(pot, 6);
-            report.market_value = this.toRange(report.market_value, Math.floor(report.market_value * 0.3));
-            report.wage       = this.toRange(report.wage, Math.floor(report.wage * 0.25));
-            report.age        = null;    // even age hidden for unknown
+            report.short_name     = info.short_name || 'Unknown';
+            report.long_name      = info.long_name  || info.short_name || 'Unknown';
+            report.age            = info.age;
+            report.nationality    = info.nationality;
+            report.position       = player.player_positions || 'Unknown';
+            report.club           = player.club?.name || 'Free Agent';
+            report.league         = player.club?.league || '—';
+            report.preferred_foot = info.preferred_foot || '—';
+            report.work_rate      = info.work_rate || '—';
+            report.traits         = player.traits || '';
+            report.contract_until = player.club?.contract_until || 2025;
+            report.overall        = ovr;
+            report.potential      = pot;
+            report.market_value   = player.value?.market_value_eur || this.estimateMarketValue(player);
+            report.wage           = player.value?.wage_eur || this.estimateWage(player);
+            report.pace           = attrs.pace || 70;
+            report.shooting       = attrs.shooting || 70;
+            report.passing        = attrs.passing || 70;
+            report.dribbling      = attrs.dribbling || 70;
+            report.defending      = attrs.defending || 70;
+            report.physic         = attrs.physic || 70;
+            report.stats_known    = true;
+            report.value_known    = true;
+        }
+        // ─────────────────────────────────────────────────────────
+        // TIER: partial  –  same country.  Stats shown as tight ranges.
+        // ─────────────────────────────────────────────────────────
+        else if (tier === 'partial') {
+            report.short_name     = info.short_name || 'Unknown';
+            report.long_name      = info.long_name  || info.short_name || 'Unknown';
+            report.age            = info.age;
+            report.nationality    = info.nationality;
+            report.position       = player.player_positions || 'Unknown';
+            report.club           = player.club?.name || 'Free Agent';
+            report.league         = player.club?.league || '—';
+            report.preferred_foot = info.preferred_foot || '—';
+            report.work_rate      = info.work_rate || '—';
+            report.traits         = player.traits || '';
+            report.contract_until = player.club?.contract_until || 2025;
+            report.overall        = ovr;
+            report.potential      = pot;
+            report.market_value   = player.value?.market_value_eur || this.estimateMarketValue(player);
+            report.wage           = player.value?.wage_eur || this.estimateWage(player);
+            // Stats as ranges ±4
+            report.pace           = this.toRange(attrs.pace || 70, 4);
+            report.shooting       = this.toRange(attrs.shooting || 70, 4);
+            report.passing        = this.toRange(attrs.passing || 70, 4);
+            report.dribbling      = this.toRange(attrs.dribbling || 70, 4);
+            report.defending      = this.toRange(attrs.defending || 70, 4);
+            report.physic         = this.toRange(attrs.physic || 70, 4);
+            report.stats_known    = true;
+            report.value_known    = true;
+        }
+        // ─────────────────────────────────────────────────────────
+        // TIER: continental  –  same continent.  Wide stat ranges, value range.
+        // ─────────────────────────────────────────────────────────
+        else if (tier === 'continental') {
+            report.short_name     = info.short_name || 'Unknown';
+            report.long_name      = info.long_name  || info.short_name || 'Unknown';
+            report.age            = info.age;
+            report.nationality    = info.nationality;
+            report.position       = player.player_positions || 'Unknown';
+            report.club           = player.club?.name || 'Free Agent';
+            report.league         = player.club?.league || '—';
+            report.preferred_foot = '—';                              // not scouted this closely
+            report.work_rate      = '—';
+            report.traits         = '';
+            report.contract_until = player.club?.contract_until || 2025;
+            report.overall        = this.toRange(ovr, 3);            // OVR as range ±3
+            report.potential      = this.toRange(pot, 4);            // POT as range ±4
+            report.market_value   = this.toRange(
+                player.value?.market_value_eur || this.estimateMarketValue(player), 
+                Math.floor((player.value?.market_value_eur || this.estimateMarketValue(player)) * 0.2)
+            );
+            report.wage           = this.toRange(
+                player.value?.wage_eur || this.estimateWage(player),
+                Math.floor((player.value?.wage_eur || this.estimateWage(player)) * 0.2)
+            );
+            // Stats as wide ranges ±8
+            report.pace           = this.toRange(attrs.pace || 70, 8);
+            report.shooting       = this.toRange(attrs.shooting || 70, 8);
+            report.passing        = this.toRange(attrs.passing || 70, 8);
+            report.dribbling      = this.toRange(attrs.dribbling || 70, 8);
+            report.defending      = this.toRange(attrs.defending || 70, 8);
+            report.physic         = this.toRange(attrs.physic || 70, 8);
+            report.stats_known    = true;
+            report.value_known    = true;
+        }
+        // ─────────────────────────────────────────────────────────
+        // TIER: distant  –  different continent, decent prospect.
+        //   Name, age, position, club visible.  OVR/POT as ?-? ranges.
+        //   No individual stats.  Value unknown.
+        // ─────────────────────────────────────────────────────────
+        else if (tier === 'distant') {
+            report.short_name     = info.short_name || 'Unknown';
+            report.long_name      = info.long_name  || info.short_name || 'Unknown';
+            report.age            = info.age;                          // age IS shown
+            report.nationality    = info.nationality;
+            report.position       = player.player_positions || 'Unknown';
+            report.club           = player.club?.name || 'Free Agent';
+            report.league         = player.club?.league || '—';
+            report.preferred_foot = '—';
+            report.work_rate      = '—';
+            report.traits         = '';
+            report.contract_until = player.club?.contract_until || 2025;
+            report.overall        = this.toRange(ovr, 6);            // wide OVR range
+            report.potential      = this.toRange(pot, 7);            // wide POT range
+            report.market_value   = null;                             // unknown
+            report.wage           = null;                             // unknown
+            report.pace           = null;
+            report.shooting       = null;
+            report.passing        = null;
+            report.dribbling      = null;
+            report.defending      = null;
+            report.physic         = null;
+            report.stats_known    = false;
+            report.value_known    = false;
+        }
+        // ─────────────────────────────────────────────────────────
+        // TIER: unknown  –  off the radar entirely.
+        //   Name & position only.  Age hidden.  OVR/POT ?-?.  Nothing else.
+        // ─────────────────────────────────────────────────────────
+        else {
+            report.short_name     = info.short_name || 'Unknown';
+            report.long_name      = info.long_name  || info.short_name || 'Unknown';
+            report.age            = null;                             // age HIDDEN
+            report.nationality    = info.nationality;                 // nationality still shown (it's on the card)
+            report.position       = player.player_positions || 'Unknown';
+            report.club           = '???';                            // club unknown
+            report.league         = '???';
+            report.preferred_foot = '—';
+            report.work_rate      = '—';
+            report.traits         = '';
+            report.contract_until = null;
+            report.overall        = this.toRange(ovr, 8);            // very wide OVR range
+            report.potential      = this.toRange(pot, 9);            // very wide POT range
+            report.market_value   = null;
+            report.wage           = null;
+            report.pace           = null;
+            report.shooting       = null;
+            report.passing        = null;
+            report.dribbling      = null;
+            report.defending      = null;
+            report.physic         = null;
+            report.stats_known    = false;
+            report.value_known    = false;
         }
 
         return report;
