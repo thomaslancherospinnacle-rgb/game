@@ -75,7 +75,7 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div class="club-badge" id="clubBadge">⚽</div>
+            <div class="club-badge" id="clubBadge">âš½</div>
             <div class="manager-info">
                 <div class="manager-name">Manager</div>
                 <div class="club-name" id="clubName">Select a Team</div>
@@ -83,7 +83,7 @@
             <div class="header-stats">
                 <div class="header-stat">
                     <div class="header-stat-label">Budget</div>
-                    <div class="header-stat-value" id="clubBudget">£0M</div>
+                    <div class="header-stat-value" id="clubBudget">Â£0M</div>
                 </div>
                 <div class="header-stat">
                     <div class="header-stat-label">Season</div>
@@ -99,6 +99,8 @@
             <div class="nav-item" onclick="showTab('squad')">Squad</div>
             <div class="nav-item" onclick="showTab('table')">Table</div>
             <div class="nav-item" onclick="showTab('fixtures')">Fixtures</div>
+            <div class="nav-item" onclick="showTab('transfers')">Transfers <span class="badge" id="offerBadge" style="display:none;">0</span></div>
+            <div class="nav-item" onclick="showTab('office')">Office</div>
             <div class="nav-item" onclick="showTab('news')">News</div>
         </nav>
 
@@ -110,28 +112,28 @@
                     <div class="training-date" id="currentDate">Monday, January 30, 2025</div>
                     <div class="training-stats">
                         <div class="training-stat">
-                            <div class="training-icon">⚽</div>
+                            <div class="training-icon">âš½</div>
                             <div>
                                 <div id="nextOpponent">--</div>
                                 <div class="training-label">Next Opponent</div>
                             </div>
                         </div>
                         <div class="training-stat">
-                            <div class="training-icon">📅</div>
+                            <div class="training-icon">ðŸ“…</div>
                             <div>
                                 <div id="daysUntilMatch">--</div>
                                 <div class="training-label">Days Until Match</div>
                             </div>
                         </div>
                         <div class="training-stat">
-                            <div class="training-icon">👥</div>
+                            <div class="training-icon">ðŸ‘¥</div>
                             <div>
                                 <div id="availablePlayers">--</div>
                                 <div class="training-label">Available Players</div>
                             </div>
                         </div>
                         <div class="training-stat">
-                            <div class="training-icon">🏥</div>
+                            <div class="training-icon">ðŸ¥</div>
                             <div>
                                 <div id="injuredPlayers">0</div>
                                 <div class="training-label">Injured</div>
@@ -146,12 +148,12 @@
                         <div class="match-date" id="nextMatchDate">Saturday, February 3, 2025</div>
                         <div class="match-teams">
                             <div class="match-team">
-                                <div class="match-team-badge" id="homeTeamBadge">⚽</div>
+                                <div class="match-team-badge" id="homeTeamBadge">âš½</div>
                                 <div id="homeTeamName">--</div>
                             </div>
                             <div class="match-vs">VS</div>
                             <div class="match-team">
-                                <div class="match-team-badge" id="awayTeamBadge">⚽</div>
+                                <div class="match-team-badge" id="awayTeamBadge">âš½</div>
                                 <div id="awayTeamName">--</div>
                             </div>
                         </div>
@@ -228,6 +230,70 @@
             </div>
         </div>
 
+        <!-- Transfers Tab -->
+        <div id="tab-transfers" class="tab-content">
+            <div class="main-content" style="padding:20px 30px;">
+                <div class="transfer-subnav" id="transferSubnav">
+                    <button class="transfer-subnav-btn active" onclick="switchTransferView('search')">🔍 Search</button>
+                    <button class="transfer-subnav-btn" onclick="switchTransferView('offers')">📬 Offers <span id="offerCount" class="transfer-badge">0</span></button>
+                    <button class="transfer-subnav-btn" onclick="switchTransferView('history')">📋 History</button>
+                </div>
+                <div id="transferView-search" class="transfer-view">
+                    <div class="search-filters" id="searchFilters">
+                        <input type="text" class="search-input" id="searchQuery" placeholder="Search player name..." oninput="debounceSearch()">
+                        <select class="search-select" id="filterPosition" onchange="debounceSearch()">
+                            <option value="">All Positions</option>
+                            <option value="GK">GK</option><option value="CB">CB</option>
+                            <option value="LB">LB</option><option value="RB">RB</option>
+                            <option value="CDM">CDM</option><option value="CM">CM</option>
+                            <option value="CAM">CAM</option><option value="LW">LW</option>
+                            <option value="RW">RW</option><option value="ST">ST</option>
+                            <option value="CF">CF</option>
+                        </select>
+                        <select class="search-select" id="filterLeague" onchange="debounceSearch()"><option value="">All Leagues</option></select>
+                        <select class="search-select" id="filterCountry" onchange="debounceSearch()"><option value="">All Countries</option></select>
+                        <div class="search-range-group">
+                            <label>OVR</label>
+                            <input type="number" class="search-num" id="filterMinOvr" placeholder="60" min="50" max="99" oninput="debounceSearch()">
+                            <span>–</span>
+                            <input type="number" class="search-num" id="filterMaxOvr" placeholder="99" min="50" max="99" oninput="debounceSearch()">
+                        </div>
+                        <div class="search-range-group">
+                            <label>Max €</label>
+                            <select class="search-select" id="filterMaxPrice" onchange="debounceSearch()" style="min-width:100px;">
+                                <option value="">Any</option>
+                                <option value="5000000">€5M</option><option value="10000000">€10M</option>
+                                <option value="25000000">€25M</option><option value="50000000">€50M</option>
+                                <option value="100000000">€100M</option>
+                            </select>
+                        </div>
+                        <label class="search-checkbox-label"><input type="checkbox" id="filterFreeAgents" onchange="debounceSearch()"> Free Agents</label>
+                    </div>
+                    <div class="search-results-header"><span id="resultsCount">Use filters or search above to find players</span></div>
+                    <div id="searchResults" class="search-results-grid"></div>
+                </div>
+                <div id="transferView-offers" class="transfer-view" style="display:none;"><div id="offersContent"></div></div>
+                <div id="transferView-history" class="transfer-view" style="display:none;"><div id="historyContent"></div></div>
+            </div>
+        </div>
+
+        <!-- Office Tab -->
+        <div id="tab-office" class="tab-content">
+            <div class="main-content" style="padding:20px 30px;">
+                <div id="officeBudgetCard" class="office-budget-card"></div>
+                <div class="card" style="margin-top:20px;">
+                    <div class="card-title">Squad Contracts</div>
+                    <div class="card-subtitle">Manage wages and contract status</div>
+                    <div id="contractsTable" class="contracts-table"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Player Detail Modal -->
+        <div id="playerDetailModal" class="modal hidden">
+            <div class="modal-content player-detail-modal" id="playerDetailContent"></div>
+        </div>
+
         <!-- News Tab -->
         <div id="tab-news" class="tab-content">
             <div class="main-content">
@@ -240,6 +306,7 @@
         </div>
     </div>
 
+    <script src="TransferSystem.js"></script>
     <script src="MatchSimulation.js?v=3"></script>
     <script src="game.js?v=3"></script>
 </body>

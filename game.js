@@ -30,11 +30,14 @@ const gameState = {
 // Match Simulator
 let matchSimulator;
 
+// Transfer System
+let transferSystem;
+
 /**
  * Initialize game - load data and setup
  */
 async function init() {
-    console.log('🎮 Initializing FIFA Manager...');
+    console.log('ðŸŽ® Initializing FIFA Manager...');
     
     try {
         // Show loading screen
@@ -56,6 +59,9 @@ async function init() {
         // Initialize match simulator
         matchSimulator = new MatchSimulation();
         
+        // Initialize transfer system
+        transferSystem = new TransferSystem(gameState);
+        
         // Check if data was preloaded from index.html
         const preloadedTeams = localStorage.getItem('fifaAllTeams');
         const selectedTeamData = localStorage.getItem('fifaSelectedTeam');
@@ -63,7 +69,7 @@ async function init() {
         // Use preloaded teams if available (players.json is too large for localStorage)
         if (preloadedTeams && preloadedTeams !== 'undefined') {
             gameState.allTeams = JSON.parse(preloadedTeams);
-            console.log(`✅ Used preloaded teams: ${gameState.allTeams.length}`);
+            console.log(`âœ… Used preloaded teams: ${gameState.allTeams.length}`);
         }
         
         if (selectedTeamData && selectedTeamData !== 'undefined') {
@@ -74,7 +80,7 @@ async function init() {
             if (team) {
                 hideLoading();
                 await selectTeam(team);
-                console.log('✅ Game initialized with pre-selected team:', team.team_name);
+                console.log('âœ… Game initialized with pre-selected team:', team.team_name);
                 return;
             }
         }
@@ -83,10 +89,10 @@ async function init() {
         hideLoading();
         showTeamSelection();
         
-        console.log('✅ Game initialized successfully');
+        console.log('âœ… Game initialized successfully');
         
     } catch (error) {
-        console.error('❌ Error initializing game:', error);
+        console.error('âŒ Error initializing game:', error);
         showError('Failed to load game data. Please ensure teams.json and players.json are in the same directory.');
     }
 }
@@ -101,9 +107,9 @@ async function loadTeamsData() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         gameState.allTeams = await response.json();
-        console.log(`✅ Loaded ${gameState.allTeams.length} teams`);
+        console.log(`âœ… Loaded ${gameState.allTeams.length} teams`);
     } catch (error) {
-        console.error('❌ Error loading teams:', error);
+        console.error('âŒ Error loading teams:', error);
         throw new Error('Could not load teams.json. Make sure it exists in the root directory.');
     }
 }
@@ -118,9 +124,9 @@ async function loadPlayersData() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         gameState.allPlayers = await response.json();
-        console.log(`✅ Loaded ${gameState.allPlayers.length} players`);
+        console.log(`âœ… Loaded ${gameState.allPlayers.length} players`);
     } catch (error) {
-        console.error('❌ Error loading players:', error);
+        console.error('âŒ Error loading players:', error);
         throw new Error('Could not load players.json. Make sure it exists in the root directory.');
     }
 }
@@ -129,7 +135,7 @@ async function loadPlayersData() {
  * Organize data into maps and calculate team ratings
  */
 function organizeData() {
-    console.log('📊 Organizing data...');
+    console.log('ðŸ“Š Organizing data...');
     
     // Create teams map
     gameState.allTeams.forEach(team => {
@@ -148,12 +154,12 @@ function organizeData() {
         gameState.playersMap[clubName].push(player);
     });
     
-    console.log(`✅ Teams mapped: ${Object.keys(gameState.teamsMap).length}`);
-    console.log(`✅ Teams with players: ${Object.keys(gameState.playersMap).length}`);
+    console.log(`âœ… Teams mapped: ${Object.keys(gameState.teamsMap).length}`);
+    console.log(`âœ… Teams with players: ${Object.keys(gameState.playersMap).length}`);
     
     // Log some examples for debugging
     const teamsWithPlayers = Object.keys(gameState.playersMap).slice(0, 5);
-    console.log('📝 Sample teams with players:', teamsWithPlayers);
+    console.log('ðŸ“ Sample teams with players:', teamsWithPlayers);
     
     // Calculate team overall ratings from squad
     gameState.allTeams.forEach(team => {
@@ -172,7 +178,7 @@ function organizeData() {
         team.budget = team.budget || 50000000;
     });
     
-    console.log('✅ Data organized successfully');
+    console.log('âœ… Data organized successfully');
 }
 
 /**
@@ -197,13 +203,13 @@ function showError(message) {
     const loadingScreen = document.getElementById('loadingScreen');
     loadingScreen.innerHTML = `
         <div class="error-message">
-            <div class="error-title">⚠️ Error Loading Game</div>
+            <div class="error-title">âš ï¸ Error Loading Game</div>
             <div class="error-text">${message}</div>
             <div class="error-text" style="margin-top: 15px;">
                 <strong>Required files:</strong><br>
-                • teams.json<br>
-                • players.json<br>
-                • Make sure they are in the root directory of your GitHub Pages site.
+                â€¢ teams.json<br>
+                â€¢ players.json<br>
+                â€¢ Make sure they are in the root directory of your GitHub Pages site.
             </div>
         </div>
     `;
@@ -270,8 +276,8 @@ function displayTeams() {
             
             const logoUrl = team.club_logo_url || '';
             const logoHtml = logoUrl 
-                ? `<img src="${logoUrl}" alt="${team.team_name}" onerror="this.style.display='none'; this.parentElement.textContent='⚽';">`
-                : '⚽';
+                ? `<img src="${logoUrl}" alt="${team.team_name}" onerror="this.style.display='none'; this.parentElement.textContent='âš½';">`
+                : 'âš½';
             
             card.innerHTML = `
                 <div class="team-card-badge">${logoHtml}</div>
@@ -288,7 +294,7 @@ function displayTeams() {
  * Select a team and start career
  */
 async function selectTeam(team) {
-    console.log('✅ Selected team:', team.team_name);
+    console.log('âœ… Selected team:', team.team_name);
     
     gameState.selectedTeam = team;
     
@@ -308,6 +314,11 @@ async function selectTeam(team) {
     generateNews();
     updateCentralTab();
     renderFixtures();
+    
+    // Initialize transfer system and populate filter dropdowns
+    transferSystem.init();
+    populateTransferFilters();
+    updateOfferBadge();
 }
 
 /**
@@ -347,10 +358,10 @@ function loadSquad(team) {
         gameState.squad = squad;
         // Sort by overall rating
         gameState.squad.sort((a, b) => (b.ratings?.overall || 0) - (a.ratings?.overall || 0));
-        console.log(`✅ Loaded squad: ${gameState.squad.length} players for ${teamName}`);
+        console.log(`âœ… Loaded squad: ${gameState.squad.length} players for ${teamName}`);
     } else {
         // No players found - generate placeholder squad
-        console.warn(`⚠️ No players found for ${teamName}, generating placeholder squad`);
+        console.warn(`âš ï¸ No players found for ${teamName}, generating placeholder squad`);
         gameState.squad = generatePlaceholderSquad(team);
     }
 }
@@ -453,7 +464,7 @@ function generateFixtures() {
     
     gameState.nextMatch = gameState.fixtures[0];
     
-    console.log(`✅ Generated ${gameState.fixtures.length} fixtures`);
+    console.log(`âœ… Generated ${gameState.fixtures.length} fixtures`);
 }
 
 /**
@@ -468,13 +479,13 @@ function updateHeader() {
     if (logoUrl) {
         badgeEl.innerHTML = `<img src="${logoUrl}" alt="${gameState.selectedTeam.team_name}" 
             style="width:45px;height:45px;object-fit:contain;display:block;" 
-            onerror="this.style.display='none'; this.parentElement.innerHTML='⚽';">`;
+            onerror="this.style.display='none'; this.parentElement.innerHTML='âš½';">`;
     } else {
-        badgeEl.innerHTML = '⚽';
+        badgeEl.innerHTML = 'âš½';
     }
     
     const budget = gameState.selectedTeam.budget / 1000000;
-    document.getElementById('clubBudget').textContent = '£' + budget.toFixed(0) + 'M';
+    document.getElementById('clubBudget').textContent = 'Â£' + budget.toFixed(0) + 'M';
     document.getElementById('currentSeason').textContent = gameState.season;
     document.getElementById('teamOverall').textContent = gameState.selectedTeam.overall_rating;
 }
@@ -507,16 +518,16 @@ function updateCentralTab() {
         
         if (homeLogoUrl) {
             homeBadge.innerHTML = `<img src="${homeLogoUrl}" alt="${gameState.nextMatch.home.team_name}" 
-                onerror="this.onerror=null; this.style.display='none'; this.parentElement.textContent='⚽';">`;
+                onerror="this.onerror=null; this.style.display='none'; this.parentElement.textContent='âš½';">`;
         } else {
-            homeBadge.textContent = '⚽';
+            homeBadge.textContent = 'âš½';
         }
         
         if (awayLogoUrl) {
             awayBadge.innerHTML = `<img src="${awayLogoUrl}" alt="${gameState.nextMatch.away.team_name}" 
-                onerror="this.onerror=null; this.style.display='none'; this.parentElement.textContent='⚽';">`;
+                onerror="this.onerror=null; this.style.display='none'; this.parentElement.textContent='âš½';">`;
         } else {
-            awayBadge.textContent = '⚽';
+            awayBadge.textContent = 'âš½';
         }
     }
     
@@ -540,11 +551,11 @@ function renderSquad() {
         // Get face URL (now local)
         const faceUrl = player.media?.face_url || player.media?.player_face_url || player.face_url || '';
         
-        let faceHtml = '👤';
+        let faceHtml = 'ðŸ‘¤';
         if (faceUrl) {
             faceHtml = `<img src="${faceUrl}" alt="${player.basic_info?.short_name || 'Player'}" 
                 style="width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;" 
-                onerror="this.style.display='none'; this.parentElement.innerHTML='👤';">`;
+                onerror="this.style.display='none'; this.parentElement.innerHTML='ðŸ‘¤';">`;
         }
         
         const positions = player.player_positions || player.position || 'SUB';
@@ -745,12 +756,12 @@ function renderFixtures() {
         
         // Get team badges
         const homeBadge = fixture.home.club_logo_url
-            ? `<img src="${fixture.home.club_logo_url}" alt="${fixture.home.team_name}" style="width:100%;height:100%;object-fit:contain;" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='⚽';">`
-            : '⚽';
+            ? `<img src="${fixture.home.club_logo_url}" alt="${fixture.home.team_name}" style="width:100%;height:100%;object-fit:contain;" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='âš½';">`
+            : 'âš½';
         
         const awayBadge = fixture.away.club_logo_url
-            ? `<img src="${fixture.away.club_logo_url}" alt="${fixture.away.team_name}" style="width:100%;height:100%;object-fit:contain;" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='⚽';">`
-            : '⚽';
+            ? `<img src="${fixture.away.club_logo_url}" alt="${fixture.away.team_name}" style="width:100%;height:100%;object-fit:contain;" onerror="this.onerror=null;this.style.display='none';this.parentElement.textContent='âš½';">`
+            : 'âš½';
         
         const card = document.createElement('div');
         card.className = 'card';
@@ -798,7 +809,7 @@ function renderFixtures() {
 function simulateMatch() {
     if (!gameState.nextMatch) return;
     
-    console.log('⚽ Simulating match...');
+    console.log('âš½ Simulating match...');
     
     // Prepare teams with squads
     const homeTeam = {
@@ -850,6 +861,12 @@ function simulateMatch() {
     // Show result
     showMatchResult(result);
     
+    // Tick transfer system (may generate new incoming offers)
+    if (transferSystem) {
+        transferSystem.tickOffers();
+        updateOfferBadge();
+    }
+    
     // Update UI
     updateCentralTab();
     generateLeagueTable();
@@ -872,12 +889,12 @@ function showMatchResult(result) {
     const awayTeam = gameState.allTeams.find(t => t.team_name === result.awayTeam);
     
     const homeBadgeHtml = homeTeam?.club_logo_url 
-        ? `<img src="${homeTeam.club_logo_url}" alt="${result.homeTeam}" style="width:100%;height:100%;object-fit:contain;padding:10px;" onerror="this.onerror=null;this.style.display='none';this.parentElement.innerHTML='⚽';"/>`
-        : '<div style="font-size:3rem;">⚽</div>';
+        ? `<img src="${homeTeam.club_logo_url}" alt="${result.homeTeam}" style="width:100%;height:100%;object-fit:contain;padding:10px;" onerror="this.onerror=null;this.style.display='none';this.parentElement.innerHTML='âš½';"/>`
+        : '<div style="font-size:3rem;">âš½</div>';
     
     const awayBadgeHtml = awayTeam?.club_logo_url
-        ? `<img src="${awayTeam.club_logo_url}" alt="${result.awayTeam}" style="width:100%;height:100%;object-fit:contain;padding:10px;" onerror="this.onerror=null;this.style.display='none';this.parentElement.innerHTML='⚽';"/>`
-        : '<div style="font-size:3rem;">⚽</div>';
+        ? `<img src="${awayTeam.club_logo_url}" alt="${result.awayTeam}" style="width:100%;height:100%;object-fit:contain;padding:10px;" onerror="this.onerror=null;this.style.display='none';this.parentElement.innerHTML='âš½';"/>`
+        : '<div style="font-size:3rem;">âš½</div>';
     
     content.innerHTML = `
         <h2 class="modal-title">Match Result</h2>
@@ -960,6 +977,570 @@ function showTab(tabName) {
 
     document.getElementById('tab-' + tabName).classList.add('active');
     event.target.classList.add('active');
+}
+
+/* ============================================================
+   TRANSFER & OFFICE UI FUNCTIONS
+   ============================================================ */
+
+/** Populate league & country dropdowns in search filters */
+function populateTransferFilters() {
+    const leagues  = [...new Set(gameState.allTeams.map(t => t.league_name).filter(Boolean))].sort();
+    const countries = [...new Set(gameState.allTeams.map(t => t.country).filter(Boolean))].sort();
+
+    const leagueSel  = document.getElementById('filterLeague');
+    const countrySel = document.getElementById('filterCountry');
+    if (!leagueSel || !countrySel) return;
+
+    leagueSel.innerHTML  = '<option value="">All Leagues</option>' + leagues.map(l => `<option value="${l}">${l}</option>`).join('');
+    countrySel.innerHTML = '<option value="">All Countries</option>' + countries.map(c => `<option value="${c}">${c}</option>`).join('');
+}
+
+/** Debounced search trigger */
+let searchTimeout = null;
+function debounceSearch() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(runSearch, 320);
+}
+
+/** Read filters and run search */
+function runSearch() {
+    if (!transferSystem) return;
+    const filters = {
+        query:       document.getElementById('searchQuery')?.value || '',
+        position:    document.getElementById('filterPosition')?.value || '',
+        league:      document.getElementById('filterLeague')?.value || '',
+        country:     document.getElementById('filterCountry')?.value || '',
+        minOvr:      parseInt(document.getElementById('filterMinOvr')?.value) || 0,
+        maxOvr:      parseInt(document.getElementById('filterMaxOvr')?.value) || 0,
+        maxPrice:    parseInt(document.getElementById('filterMaxPrice')?.value) || 0,
+        freeAgents:  document.getElementById('filterFreeAgents')?.checked || false
+    };
+
+    // Need at least something to search
+    if (!filters.query && !filters.position && !filters.league && !filters.country && !filters.freeAgents && !filters.minOvr) {
+        document.getElementById('resultsCount').textContent = 'Use filters or search above to find players';
+        document.getElementById('searchResults').innerHTML = '';
+        return;
+    }
+
+    const results = transferSystem.searchPlayers(filters);
+    document.getElementById('resultsCount').textContent = `${results.length} player${results.length !== 1 ? 's' : ''} found`;
+    renderSearchResults(results);
+}
+
+/** Render the scout cards in the search grid */
+function renderSearchResults(reports) {
+    const grid = document.getElementById('searchResults');
+    grid.innerHTML = '';
+
+    reports.forEach(r => {
+        const card = document.createElement('div');
+        card.className = 'scout-card';
+        card.onclick = () => openPlayerDetail(r);
+
+        // Overall display
+        const ovrDisplay = typeof r.overall === 'object' ? `${r.overall.min}-${r.overall.max}` : r.overall;
+
+        // Stats row
+        const statsHtml = r.stats_known
+            ? ['pace','shooting','passing','dribbling','defending','physic'].map(key => {
+                const labels = { pace:'PAC', shooting:'SHO', passing:'PAS', dribbling:'DRI', defending:'DEF', physic:'PHY' };
+                const val = r[key];
+                if (val === null) return `<div class="scout-stat"><div class="scout-stat-label">${labels[key]}</div><div class="scout-stat-value hidden">?</div></div>`;
+                if (typeof val === 'object') return `<div class="scout-stat"><div class="scout-stat-label">${labels[key]}</div><div class="scout-stat-value range">${val.min}-${val.max}</div></div>`;
+                return `<div class="scout-stat"><div class="scout-stat-label">${labels[key]}</div><div class="scout-stat-value">${val}</div></div>`;
+            }).join('')
+            : '<div style="grid-column:1/-1;text-align:center;font-size:0.72rem;color:rgba(255,255,255,0.28);font-style:italic;padding:4px 0;">Scout the player for detailed stats</div>';
+
+        // Price
+        let priceHtml;
+        if (r.value_known) {
+            const mv = typeof r.market_value === 'object' ? `${transferSystem.formatMoney(r.market_value.min)}-${transferSystem.formatMoney(r.market_value.max)}` : transferSystem.formatMoney(r.market_value);
+            priceHtml = `<div class="scout-price">€${mv}</div>`;
+        } else {
+            priceHtml = `<div class="scout-price unknown-price">Value unknown</div>`;
+        }
+
+        card.innerHTML = `
+            <span class="intel-tier ${r.tier}">${r.tier}</span>
+            <div class="scout-card-top">
+                <div class="scout-card-ovr">
+                    <div class="ovr-num">${ovrDisplay}</div>
+                    <div class="ovr-label">OVR</div>
+                </div>
+                <div class="scout-card-info">
+                    <div class="scout-card-name">${r.short_name}</div>
+                    <div class="scout-card-club">${r.club} · ${r.league}</div>
+                    <div class="scout-card-pos">${r.position}</div>
+                </div>
+            </div>
+            <div class="scout-card-stats">${statsHtml}</div>
+            <div class="scout-card-footer">
+                ${priceHtml}
+                <div class="scout-wage">Wage: ${r.value_known ? '€' + transferSystem.formatMoney(typeof r.wage === 'object' ? r.wage.min : r.wage) + '/wk' : '?'}</div>
+            </div>`;
+
+        grid.appendChild(card);
+    });
+}
+
+/** Open the player detail modal with full scout report + bid form */
+function openPlayerDetail(report) {
+    const modal  = document.getElementById('playerDetailModal');
+    const content = document.getElementById('playerDetailContent');
+
+    // Overall & potential display helpers
+    const fmtOvr = v => typeof v === 'object' ? `${v.min}-${v.max}` : v;
+    const fmtVal = (v, prefix='€') => {
+        if (v === null || v === undefined) return '?';
+        if (typeof v === 'object') return `${prefix}${transferSystem.formatMoney(v.min)}-${transferSystem.formatMoney(v.max)}`;
+        return `${prefix}${transferSystem.formatMoney(v)}`;
+    };
+
+    // Attribute bars
+    const attrKeys = ['pace','shooting','passing','dribbling','defending','physic'];
+    const attrLabels = { pace:'Pace', shooting:'Shooting', passing:'Passing', dribbling:'Dribbling', defending:'Defending', physic:'Physical' };
+    let attrsHtml = '';
+    attrKeys.forEach(key => {
+        const val = report[key];
+        if (val === null) {
+            attrsHtml += `<div class="detail-attr"><div class="detail-attr-label">${attrLabels[key]}</div><div class="detail-attr-bar-wrap"><div class="detail-attr-bar"><div class="detail-attr-bar-fill" style="width:20%;opacity:0.2;"></div></div><div class="detail-attr-val hidden-val">?</div></div></div>`;
+        } else if (typeof val === 'object') {
+            const pct = ((val.min + val.max) / 2) / 100 * 100;
+            attrsHtml += `<div class="detail-attr"><div class="detail-attr-label">${attrLabels[key]}</div><div class="detail-attr-bar-wrap"><div class="detail-attr-bar"><div class="detail-attr-bar-fill" style="width:${pct}%;"></div></div><div class="detail-attr-val range">${val.min}-${val.max}</div></div></div>`;
+        } else {
+            const pct = val / 100 * 100;
+            attrsHtml += `<div class="detail-attr"><div class="detail-attr-label">${attrLabels[key]}</div><div class="detail-attr-bar-wrap"><div class="detail-attr-bar"><div class="detail-attr-bar-fill" style="width:${pct}%;"></div></div><div class="detail-attr-val">${val}</div></div></div>`;
+        }
+    });
+
+    // Contract status
+    const currentYear = gameState.currentDate.getFullYear();
+    const contractEnd = report.contract_until || 2025;
+    const isFreeAgent = contractEnd <= currentYear;
+    const isExpiring  = contractEnd <= currentYear + 1;
+
+    // Release clause
+    const releaseHtml = report.release_clause ? `<div class="detail-fin-item"><div class="detail-fin-label">Release Clause</div><div class="detail-fin-value">€${transferSystem.formatMoney(report.release_clause)}</div></div>` : '';
+
+    content.innerHTML = `
+        <button class="modal-close-btn" onclick="closePlayerDetail()">×</button>
+        <div class="detail-header">
+            <div class="detail-ovr-block">
+                <div class="d-ovr">${fmtOvr(report.overall)}</div>
+                <div class="d-pot">POT ${fmtOvr(report.potential)}</div>
+            </div>
+            <div class="detail-info-block">
+                <div class="detail-name">${report.long_name || report.short_name}</div>
+                <div class="detail-meta">
+                    <span>🏴 ${report.nationality || '—'}</span>
+                    <span>📍 ${report.club}</span>
+                    <span>👟 ${report.preferred_foot || '—'}</span>
+                    <span>⚡ ${report.work_rate || '—'}</span>
+                </div>
+                <div class="detail-meta" style="margin-top:3px;">
+                    <span>📋 ${report.position}</span>
+                    ${report.age ? `<span>🎂 Age ${report.age}</span>` : ''}
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-attrs">${attrsHtml}</div>
+
+        <div class="detail-finances">
+            <div class="detail-fin-item"><div class="detail-fin-label">Market Value</div><div class="detail-fin-value ${report.value_known ? '' : 'unknown'}">${fmtVal(report.market_value)}</div></div>
+            <div class="detail-fin-item"><div class="detail-fin-label">Weekly Wage</div><div class="detail-fin-value ${report.value_known ? '' : 'unknown'}">${fmtVal(report.wage)}/wk</div></div>
+            ${releaseHtml}
+        </div>
+
+        <div class="detail-contract-info">
+            <span>📄 Contract until: <strong style="color:${isExpiring ? '#ff3366' : '#fff'}">${isFreeAgent ? 'FREE AGENT' : contractEnd}</strong></span>
+            ${report.traits ? `<span>🏷️ ${report.traits}</span>` : ''}
+        </div>
+
+        <!-- Bid / Transfer Form -->
+        <div class="bid-form" id="bidForm">
+            <div class="bid-form-title">${isFreeAgent ? '✍️ Sign Free Agent' : '💰 Place a Bid'}</div>
+            ${isFreeAgent ? `
+                <div style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:10px;">No transfer fee required. Negotiate contract directly.</div>
+                <button class="bid-btn success" onclick="startContractNegotiation('${report.player_id}', 0)">Negotiate Contract</button>
+            ` : `
+                <div class="bid-form-row">
+                    <span style="font-size:0.82rem;color:rgba(255,255,255,0.5);">€</span>
+                    <input type="number" class="bid-input" id="bidAmount" placeholder="${report.value_known ? 'e.g. ' + transferSystem.formatMoney(typeof report.market_value === 'object' ? report.market_value.min : report.market_value) : 'Enter amount'}">
+                    <button class="bid-btn" onclick="submitBid('${report.player_id}')">Place Bid</button>
+                </div>
+                <div class="bid-result" id="bidResult"></div>
+            `}
+        </div>
+
+        <!-- Contract Negotiation Form (hidden until bid accepted) -->
+        <div class="contract-form" id="contractForm">
+            <div class="bid-form-title">✍️ Contract Negotiation</div>
+            <div class="contract-form-row">
+                <div class="contract-field">
+                    <label>Contract Length</label>
+                    <select id="contractLength">
+                        <option value="1">1 Year</option>
+                        <option value="2">2 Years</option>
+                        <option value="3" selected>3 Years</option>
+                        <option value="4">4 Years</option>
+                        <option value="5">5 Years</option>
+                    </select>
+                </div>
+                <div class="contract-field">
+                    <label>Weekly Wage (€)</label>
+                    <input type="number" id="contractWage" placeholder="e.g. 50000">
+                </div>
+                <div class="contract-field">
+                    <label>Signing Bonus (€)</label>
+                    <input type="number" id="contractBonus" placeholder="e.g. 500000">
+                </div>
+            </div>
+            <div class="contract-form-row">
+                <button class="bid-btn success" onclick="submitContract('${report.player_id}')">Sign Contract</button>
+                <button class="bid-btn danger" onclick="closePlayerDetail()">Cancel</button>
+            </div>
+            <div class="bid-result" id="contractResult"></div>
+        </div>
+    `;
+
+    modal.classList.remove('hidden');
+    modal.classList.add('active');
+}
+
+function closePlayerDetail() {
+    const modal = document.getElementById('playerDetailModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('active');
+}
+
+/* ── BID LOGIC ── */
+// Store pending transfer fee for contract step
+let pendingTransferFee = 0;
+
+function submitBid(playerId) {
+    const amount = parseInt(document.getElementById('bidAmount')?.value) || 0;
+    if (amount <= 0) { showBidResult('Enter a valid bid amount.', 'rejected'); return; }
+
+    const result = transferSystem.placeBid(playerId, amount);
+
+    if (result.status === 'accepted' || result.status === 'release_clause') {
+        pendingTransferFee = result.fee || amount;
+        showBidResult(result.message, 'success');
+        // Show contract form
+        setTimeout(() => {
+            const cf = document.getElementById('contractForm');
+            if (cf) cf.classList.add('show');
+            // Pre-fill wage suggestion
+            const player = gameState.allPlayers.find(p => p.player_id === playerId);
+            if (player) {
+                const suggestedWage = Math.floor((player.value?.wage_eur || transferSystem.estimateWage(player)) * 1.05 / 1000) * 1000;
+                document.getElementById('contractWage').value = suggestedWage;
+                document.getElementById('contractBonus').value = Math.floor(suggestedWage * 8);
+            }
+        }, 800);
+    } else if (result.status === 'counter') {
+        showBidResult(result.message, 'counter');
+        // Update bid input with counter value
+        document.getElementById('bidAmount').value = result.counter;
+    } else if (result.status === 'rejected_open') {
+        showBidResult(result.message, 'rejected');
+    } else {
+        showBidResult(result.message, 'rejected');
+    }
+}
+
+function showBidResult(msg, type) {
+    const el = document.getElementById('bidResult');
+    if (!el) return;
+    el.textContent = msg;
+    el.className = 'bid-result show ' + type;
+}
+
+/* ── CONTRACT NEGOTIATION ── */
+function startContractNegotiation(playerId, fee) {
+    pendingTransferFee = fee;
+    const cf = document.getElementById('contractForm');
+    if (cf) cf.classList.add('show');
+    // Pre-fill
+    const player = gameState.allPlayers.find(p => p.player_id === playerId);
+    if (player) {
+        const suggestedWage = Math.floor((player.value?.wage_eur || transferSystem.estimateWage(player)) * 1.1 / 1000) * 1000;
+        document.getElementById('contractWage').value = suggestedWage;
+        document.getElementById('contractBonus').value = Math.floor(suggestedWage * 5);
+    }
+}
+
+function submitContract(playerId) {
+    const length = parseInt(document.getElementById('contractLength')?.value) || 3;
+    const wage   = parseInt(document.getElementById('contractWage')?.value) || 0;
+    const bonus  = parseInt(document.getElementById('contractBonus')?.value) || 0;
+
+    if (wage <= 0) { showContractResult('Enter a weekly wage.', 'rejected'); return; }
+
+    const player = gameState.allPlayers.find(p => p.player_id === playerId);
+    if (!player) { showContractResult('Player not found.', 'rejected'); return; }
+
+    const contractOffer = { length, weeklyWage: wage, signingBonus: bonus };
+    const result = transferSystem.negotiateContract(player, contractOffer, pendingTransferFee);
+
+    if (result.success) {
+        // Finalise!
+        transferSystem.finaliseTransfer(player, pendingTransferFee, contractOffer);
+        showContractResult(`✅ ${result.message} Transfer complete!`, 'success');
+        // Refresh squad view
+        renderSquad();
+        updateOfferBadge();
+        // Close modal after a moment
+        setTimeout(() => { closePlayerDetail(); runSearch(); }, 1200);
+    } else if (result.reason === 'counter') {
+        showContractResult(result.message, 'counter');
+        // Auto-fill the counter values
+        document.getElementById('contractLength').value = result.counter.length;
+        document.getElementById('contractWage').value   = result.counter.weeklyWage;
+    } else {
+        showContractResult(result.message, 'rejected');
+    }
+}
+
+function showContractResult(msg, type) {
+    const el = document.getElementById('contractResult');
+    if (!el) return;
+    el.textContent = msg;
+    el.className = 'bid-result show ' + type;
+}
+
+/* ── TRANSFER SUB-VIEW SWITCHER ── */
+function switchTransferView(view) {
+    // Hide all views
+    ['search','offers','history'].forEach(v => {
+        const el = document.getElementById('transferView-' + v);
+        if (el) el.style.display = 'none';
+    });
+    // Show selected
+    const target = document.getElementById('transferView-' + view);
+    if (target) target.style.display = 'block';
+
+    // Update subnav active state
+    document.querySelectorAll('.transfer-subnav-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', ['search','offers','history'][i] === view);
+    });
+
+    // Render content for the view
+    if (view === 'offers') renderOffers();
+    if (view === 'history') renderHistory();
+}
+
+/* ── RENDER INCOMING OFFERS ── */
+function renderOffers() {
+    const container = document.getElementById('offersContent');
+    if (!container || !transferSystem) return;
+
+    const pending = transferSystem.getPendingOffers();
+    updateOfferBadge();
+
+    if (pending.length === 0) {
+        container.innerHTML = '<div class="offers-empty">📬 No pending offers at this time.<br><span style="font-size:0.78rem;opacity:0.6;">Offers arrive as the season progresses.</span></div>';
+        return;
+    }
+
+    container.innerHTML = pending.map(offer => `
+        <div class="offer-card">
+            <div class="offer-card-left">
+                <div class="offer-card-player">
+                    <div class="offer-card-player-name">${offer.playerName}</div>
+                    <div class="offer-card-player-detail">OVR ${offer.playerOvr} · Your squad</div>
+                </div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+                <div class="offer-card-amount">€${transferSystem.formatMoney(offer.amount)}</div>
+                <div class="offer-card-from">from ${offer.club}</div>
+            </div>
+            <div class="offer-card-actions">
+                <button class="offer-btn accept" onclick="acceptIncomingOffer(${offer.id})">Accept</button>
+                <button class="offer-btn counter" onclick="promptCounter(${offer.id}, ${offer.amount})">Counter</button>
+                <button class="offer-btn reject" onclick="rejectIncomingOffer(${offer.id})">Reject</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function acceptIncomingOffer(offerId) {
+    const result = transferSystem.acceptOffer(offerId);
+    if (result.success) {
+        renderSquad();
+        renderOffers();
+    }
+}
+
+function rejectIncomingOffer(offerId) {
+    transferSystem.rejectOffer(offerId);
+    renderOffers();
+}
+
+function promptCounter(offerId, currentAmount) {
+    const newVal = prompt('Enter your counter-offer (€):', currentAmount);
+    if (newVal === null) return;
+    const amount = parseInt(newVal);
+    if (isNaN(amount) || amount <= 0) return;
+    const result = transferSystem.counterOffer(offerId, amount);
+    renderOffers();
+}
+
+/* ── RENDER DEAL HISTORY ── */
+function renderHistory() {
+    const container = document.getElementById('historyContent');
+    if (!container || !transferSystem) return;
+
+    const history = transferSystem.transferHistory;
+    if (history.length === 0) {
+        container.innerHTML = '<div class="offers-empty">📋 No transfers completed yet this window.</div>';
+        return;
+    }
+
+    container.innerHTML = history.map(deal => `
+        <div class="history-card">
+            <div class="history-type ${deal.type.toLowerCase()}">${deal.type}</div>
+            <div class="history-card-info">
+                <div class="history-card-name">${deal.player}</div>
+                <div class="history-card-detail">${deal.type === 'IN' ? 'from ' + deal.from : 'to ' + deal.to} · ${deal.date?.toLocaleDateString('en-US', {month:'short', day:'numeric'}) || ''}</div>
+            </div>
+            <div class="history-card-fee">€${transferSystem.formatMoney(deal.fee)}</div>
+        </div>
+    `).join('');
+}
+
+/* ── RENDER OFFICE TAB ── */
+function renderOffice() {
+    if (!transferSystem) return;
+    renderBudgetCards();
+    renderContractsTable();
+}
+
+function renderBudgetCards() {
+    const container = document.getElementById('officeBudgetCard');
+    if (!container) return;
+
+    const tb = transferSystem.transferBudget;
+    const wb = transferSystem.wageBudget;
+    const tw = transferSystem.totalWages;
+    const teamOvr = gameState.selectedTeam?.overall_rating || 75;
+    const maxWages = Math.floor(teamOvr * 18000);
+
+    const tbClass = tb > 10000000 ? 'green' : (tb > 2000000 ? 'yellow' : 'red');
+    const wbClass = wb > 20000  ? 'green' : (wb > 5000 ? 'yellow' : 'red');
+    const tbItemClass = tb < 5000000 ? 'warning' : '';
+    const wbItemClass = wb < 10000  ? 'danger' : '';
+
+    container.innerHTML = `
+        <div class="budget-item ${tbItemClass}">
+            <div class="budget-label">Transfer Budget</div>
+            <div class="budget-value ${tbClass}">€${transferSystem.formatMoney(tb)}</div>
+            <div class="budget-sub">Available for signings</div>
+        </div>
+        <div class="budget-item ${wbItemClass}">
+            <div class="budget-label">Wage Budget</div>
+            <div class="budget-value ${wbClass}">€${transferSystem.formatMoney(wb)}/wk</div>
+            <div class="budget-sub">Remaining wage capacity</div>
+        </div>
+        <div class="budget-item">
+            <div class="budget-label">Total Wages</div>
+            <div class="budget-value" style="color:#ffd900;">€${transferSystem.formatMoney(tw)}/wk</div>
+            <div class="budget-sub">of €${transferSystem.formatMoney(maxWages)} max</div>
+        </div>
+        <div class="budget-item">
+            <div class="budget-label">Squad Size</div>
+            <div class="budget-value">${gameState.squad.length}</div>
+            <div class="budget-sub">Players registered</div>
+        </div>
+    `;
+}
+
+function renderContractsTable() {
+    const container = document.getElementById('contractsTable');
+    if (!container) return;
+
+    const currentYear = gameState.currentDate.getFullYear();
+
+    container.innerHTML = `
+        <div class="contracts-header">
+            <div>Player</div>
+            <div>Position</div>
+            <div>OVR</div>
+            <div>Weekly Wage</div>
+            <div>Contract Ends</div>
+            <div></div>
+        </div>
+    `;
+
+    // Sort squad by wage descending
+    const sorted = [...gameState.squad].sort((a, b) => {
+        const wA = a.contract?.wage || transferSystem.estimateWage(a);
+        const wB = b.contract?.wage || transferSystem.estimateWage(b);
+        return wB - wA;
+    });
+
+    sorted.forEach(player => {
+        const info = player.basic_info || {};
+        const ovr  = player.ratings?.overall || 70;
+        const wage = player.contract?.wage || transferSystem.estimateWage(player);
+        const ends = player.contract?.endYear || player.club?.contract_until || 2025;
+        const isExpiring = ends <= currentYear + 1;
+
+        const row = document.createElement('div');
+        row.className = 'contract-row';
+        row.innerHTML = `
+            <div>
+                <div class="cr-name">${info.short_name || 'Unknown'}</div>
+            </div>
+            <div class="cr-pos">${(player.player_positions || '—').split(',')[0].trim()}</div>
+            <div class="cr-val">${ovr}</div>
+            <div class="cr-wage">€${transferSystem.formatMoney(wage)}/wk</div>
+            <div class="cr-ends ${isExpiring ? 'expiring' : ''}">${isExpiring ? '⚠️ ' : ''}${ends}</div>
+            <div><button class="cr-sell-btn" onclick="quickSell('${player.player_id}', '${(info.short_name||'').replace(/'/g,"\\'")}')">Sell</button></div>
+        `;
+        container.appendChild(row);
+    });
+}
+
+function quickSell(playerId, playerName) {
+    const player = gameState.squad.find(p => p.player_id === playerId);
+    if (!player) return;
+    const mv = player.value?.market_value_eur || transferSystem.estimateMarketValue(player);
+    // Sell at 70-85% of market value (quick sale)
+    const fee = Math.floor(mv * (0.70 + Math.random() * 0.15) / 1000) * 1000;
+    if (confirm(`Sell ${playerName} for €${transferSystem.formatMoney(fee)}?`)) {
+        transferSystem.sellPlayer(playerId, fee);
+        transferSystem.transferHistory.push({
+            type: 'OUT', player: playerName, fee: fee,
+            date: new Date(gameState.currentDate), to: 'Transfer Market'
+        });
+        renderSquad();
+        renderOffice();
+    }
+}
+
+/** Update the offer badge count in the nav */
+function updateOfferBadge() {
+    if (!transferSystem) return;
+    const count = transferSystem.getPendingOffers().length;
+    const badge = document.getElementById('offerBadge');
+    if (badge) {
+        badge.textContent = count;
+        badge.style.display = count > 0 ? 'inline' : 'none';
+    }
+    const countEl = document.getElementById('offerCount');
+    if (countEl) countEl.textContent = count;
+}
+
+// ── Hook into showTab to render office/offers on demand ──
+const _origShowTab = showTab;
+function showTab(tabName) {
+    _origShowTab.call(this, tabName);
+    if (tabName === 'office')    renderOffice();
+    if (tabName === 'transfers') { updateOfferBadge(); }
 }
 
 // Start game when page loads
