@@ -6,12 +6,8 @@
     <title>FIFA Manager - Start</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;900&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Rajdhani', sans-serif;
@@ -21,574 +17,424 @@
             height: 100vh;
         }
 
-        /* Loading screen */
+        /* ── Loading ── */
         .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.95);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
             z-index: 9999;
         }
-
-        .loading-screen.hidden {
-            display: none;
-        }
-
+        .loading-screen.hidden { display: none; }
         .loading-spinner {
-            width: 80px;
-            height: 80px;
-            border: 4px solid rgba(0, 212, 255, 0.2);
+            width: 80px; height: 80px;
+            border: 4px solid rgba(0,212,255,0.2);
             border-top-color: #00d4ff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { margin-top: 30px; font-size: 1.5rem; color: #00d4ff; font-weight: 700; letter-spacing: 2px; }
+        .loading-progress { margin-top: 15px; font-size: 1rem; color: rgba(255,255,255,0.6); }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            margin-top: 30px;
-            font-size: 1.5rem;
-            color: #00d4ff;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-
-        .loading-progress {
-            margin-top: 15px;
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        /* Animated background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
+        /* ── BG ── */
+        .bg-animation { position: fixed; inset: 0; z-index: 0; }
         .bg-gradient {
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(ellipse at center, rgba(0, 150, 255, 0.3) 0%, transparent 50%);
+            position: absolute; width: 200%; height: 200%;
+            background: radial-gradient(ellipse at center, rgba(0,150,255,0.3) 0%, transparent 50%);
             animation: rotate 20s linear infinite;
         }
-
         .bg-gradient:nth-child(2) {
-            background: radial-gradient(ellipse at center, rgba(255, 217, 0, 0.2) 0%, transparent 50%);
+            background: radial-gradient(ellipse at center, rgba(255,217,0,0.2) 0%, transparent 50%);
             animation: rotate 15s linear infinite reverse;
         }
+        @keyframes rotate { from { transform: rotate(0deg) scale(1.5); } to { transform: rotate(360deg) scale(1.5); } }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg) scale(1.5); }
-            to { transform: rotate(360deg) scale(1.5); }
-        }
-
-        /* Particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
+        /* ── Particles ── */
+        .particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
         .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(0, 212, 255, 0.6);
-            border-radius: 50%;
+            position: absolute; width: 4px; height: 4px;
+            background: rgba(0,212,255,0.6); border-radius: 50%;
             animation: float 10s infinite;
         }
-
-        .particle:nth-child(2n) { background: rgba(255, 217, 0, 0.6); }
-
+        .particle:nth-child(2n) { background: rgba(255,217,0,0.6); }
         @keyframes float {
             0%, 100% { transform: translateY(0); opacity: 0; }
             10%, 90% { opacity: 1; }
             100% { transform: translateY(-100vh); }
         }
 
-        /* Scanline */
+        /* ── Scanline ── */
         .scanline {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent 0%, rgba(0, 212, 255, 0.05) 50%, transparent 100%);
+            position: fixed; inset: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,212,255,0.05) 50%, transparent 100%);
             animation: scan 8s linear infinite;
-            pointer-events: none;
-            z-index: 2;
+            pointer-events: none; z-index: 2;
         }
+        @keyframes scan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
 
-        @keyframes scan {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
-        }
-
-        /* Corner decorations */
+        /* ── Corners ── */
         .corner {
-            position: fixed;
-            width: 200px;
-            height: 200px;
-            border: 2px solid rgba(0, 212, 255, 0.3);
-            z-index: 5;
+            position: fixed; width: 200px; height: 200px;
+            border: 2px solid rgba(0,212,255,0.3); z-index: 5;
             animation: cornerPulse 3s ease-in-out infinite;
         }
-
         .corner.tl { top: 30px; left: 30px; border-right: none; border-bottom: none; }
         .corner.tr { top: 30px; right: 30px; border-left: none; border-bottom: none; animation-delay: 0.5s; }
         .corner.bl { bottom: 30px; left: 30px; border-right: none; border-top: none; animation-delay: 1s; }
         .corner.br { bottom: 30px; right: 30px; border-left: none; border-top: none; animation-delay: 1.5s; }
+        @keyframes cornerPulse { 0%,100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
 
-        @keyframes cornerPulse {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
-        }
-
-        /* Main container */
+        /* ── Main ── */
         .container {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            padding: 40px;
-            opacity: 0;
-            transition: opacity 0.5s ease-in;
+            position: relative; z-index: 10;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            height: 100vh; padding: 20px;
+            opacity: 0; transition: opacity 0.5s ease-in;
         }
+        .container.visible { opacity: 1; }
 
-        .container.visible {
-            opacity: 1;
-        }
-
-        /* Logo */
+        /* ── Logo ── */
         .logo {
-            font-size: 6rem;
-            font-weight: 900;
-            letter-spacing: 10px;
+            font-size: 5.5rem; font-weight: 900; letter-spacing: 10px;
             background: linear-gradient(135deg, #00d4ff 0%, #0096ff 50%, #ffd900 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
             animation: glow 2s ease-in-out infinite alternate;
-            margin-bottom: 10px;
+            margin-bottom: 2px;
         }
-
-        @keyframes glow {
-            from { filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5)); }
-            to { filter: drop-shadow(0 0 40px rgba(0, 212, 255, 1)); }
-        }
-
+        @keyframes glow { from { filter: drop-shadow(0 0 20px rgba(0,212,255,0.5)); } to { filter: drop-shadow(0 0 40px rgba(0,212,255,1)); } }
         .subtitle {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 8px;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 40px;
+            font-size: 1.8rem; font-weight: 700; letter-spacing: 8px;
+            color: rgba(255,255,255,0.9); margin-bottom: 20px; text-transform: uppercase;
+        }
+
+        /* ── Country Filter ── */
+        .country-filter {
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 12px;
+        }
+        .country-filter select {
+            background: rgba(10,30,60,0.85);
+            border: 2px solid rgba(0,212,255,0.4);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem; font-weight: 600;
+            padding: 6px 12px; border-radius: 8px;
+            cursor: pointer; outline: none;
+            min-width: 180px;
+            transition: border-color 0.3s;
+        }
+        .country-filter select:hover { border-color: #00d4ff; }
+        .country-filter select option { background: #0a1e3c; color: #fff; }
+        .country-filter label {
+            font-size: 0.8rem; letter-spacing: 2px; color: rgba(255,255,255,0.5);
             text-transform: uppercase;
         }
 
-        /* Club selection card */
+        /* ── Club Select Card (3 rows: 25 / 50 / 25) ── */
         .club-select {
-            background: rgba(10, 30, 60, 0.8);
+            background: rgba(10,30,60,0.8);
             backdrop-filter: blur(20px);
-            border: 2px solid rgba(0, 212, 255, 0.4);
+            border: 2px solid rgba(0,212,255,0.4);
             border-radius: 20px;
-            width: 500px;
-            height: 400px;
-            display: flex;
-            flex-direction: column;
+            width: 420px;
+            height: 380px;
+            display: flex; flex-direction: column;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);
-            margin-bottom: 20px;
+            box-shadow: 0 20px 60px rgba(0,212,255,0.3);
+            margin-bottom: 18px;
         }
 
-        /* League section */
+        /* top 25% — league */
         .league-section {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 150, 200, 0.2) 100%);
-            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
-            padding: 20px 30px;
-            text-align: center;
+            height: 25%;
+            background: linear-gradient(135deg, rgba(0,212,255,0.15) 0%, rgba(0,150,200,0.15) 100%);
+            border-bottom: 1px solid rgba(0,212,255,0.25);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
         }
-
         .league-label {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 5px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            font-size: 0.7rem; color: rgba(255,255,255,0.5);
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2px;
         }
-
         .league-name {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #00d4ff;
-            letter-spacing: 2px;
+            font-size: 1.6rem; font-weight: 700; color: #00d4ff; letter-spacing: 1px;
+            text-align: center; padding: 0 12px;
         }
 
-        /* Club section (50% middle) */
+        /* middle 50% — logo + name */
         .club-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 30px;
+            height: 50%;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: 8px;
         }
-
         .club-badge {
-            width: 120px;
-            height: 120px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 3px solid rgba(0, 212, 255, 0.5);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            margin-bottom: 20px;
+            width: 110px; height: 110px;
+            background: rgba(255,255,255,0.07);
+            border: 2px solid rgba(0,212,255,0.4);
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3.5rem;
             overflow: hidden;
         }
-
-        .club-badge img {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            display: block;
-        }
-
+        .club-badge img { width: 100%; height: 100%; object-fit: contain; display: block; }
         .club-name {
-            font-size: 2.2rem;
-            font-weight: 900;
-            text-align: center;
-            letter-spacing: 2px;
+            font-size: 1.9rem; font-weight: 900; text-align: center;
+            letter-spacing: 1px; padding: 0 10px;
             background: linear-gradient(135deg, #ffd900 0%, #ffb700 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-
         .club-rating {
             background: linear-gradient(135deg, #ffd900 0%, #ffb700 100%);
-            color: #000;
-            padding: 8px 25px;
-            border-radius: 8px;
-            font-size: 1.8rem;
-            font-weight: 900;
-            box-shadow: 0 5px 20px rgba(255, 217, 0, 0.4);
+            color: #000; padding: 4px 20px; border-radius: 6px;
+            font-size: 1.5rem; font-weight: 900;
+            box-shadow: 0 4px 15px rgba(255,217,0,0.4);
         }
 
-        /* Country display (below card) */
-        .country-display {
-            text-align: center;
-            padding: 15px 30px;
-            background: rgba(10, 30, 60, 0.6);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 217, 0, 0.3);
-            border-radius: 10px;
-            min-width: 300px;
-            margin-bottom: 20px;
+        /* bottom 25% — country */
+        .country-section {
+            height: 25%;
+            background: linear-gradient(135deg, rgba(255,217,0,0.08) 0%, rgba(255,180,0,0.08) 100%);
+            border-top: 1px solid rgba(255,217,0,0.2);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
         }
-
         .country-label {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 5px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            font-size: 0.7rem; color: rgba(255,255,255,0.5);
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2px;
         }
-
         .country-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #ffd900;
-            letter-spacing: 2px;
+            font-size: 1.4rem; font-weight: 700; color: #ffd900; letter-spacing: 1px;
         }
 
-        /* Navigation arrows */
-        .nav-arrows {
-            display: flex;
-            gap: 20px;
-            margin-top: 10px;
-        }
-
+        /* ── Arrows ── */
+        .nav-arrows { display: flex; gap: 16px; margin-top: 4px; }
         .arrow-btn {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.3) 0%, rgba(0, 150, 200, 0.3) 100%);
-            border: 2px solid rgba(0, 212, 255, 0.5);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            font-size: 2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 700;
+            background: linear-gradient(135deg, rgba(0,212,255,0.3) 0%, rgba(0,150,200,0.3) 100%);
+            border: 2px solid rgba(0,212,255,0.5);
+            color: white; width: 54px; height: 54px; border-radius: 50%;
+            font-size: 1.8rem; cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Rajdhani', sans-serif; font-weight: 700;
         }
-
         .arrow-btn:hover {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.5) 0%, rgba(0, 150, 200, 0.5) 100%);
-            border-color: #00d4ff;
-            transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            background: linear-gradient(135deg, rgba(0,212,255,0.5) 0%, rgba(0,150,200,0.5) 100%);
+            border-color: #00d4ff; transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(0,212,255,0.5);
         }
 
-        /* Start button */
+        /* ── Start ── */
         .start-btn {
             background: linear-gradient(135deg, #00d4ff 0%, #0096ff 100%);
-            border: none;
-            color: white;
-            padding: 15px 60px;
-            border-radius: 10px;
-            font-size: 1.5rem;
-            font-weight: 900;
-            letter-spacing: 3px;
-            cursor: pointer;
-            margin-top: 30px;
-            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.4);
-            font-family: 'Rajdhani', sans-serif;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
+            border: none; color: white;
+            padding: 13px 55px; border-radius: 10px;
+            font-size: 1.4rem; font-weight: 900; letter-spacing: 3px;
+            cursor: pointer; margin-top: 18px;
+            box-shadow: 0 10px 40px rgba(0,212,255,0.4);
+            font-family: 'Rajdhani', sans-serif; text-transform: uppercase;
+            transition: all 0.2s ease;
         }
+        .start-btn:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 14px 45px rgba(0,212,255,0.6); }
 
-        .start-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 50px rgba(0, 212, 255, 0.6);
-        }
-
-        /* Press hint */
         .press-hint {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.5);
-            margin-top: 15px;
-            letter-spacing: 2px;
+            font-size: 0.85rem; color: rgba(255,255,255,0.4);
+            margin-top: 10px; letter-spacing: 1px;
         }
-
-        .key-highlight {
-            color: #00d4ff;
-            font-weight: 700;
-        }
+        .key-highlight { color: #00d4ff; font-weight: 700; }
 
         @media (max-width: 768px) {
-            .logo { font-size: 3rem; letter-spacing: 5px; }
-            .subtitle { font-size: 1.2rem; letter-spacing: 4px; }
-            .club-select { width: 90%; height: 350px; }
-            .club-badge { width: 80px; height: 80px; font-size: 3rem; }
-            .club-name { font-size: 1.5rem; }
-            .corner { width: 100px; height: 100px; }
+            .club-select { width: 90%; height: 320px; }
+            .logo { font-size: 3.5rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Loading screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">LOADING FIFA MANAGER</div>
-        <div class="loading-progress" id="loadingProgress">Initializing...</div>
+
+<!-- Loading -->
+<div class="loading-screen" id="loadingScreen">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">LOADING FIFA MANAGER</div>
+    <div class="loading-progress" id="loadingProgress">Initializing...</div>
+</div>
+
+<!-- BG -->
+<div class="bg-animation">
+    <div class="bg-gradient"></div>
+    <div class="bg-gradient"></div>
+</div>
+<div class="particles" id="particles"></div>
+<div class="scanline"></div>
+
+<!-- Corners -->
+<div class="corner tl"></div>
+<div class="corner tr"></div>
+<div class="corner bl"></div>
+<div class="corner br"></div>
+
+<!-- Main -->
+<div class="container" id="mainContainer">
+    <div class="logo">FIFA</div>
+    <div class="subtitle">MANAGER</div>
+
+    <!-- Country filter dropdown -->
+    <div class="country-filter">
+        <label>Filter by</label>
+        <select id="countryFilter" onchange="applyFilter()">
+            <option value="">All Countries</option>
+        </select>
     </div>
 
-    <!-- Background -->
-    <div class="bg-animation">
-        <div class="bg-gradient"></div>
-        <div class="bg-gradient"></div>
-    </div>
-
-    <div class="particles" id="particles"></div>
-    <div class="scanline"></div>
-
-    <!-- Corners -->
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
-
-    <!-- Main container -->
-    <div class="container" id="mainContainer">
-        <div class="logo">FIFA</div>
-        <div class="subtitle">MANAGER</div>
-
-        <div class="club-select">
-            <div class="league-section">
-                <div class="league-label">LEAGUE</div>
-                <div class="league-name" id="leagueName">Loading...</div>
-            </div>
-
-            <div class="club-section">
-                <div class="club-badge" id="clubBadge">⚽</div>
-                <div class="club-name" id="clubName">Loading...</div>
-                <div class="club-rating" id="clubRating">--</div>
-            </div>
+    <!-- 3-row selector card -->
+    <div class="club-select">
+        <!-- top 25% — league -->
+        <div class="league-section">
+            <div class="league-label">League</div>
+            <div class="league-name" id="leagueName">—</div>
         </div>
-
-        <div class="country-display">
-            <div class="country-label">COUNTRY</div>
-            <div class="country-name" id="countryName">Loading...</div>
+        <!-- middle 50% — badge + name + rating -->
+        <div class="club-section">
+            <div class="club-badge" id="clubBadge">⚽</div>
+            <div class="club-name" id="clubName">—</div>
+            <div class="club-rating" id="clubRating">—</div>
         </div>
-
-        <div class="nav-arrows">
-            <button class="arrow-btn" onclick="previousTeam()">◀</button>
-            <button class="arrow-btn" onclick="nextTeam()">▶</button>
-        </div>
-
-        <button class="start-btn" onclick="startGame()">START CAREER</button>
-
-        <div class="press-hint">
-            Use <span class="key-highlight">← →</span> arrows or press <span class="key-highlight">SPACE</span> to start
+        <!-- bottom 25% — country -->
+        <div class="country-section">
+            <div class="country-label">Country</div>
+            <div class="country-name" id="countryName">—</div>
         </div>
     </div>
 
-    <script>
-        
-        // Particles
-        const particles = document.getElementById('particles');
-        for (let i = 0; i < 50; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
-            p.style.left = Math.random() * 100 + '%';
-            p.style.animationDelay = Math.random() * 10 + 's';
-            particles.appendChild(p);
-        }
+    <!-- Arrows -->
+    <div class="nav-arrows">
+        <button class="arrow-btn" onclick="previousTeam()">◀</button>
+        <button class="arrow-btn" onclick="nextTeam()">▶</button>
+    </div>
 
-        let allTeams = [];
-        let allPlayers = [];
-        let currentIndex = 0;
-        let dataLoaded = false;
+    <button class="start-btn" onclick="startGame()">START CAREER</button>
+    <div class="press-hint">Use <span class="key-highlight">← →</span> arrows or press <span class="key-highlight">SPACE</span> to start</div>
+</div>
 
-        async function loadAllData() {
-            try {
-                document.getElementById('loadingProgress').textContent = 'Loading teams...';
-                
-                const teamsRes = await fetch('teams.json');
-                if (!teamsRes.ok) throw new Error('Failed to load teams.json');
-                allTeams = await teamsRes.json();
-                allTeams = allTeams.filter(t => t.team_name && t.team_name.trim());
-                
-                document.getElementById('loadingProgress').textContent = `Loaded ${allTeams.length} teams...`;
-                
-                const playersRes = await fetch('players.json');
-                if (!playersRes.ok) throw new Error('Failed to load players.json');
-                allPlayers = await playersRes.json();
-                
-                document.getElementById('loadingProgress').textContent = `Loaded ${allPlayers.length} players...`;
-                
-                // Store only teams in localStorage (players.json is too large ~40-80MB)
-                // We'll just pass the team reference and let game.html load players itself
-                localStorage.setItem('fifaAllTeams', JSON.stringify(allTeams));
-                
-                document.getElementById('loadingProgress').textContent = 'Ready!';
-                
-                dataLoaded = true;
-                
-                setTimeout(() => {
-                    document.getElementById('loadingScreen').classList.add('hidden');
-                    document.getElementById('mainContainer').classList.add('visible');
-                    displayCurrentTeam();
-                }, 500);
-                
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('loadingProgress').textContent = 'ERROR: ' + error.message;
-                document.getElementById('loadingProgress').style.color = '#ff3366';
-            }
-        }
+<script>
+// ── Particles ──
+const particlesEl = document.getElementById('particles');
+for (let i = 0; i < 50; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDelay = Math.random() * 10 + 's';
+    particlesEl.appendChild(p);
+}
 
-        function displayCurrentTeam() {
-            if (!allTeams.length) return;
-            
-            const team = allTeams[currentIndex];
-            
-            console.log('=== DISPLAYING TEAM ===');
-            console.log('Team name:', team.team_name);
-            console.log('League:', team.league_name);
-            console.log('Country:', team.country);
-            console.log('Rating:', team.overall_rating);
-            console.log('Logo URL:', team.club_logo_url);
-            console.log('Has logo URL?', !!team.club_logo_url);
-            console.log('Full team object:', team);
-            
-            document.getElementById('clubName').textContent = team.team_name;
-            document.getElementById('leagueName').textContent = team.league_name || 'League';
-            document.getElementById('countryName').textContent = team.country || 'Country';
-            document.getElementById('clubRating').textContent = team.overall_rating || '75';
-            
-            const badge = document.getElementById('clubBadge');
-            const logoUrl = team.club_logo_url;
-            
-            if (logoUrl) {
-                badge.innerHTML = `<img src="${logoUrl}" alt="${team.team_name}" 
-                    style="width:100px;height:100px;object-fit:contain;display:block;padding:10px;" 
-                    onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'font-size:4rem;\\'>⚽</div>';">`;
-            } else {
-                badge.innerHTML = '<div style="font-size:4rem;">⚽</div>';
-            }
-            console.log('=====================');
-        }
+// ── State ──
+let allTeams      = [];
+let filteredTeams = [];
+let currentIndex  = 0;
+let dataLoaded    = false;
 
-        function nextTeam() {
-            if (!dataLoaded) return;
-            currentIndex = (currentIndex + 1) % allTeams.length;
-            displayCurrentTeam();
-        }
+// ── Load ──
+async function loadAllData() {
+    try {
+        document.getElementById('loadingProgress').textContent = 'Loading teams…';
 
-        function previousTeam() {
-            if (!dataLoaded) return;
-            currentIndex = (currentIndex - 1 + allTeams.length) % allTeams.length;
-            displayCurrentTeam();
-        }
+        const teamsRes = await fetch('teams.json');
+        if (!teamsRes.ok) throw new Error('teams.json not found');
+        allTeams = (await teamsRes.json()).filter(t => t.team_name && t.team_name.trim());
 
-        function startGame() {
-            if (!dataLoaded) {
-                alert('Please wait for data to load!');
-                return;
-            }
-            
-            const selectedTeam = allTeams[currentIndex];
-            localStorage.setItem('fifaSelectedTeam', JSON.stringify(selectedTeam));
-            
-            console.log('✅ Starting with:', selectedTeam.team_name);
-            
-            document.body.style.transition = 'opacity 0.5s';
-            document.body.style.opacity = '0';
-            
-            setTimeout(() => {
-                window.location.href = 'game.html';
-            }, 500);
-        }
+        document.getElementById('loadingProgress').textContent = `Loaded ${allTeams.length} teams…`;
 
-        document.addEventListener('keydown', (e) => {
-            if (!dataLoaded) return;
-            if (e.code === 'Space') {
-                e.preventDefault();
-                startGame();
-            } else if (e.code === 'ArrowLeft') {
-                e.preventDefault();
-                previousTeam();
-            } else if (e.code === 'ArrowRight') {
-                e.preventDefault();
-                nextTeam();
-            }
+        // pre-fetch players.json so game.html doesn't have to wait
+        fetch('players.json');
+
+        // Build country dropdown
+        const countries = [...new Set(allTeams.map(t => t.country).filter(Boolean))].sort();
+        const sel = document.getElementById('countryFilter');
+        countries.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c; opt.textContent = c;
+            sel.appendChild(opt);
         });
 
-        loadAllData();
-    </script>
+        // Store teams in localStorage for game.html
+        localStorage.setItem('fifaAllTeams', JSON.stringify(allTeams));
+
+        filteredTeams = allTeams;
+        dataLoaded = true;
+
+        setTimeout(() => {
+            document.getElementById('loadingScreen').classList.add('hidden');
+            document.getElementById('mainContainer').classList.add('visible');
+            displayCurrentTeam();
+        }, 400);
+
+    } catch (e) {
+        console.error(e);
+        document.getElementById('loadingProgress').textContent = 'ERROR: ' + e.message;
+        document.getElementById('loadingProgress').style.color = '#ff3366';
+    }
+}
+
+// ── Filter ──
+function applyFilter() {
+    const country = document.getElementById('countryFilter').value;
+    filteredTeams = country ? allTeams.filter(t => t.country === country) : allTeams;
+    currentIndex  = 0;
+    displayCurrentTeam();
+}
+
+// ── Display ──
+function displayCurrentTeam() {
+    if (!filteredTeams.length) return;
+    const team = filteredTeams[currentIndex];
+
+    document.getElementById('leagueName').textContent  = team.league_name || '—';
+    document.getElementById('clubName').textContent    = team.team_name;
+    document.getElementById('clubRating').textContent  = team.overall_rating || '—';
+    document.getElementById('countryName').textContent = team.country || '—';
+
+    const badge = document.getElementById('clubBadge');
+    const logo  = team.club_logo_url;
+
+    if (logo) {
+        badge.innerHTML = `<img src="${logo}" alt="${team.team_name}"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='⚽';">`;
+    } else {
+        badge.innerHTML = '⚽';
+    }
+}
+
+// ── Nav ──
+function nextTeam() {
+    if (!dataLoaded || !filteredTeams.length) return;
+    currentIndex = (currentIndex + 1) % filteredTeams.length;
+    displayCurrentTeam();
+}
+function previousTeam() {
+    if (!dataLoaded || !filteredTeams.length) return;
+    currentIndex = (currentIndex - 1 + filteredTeams.length) % filteredTeams.length;
+    displayCurrentTeam();
+}
+
+// ── Start ──
+function startGame() {
+    if (!dataLoaded || !filteredTeams.length) { alert('Please wait for data to load!'); return; }
+    localStorage.setItem('fifaSelectedTeam', JSON.stringify(filteredTeams[currentIndex]));
+    document.body.style.transition = 'opacity 0.5s';
+    document.body.style.opacity   = '0';
+    setTimeout(() => { window.location.href = 'game.html'; }, 500);
+}
+
+// ── Keys ──
+document.addEventListener('keydown', e => {
+    if (!dataLoaded) return;
+    if (e.code === 'Space')      { e.preventDefault(); startGame(); }
+    else if (e.code === 'ArrowLeft')  { e.preventDefault(); previousTeam(); }
+    else if (e.code === 'ArrowRight') { e.preventDefault(); nextTeam(); }
+});
+
+loadAllData();
+</script>
 </body>
 </html>
