@@ -457,8 +457,8 @@
     </div>
 
     <script>
-        // FORCE CORS PROXY (Simplified for debugging)
-        const PROXY = 'https://corsproxy.io/?';
+        // CORS PROXY - Using allorigins (supports images for free)
+        const PROXY = 'https://api.allorigins.win/raw?url=';
         
         function getProxiedUrl(url) {
             if (!url || !url.trim()) {

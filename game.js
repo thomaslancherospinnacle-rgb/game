@@ -3,8 +3,8 @@
  * Loads data from teams.json and players.json
  */
 
-// FORCE CORS PROXY (Simplified for debugging)
-const PROXY = 'https://corsproxy.io/?';
+// CORS PROXY - Using allorigins (supports images for free)
+const PROXY = 'https://api.allorigins.win/raw?url=';
 
 /**
  * Get image URL with CORS proxy - ALWAYS enabled for sofifa.net
