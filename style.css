@@ -63,6 +63,14 @@
             align-items: center;
             justify-content: center;
             font-size: 2rem;
+            overflow: hidden;
+        }
+
+        .club-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 5px;
         }
 
         .manager-info {

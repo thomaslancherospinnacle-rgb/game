@@ -463,11 +463,12 @@ function updateHeader() {
     document.getElementById('clubName').textContent = gameState.selectedTeam.team_name;
     
     const logoUrl = gameState.selectedTeam.club_logo_url;
+    const badgeEl = document.getElementById('clubBadge');
+    
     if (logoUrl) {
-        document.getElementById('clubBadge').innerHTML = 
-            `<img src="${logoUrl}" alt="${gameState.selectedTeam.team_name}" onerror="this.style.display='none'; this.parentElement.textContent='⚽';">`;
+        badgeEl.innerHTML = `<img src="${logoUrl}" alt="${gameState.selectedTeam.team_name}" onerror="this.parentElement.textContent='⚽';">`;
     } else {
-        document.getElementById('clubBadge').textContent = '⚽';
+        badgeEl.textContent = '⚽';
     }
     
     const budget = gameState.selectedTeam.budget / 1000000;
@@ -495,17 +496,26 @@ function updateCentralTab() {
         document.getElementById('homeTeamName').textContent = gameState.nextMatch.home.team_name;
         document.getElementById('awayTeamName').textContent = gameState.nextMatch.away.team_name;
         
-        // Update badges
+        // Update badges with proper error handling
         const homeLogoUrl = gameState.nextMatch.home.club_logo_url;
         const awayLogoUrl = gameState.nextMatch.away.club_logo_url;
         
-        document.getElementById('homeTeamBadge').innerHTML = homeLogoUrl 
-            ? `<img src="${homeLogoUrl}" alt="${gameState.nextMatch.home.team_name}" onerror="this.style.display='none'; this.parentElement.textContent='⚽';">`
-            : '⚽';
+        const homeBadge = document.getElementById('homeTeamBadge');
+        const awayBadge = document.getElementById('awayTeamBadge');
         
-        document.getElementById('awayTeamBadge').innerHTML = awayLogoUrl 
-            ? `<img src="${awayLogoUrl}" alt="${gameState.nextMatch.away.team_name}" onerror="this.style.display='none'; this.parentElement.textContent='⚽';">`
-            : '⚽';
+        if (homeLogoUrl) {
+            homeBadge.innerHTML = `<img src="${homeLogoUrl}" alt="${gameState.nextMatch.home.team_name}" 
+                onerror="this.onerror=null; this.style.display='none'; this.parentElement.textContent='⚽';">`;
+        } else {
+            homeBadge.textContent = '⚽';
+        }
+        
+        if (awayLogoUrl) {
+            awayBadge.innerHTML = `<img src="${awayLogoUrl}" alt="${gameState.nextMatch.away.team_name}" 
+                onerror="this.onerror=null; this.style.display='none'; this.parentElement.textContent='⚽';">`;
+        } else {
+            awayBadge.textContent = '⚽';
+        }
     }
     
     document.getElementById('availablePlayers').textContent = gameState.squad.length;
@@ -525,10 +535,15 @@ function renderSquad() {
         const card = document.createElement('div');
         card.className = 'player-card';
         
-        const faceUrl = player.media?.face_url || '';
-        const faceHtml = faceUrl 
-            ? `<img src="${faceUrl}" alt="${player.basic_info?.short_name}" onerror="this.style.display='none'; this.parentElement.textContent='👤';">` 
-            : '👤';
+        // Get face URL
+        const faceUrl = player.media?.face_url || player.media?.player_face_url || '';
+        let faceHtml = '👤';
+        
+        if (faceUrl) {
+            // Create image with fallback
+            faceHtml = `<img src="${faceUrl}" alt="${player.basic_info?.short_name || 'Player'}" 
+                onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='👤';">`;
+        }
         
         const positions = player.player_positions || 'SUB';
         const overall = player.ratings?.overall || 65;
