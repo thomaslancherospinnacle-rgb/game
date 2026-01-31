@@ -57,16 +57,10 @@ async function init() {
         matchSimulator = new MatchSimulation();
         
         // Check if data was preloaded from index.html
-        const preloadedPlayers = localStorage.getItem('fifaAllPlayers');
         const preloadedTeams = localStorage.getItem('fifaAllTeams');
         const selectedTeamData = localStorage.getItem('fifaSelectedTeam');
         
-        // Use preloaded data if available
-        if (preloadedPlayers && preloadedPlayers !== 'undefined') {
-            gameState.allPlayers = JSON.parse(preloadedPlayers);
-            console.log(`✅ Used preloaded players: ${gameState.allPlayers.length}`);
-        }
-        
+        // Use preloaded teams if available (players.json is too large for localStorage)
         if (preloadedTeams && preloadedTeams !== 'undefined') {
             gameState.allTeams = JSON.parse(preloadedTeams);
             console.log(`✅ Used preloaded teams: ${gameState.allTeams.length}`);
