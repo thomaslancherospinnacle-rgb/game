@@ -466,7 +466,9 @@ function updateHeader() {
     const badgeEl = document.getElementById('clubBadge');
     
     if (logoUrl) {
-        badgeEl.innerHTML = `<img src="${logoUrl}" alt="${gameState.selectedTeam.team_name}" onerror="this.parentElement.textContent='⚽';">`;
+        badgeEl.innerHTML = `<img src="${logoUrl}" alt="${gameState.selectedTeam.team_name}" 
+            style="width:45px;height:45px;object-fit:contain;display:block;" 
+            onerror="this.style.display='none'; this.parentElement.textContent='⚽';">`;
     } else {
         badgeEl.textContent = '⚽';
     }
@@ -535,24 +537,25 @@ function renderSquad() {
         const card = document.createElement('div');
         card.className = 'player-card';
         
-        // Get face URL
-        const faceUrl = player.media?.face_url || player.media?.player_face_url || '';
+        // Get face URL - try multiple fields
+        const faceUrl = player.media?.face_url || player.media?.player_face_url || player.face_url || '';
         let faceHtml = '👤';
         
-        if (faceUrl) {
-            // Create image with fallback
+        if (faceUrl && faceUrl.trim()) {
+            // Create image with better error handling
             faceHtml = `<img src="${faceUrl}" alt="${player.basic_info?.short_name || 'Player'}" 
-                onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='👤';">`;
+                style="width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;" 
+                onerror="console.log('Failed to load face:', '${faceUrl}'); this.style.display='none'; this.parentElement.innerHTML='👤';">`;
         }
         
-        const positions = player.player_positions || 'SUB';
-        const overall = player.ratings?.overall || 65;
+        const positions = player.player_positions || player.position || 'SUB';
+        const overall = player.ratings?.overall || player.overall || 65;
         const pace = player.core_attributes?.pace || 50;
         const shooting = player.core_attributes?.shooting || 50;
         const passing = player.core_attributes?.passing || 50;
         const dribbling = player.core_attributes?.dribbling || 50;
         const defending = player.core_attributes?.defending || 50;
-        const physic = player.core_attributes?.physic || 50;
+        const physic = player.core_attributes?.physic || player.core_attributes?.physical || 50;
         
         card.innerHTML = `
             <div class="player-card-header">
@@ -560,7 +563,7 @@ function renderSquad() {
                 <div class="player-position">${positions.split(',')[0].trim()}</div>
             </div>
             <div class="player-face">${faceHtml}</div>
-            <div class="player-name">${player.basic_info?.short_name || 'Unknown'}</div>
+            <div class="player-name">${player.basic_info?.short_name || player.name || 'Unknown'}</div>
             <div class="player-stats">
                 <div class="player-stat">
                     <div class="player-stat-label">PAC</div>
