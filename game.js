@@ -12,9 +12,18 @@ const CORS_PROXY_URL = 'https://corsproxy.io/?';
  */
 function getProxiedUrl(url) {
     if (!url || !url.trim()) return null;
+    
+    console.log('🔧 getProxiedUrl called with:', url);
+    console.log('🔧 USE_CORS_PROXY is:', USE_CORS_PROXY);
+    console.log('🔧 CORS_PROXY_URL is:', CORS_PROXY_URL);
+    
     if (USE_CORS_PROXY && url.includes('cdn.sofifa.net')) {
-        return CORS_PROXY_URL + encodeURIComponent(url);
+        const proxiedUrl = CORS_PROXY_URL + encodeURIComponent(url);
+        console.log('🔧 Returning PROXIED URL:', proxiedUrl);
+        return proxiedUrl;
     }
+    
+    console.log('🔧 Returning ORIGINAL URL:', url);
     return url;
 }
 
