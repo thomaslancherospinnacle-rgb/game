@@ -758,7 +758,7 @@ function renderFixtures() {
         card.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px;">
                 <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
-                    <div style="width:50px;height:50px;display:flex;align-items:center;justify-content:center;font-size:2rem;">
+                    <div style="width:50px;height:50px;flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:2rem;">
                         ${homeBadge}
                     </div>
                     <div style="flex: 1;">
@@ -782,7 +782,7 @@ function renderFixtures() {
                             ${fixture.away.team_name}
                         </div>
                     </div>
-                    <div style="width:50px;height:50px;display:flex;align-items:center;justify-content:center;font-size:2rem;">
+                    <div style="width:50px;height:50px;flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:2rem;">
                         ${awayBadge}
                     </div>
                 </div>
