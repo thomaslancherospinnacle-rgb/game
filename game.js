@@ -129,21 +129,31 @@ async function loadPlayersData() {
  * Organize data into maps and calculate team ratings
  */
 function organizeData() {
+    console.log('📊 Organizing data...');
+    
     // Create teams map
     gameState.allTeams.forEach(team => {
         gameState.teamsMap[team.team_name] = team;
     });
     
-    // Create players map by team
+    // Create players map by team - try multiple matching strategies
     gameState.allPlayers.forEach(player => {
-        const teamName = player.club?.name;
-        if (teamName) {
-            if (!gameState.playersMap[teamName]) {
-                gameState.playersMap[teamName] = [];
-            }
-            gameState.playersMap[teamName].push(player);
+        const clubName = player.club?.name;
+        if (!clubName) return;
+        
+        // Add to exact match
+        if (!gameState.playersMap[clubName]) {
+            gameState.playersMap[clubName] = [];
         }
+        gameState.playersMap[clubName].push(player);
     });
+    
+    console.log(`✅ Teams mapped: ${Object.keys(gameState.teamsMap).length}`);
+    console.log(`✅ Teams with players: ${Object.keys(gameState.playersMap).length}`);
+    
+    // Log some examples for debugging
+    const teamsWithPlayers = Object.keys(gameState.playersMap).slice(0, 5);
+    console.log('📝 Sample teams with players:', teamsWithPlayers);
     
     // Calculate team overall ratings from squad
     gameState.allTeams.forEach(team => {
@@ -163,7 +173,6 @@ function organizeData() {
     });
     
     console.log('✅ Data organized successfully');
-    console.log(`   Teams with players: ${Object.keys(gameState.playersMap).length}`);
 }
 
 /**
@@ -305,12 +314,92 @@ async function selectTeam(team) {
  * Load squad for team
  */
 function loadSquad(team) {
-    gameState.squad = gameState.playersMap[team.team_name] || [];
+    // Try multiple matching strategies to find players
+    const teamName = team.team_name;
     
-    // Sort by overall rating
-    gameState.squad.sort((a, b) => (b.ratings?.overall || 0) - (a.ratings?.overall || 0));
+    // Strategy 1: Exact match on club.name
+    let squad = gameState.allPlayers.filter(p => p.club?.name === teamName);
     
-    console.log(`✅ Loaded squad: ${gameState.squad.length} players`);
+    // Strategy 2: If no matches, try case-insensitive
+    if (squad.length === 0) {
+        const teamNameLower = teamName.toLowerCase();
+        squad = gameState.allPlayers.filter(p => 
+            p.club?.name?.toLowerCase() === teamNameLower
+        );
+    }
+    
+    // Strategy 3: If still no matches, try partial match
+    if (squad.length === 0) {
+        const teamNameLower = teamName.toLowerCase();
+        squad = gameState.allPlayers.filter(p => {
+            const clubName = p.club?.name?.toLowerCase() || '';
+            return clubName.includes(teamNameLower) || teamNameLower.includes(clubName);
+        });
+    }
+    
+    // Strategy 4: If still nothing, try team_id match
+    if (squad.length === 0 && team.team_id) {
+        squad = gameState.allPlayers.filter(p => p.club?.id === team.team_id);
+    }
+    
+    // If we found players, assign them
+    if (squad.length > 0) {
+        gameState.squad = squad;
+        // Sort by overall rating
+        gameState.squad.sort((a, b) => (b.ratings?.overall || 0) - (a.ratings?.overall || 0));
+        console.log(`✅ Loaded squad: ${gameState.squad.length} players for ${teamName}`);
+    } else {
+        // No players found - generate placeholder squad
+        console.warn(`⚠️ No players found for ${teamName}, generating placeholder squad`);
+        gameState.squad = generatePlaceholderSquad(team);
+    }
+}
+
+/**
+ * Generate placeholder squad if no real players found
+ */
+function generatePlaceholderSquad(team) {
+    const positions = ['GK', 'CB', 'CB', 'LB', 'RB', 'CDM', 'CM', 'CM', 'LW', 'RW', 'ST'];
+    const firstNames = ['John', 'James', 'Michael', 'David', 'Robert', 'William', 'Richard', 'Joseph', 'Thomas', 'Christopher'];
+    const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez'];
+    
+    const squad = [];
+    const baseRating = team.overall_rating || 75;
+    
+    for (let i = 0; i < 25; i++) {
+        const position = positions[i % positions.length];
+        const overall = baseRating + Math.floor(Math.random() * 10) - 5;
+        
+        squad.push({
+            player_id: `placeholder_${i}`,
+            basic_info: {
+                short_name: `${firstNames[Math.floor(Math.random() * firstNames.length)]} ${lastNames[Math.floor(Math.random() * lastNames.length)]}`,
+                age: 18 + Math.floor(Math.random() * 15),
+                nationality: team.country || 'Various'
+            },
+            player_positions: position,
+            ratings: {
+                overall: overall,
+                potential: overall + Math.floor(Math.random() * 10)
+            },
+            core_attributes: {
+                pace: 60 + Math.floor(Math.random() * 30),
+                shooting: 60 + Math.floor(Math.random() * 30),
+                passing: 60 + Math.floor(Math.random() * 30),
+                dribbling: 60 + Math.floor(Math.random() * 30),
+                defending: 60 + Math.floor(Math.random() * 30),
+                physic: 60 + Math.floor(Math.random() * 30)
+            },
+            media: {
+                face_url: null
+            },
+            club: {
+                name: team.team_name
+            }
+        });
+    }
+    
+    return squad;
 }
 
 /**
