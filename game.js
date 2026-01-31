@@ -1054,20 +1054,17 @@ function renderSearchResults(reports) {
         // Overall display
         const ovrDisplay = typeof r.overall === 'object' ? `${r.overall.min}-${r.overall.max}` : r.overall;
 
-        // ── Face image – ALWAYS rendered, with SVG silhouette fallback ──
-        const faceId = 'face_' + (r.player_id || '').replace(/[^a-zA-Z0-9]/g,'');
+        // ── Face image – always rendered. SVG silhouette sits behind; img covers it on load ──
         let faceHtml;
         if (r.face_url) {
-            faceHtml = `<img id="${faceId}" src="${r.face_url}" alt="${r.short_name}"
-                style="width:100%;height:100%;object-fit:cover;border-radius:50%;"
-                onerror="this.onerror=null;this.style.display='none';document.getElementById('${faceId}_fb').style.display='flex';">
-                <div id="${faceId}_fb" style="display:none;width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#1a3a6a,#0d2240);align-items:center;justify-content:center;">
-                    <svg width="32" height="36" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
-                </div>`;
+            faceHtml = `<div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#1a3a6a,#0d2240);display:flex;align-items:center;justify-content:center;position:relative;">
+                <svg width="24" height="28" viewBox="0 0 32 36" fill="none" style="position:relative;z-index:0;"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
+                <img src="${r.face_url}" alt="${r.short_name}" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:50%;z-index:1;" onerror="this.style.display='none';">
+            </div>`;
         } else {
             faceHtml = `<div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#1a3a6a,#0d2240);display:flex;align-items:center;justify-content:center;">
-                <svg width="32" height="36" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
-                </div>`;
+                <svg width="24" height="28" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
+            </div>`;
         }
 
         // Stats row
@@ -1158,19 +1155,17 @@ function openPlayerDetail(report) {
     // Release clause
     const releaseHtml = report.release_clause ? `<div class="detail-fin-item"><div class="detail-fin-label">Release Clause</div><div class="detail-fin-value">€${transferSystem.formatMoney(report.release_clause)}</div></div>` : '';
 
-    // Face image for modal header – always rendered with SVG silhouette fallback
+    // Face image for modal header – SVG silhouette behind, img layered on top
     let modalFaceHtml;
     if (report.face_url) {
-        modalFaceHtml = `<img src="${report.face_url}" alt="${report.short_name}"
-            style="width:100%;height:100%;object-fit:cover;border-radius:50%;"
-            onerror="this.onerror=null;this.style.display='none';this.parentElement.querySelector('.detail-face-fb').style.display='flex';">
-            <div class="detail-face-fb" style="display:none;width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#1a3a6a,#0d2240);align-items:center;justify-content:center;">
-                <svg width="44" height="50" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
-            </div>`;
+        modalFaceHtml = `<div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#1a3a6a,#0d2240);display:flex;align-items:center;justify-content:center;position:relative;">
+            <svg width="36" height="42" viewBox="0 0 32 36" fill="none" style="position:relative;z-index:0;"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
+            <img src="${report.face_url}" alt="${report.short_name}" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:50%;z-index:1;" onerror="this.style.display='none';">
+        </div>`;
     } else {
         modalFaceHtml = `<div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#1a3a6a,#0d2240);display:flex;align-items:center;justify-content:center;">
-            <svg width="44" height="50" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
-            </div>`;
+            <svg width="36" height="42" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
+        </div>`;
     }
 
     content.innerHTML = `
