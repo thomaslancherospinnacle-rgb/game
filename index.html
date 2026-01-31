@@ -457,25 +457,6 @@
     </div>
 
     <script>
-        // CORS PROXY - Using allorigins (supports images for free)
-        const PROXY = 'https://api.allorigins.win/raw?url=';
-        
-        function getProxiedUrl(url) {
-            if (!url || !url.trim()) {
-                console.log('⚠️ Empty URL provided to getProxiedUrl');
-                return null;
-            }
-            
-            // ALWAYS use proxy for sofifa URLs
-            if (url.includes('cdn.sofifa.net')) {
-                const result = PROXY + encodeURIComponent(url);
-                console.log('🟢 PROXY ACTIVE:', url, '→', result);
-                return result;
-            }
-            
-            console.log('🔵 No proxy needed for:', url);
-            return url;
-        }
         
         // Particles
         const particles = document.getElementById('particles');
@@ -550,16 +531,13 @@
             document.getElementById('clubRating').textContent = team.overall_rating || '75';
             
             const badge = document.getElementById('clubBadge');
-            const logoUrl = getProxiedUrl(team.club_logo_url);
+            const logoUrl = team.club_logo_url;
             
             if (logoUrl) {
-                console.log('✅ Attempting to load logo:', logoUrl);
                 badge.innerHTML = `<img src="${logoUrl}" alt="${team.team_name}" 
                     style="width:100px;height:100px;object-fit:contain;display:block;padding:10px;" 
-                    onload="console.log('✅ Logo loaded successfully for ${team.team_name}');"
-                    onerror="console.error('❌ Failed to load logo for ${team.team_name}:', '${logoUrl}'); this.style.display='none'; this.parentElement.innerHTML='<div style=\\'font-size:4rem;\\'>⚽</div>';">`;
+                    onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'font-size:4rem;\\'>⚽</div>';">`;
             } else {
-                console.warn('⚠️ No logo URL found for', team.team_name);
                 badge.innerHTML = '<div style="font-size:4rem;">⚽</div>';
             }
             console.log('=====================');

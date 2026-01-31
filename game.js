@@ -3,29 +3,6 @@
  * Loads data from teams.json and players.json
  */
 
-// CORS PROXY - Using allorigins (supports images for free)
-const PROXY = 'https://api.allorigins.win/raw?url=';
-
-/**
- * Get image URL with CORS proxy - ALWAYS enabled for sofifa.net
- */
-function getProxiedUrl(url) {
-    if (!url || !url.trim()) {
-        console.log('⚠️ Empty URL provided to getProxiedUrl');
-        return null;
-    }
-    
-    // ALWAYS use proxy for sofifa URLs
-    if (url.includes('cdn.sofifa.net')) {
-        const result = PROXY + encodeURIComponent(url);
-        console.log('🟢 PROXY ACTIVE:', url, '→', result);
-        return result;
-    }
-    
-    console.log('🔵 No proxy needed for:', url);
-    return url;
-}
-
 // Game State
 const gameState = {
     selectedTeam: null,
@@ -485,7 +462,7 @@ function generateFixtures() {
 function updateHeader() {
     document.getElementById('clubName').textContent = gameState.selectedTeam.team_name;
     
-    const logoUrl = getProxiedUrl(gameState.selectedTeam.club_logo_url);
+    const logoUrl = gameState.selectedTeam.club_logo_url;
     const badgeEl = document.getElementById('clubBadge');
     
     if (logoUrl) {
@@ -560,9 +537,8 @@ function renderSquad() {
         const card = document.createElement('div');
         card.className = 'player-card';
         
-        // Get face URL and apply proxy
-        const rawFaceUrl = player.media?.face_url || player.media?.player_face_url || player.face_url || '';
-        const faceUrl = getProxiedUrl(rawFaceUrl);
+        // Get face URL (now local)
+        const faceUrl = player.media?.face_url || player.media?.player_face_url || player.face_url || '';
         
         let faceHtml = '👤';
         if (faceUrl) {
