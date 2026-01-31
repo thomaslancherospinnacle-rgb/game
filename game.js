@@ -964,7 +964,7 @@ function closeMatchResult() {
 }
 
 /**
- * Show tab
+ * Show tab – unified version
  */
 function showTab(tabName) {
     document.querySelectorAll('.tab-content').forEach(tab => {
@@ -975,8 +975,20 @@ function showTab(tabName) {
         item.classList.remove('active');
     });
 
-    document.getElementById('tab-' + tabName).classList.add('active');
-    event.target.classList.add('active');
+    const tabEl = document.getElementById('tab-' + tabName);
+    if (tabEl) tabEl.classList.add('active');
+
+    // Highlight the correct nav item by matching its onclick string
+    document.querySelectorAll('.nav-item').forEach(item => {
+        const onclick = item.getAttribute('onclick') || '';
+        if (onclick.includes("'" + tabName + "'")) {
+            item.classList.add('active');
+        }
+    });
+
+    // On-demand render for tabs that need fresh data each visit
+    if (tabName === 'office'    && typeof renderOffice === 'function')     renderOffice();
+    if (tabName === 'transfers' && typeof updateOfferBadge === 'function') updateOfferBadge();
 }
 
 /* ============================================================
@@ -1533,14 +1545,6 @@ function updateOfferBadge() {
     }
     const countEl = document.getElementById('offerCount');
     if (countEl) countEl.textContent = count;
-}
-
-// ── Hook into showTab to render office/offers on demand ──
-const _origShowTab = showTab;
-function showTab(tabName) {
-    _origShowTab.call(this, tabName);
-    if (tabName === 'office')    renderOffice();
-    if (tabName === 'transfers') { updateOfferBadge(); }
 }
 
 // Start game when page loads
