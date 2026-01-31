@@ -489,8 +489,8 @@
                 
                 document.getElementById('loadingProgress').textContent = `Loaded ${allPlayers.length} players...`;
                 
-                // Store in localStorage
-                localStorage.setItem('fifaAllPlayers', JSON.stringify(allPlayers));
+                // Store only teams in localStorage (players.json is too large ~40-80MB)
+                // We'll just pass the team reference and let game.html load players itself
                 localStorage.setItem('fifaAllTeams', JSON.stringify(allTeams));
                 
                 document.getElementById('loadingProgress').textContent = 'Ready!';
