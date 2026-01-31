@@ -3,6 +3,21 @@
  * Loads data from teams.json and players.json
  */
 
+// CORS Proxy Configuration (if sofifa.net blocks direct access)
+const USE_CORS_PROXY = true; // Enabled by default to fix CORS blocking
+const CORS_PROXY_URL = 'https://corsproxy.io/?';
+
+/**
+ * Get image URL with optional CORS proxy
+ */
+function getProxiedUrl(url) {
+    if (!url || !url.trim()) return null;
+    if (USE_CORS_PROXY && url.includes('cdn.sofifa.net')) {
+        return CORS_PROXY_URL + encodeURIComponent(url);
+    }
+    return url;
+}
+
 // Game State
 const gameState = {
     selectedTeam: null,
@@ -462,15 +477,15 @@ function generateFixtures() {
 function updateHeader() {
     document.getElementById('clubName').textContent = gameState.selectedTeam.team_name;
     
-    const logoUrl = gameState.selectedTeam.club_logo_url;
+    const logoUrl = getProxiedUrl(gameState.selectedTeam.club_logo_url);
     const badgeEl = document.getElementById('clubBadge');
     
     if (logoUrl) {
         badgeEl.innerHTML = `<img src="${logoUrl}" alt="${gameState.selectedTeam.team_name}" 
             style="width:45px;height:45px;object-fit:contain;display:block;" 
-            onerror="this.style.display='none'; this.parentElement.textContent='⚽';">`;
+            onerror="this.style.display='none'; this.parentElement.innerHTML='⚽';">`;
     } else {
-        badgeEl.textContent = '⚽';
+        badgeEl.innerHTML = '⚽';
     }
     
     const budget = gameState.selectedTeam.budget / 1000000;
@@ -537,15 +552,15 @@ function renderSquad() {
         const card = document.createElement('div');
         card.className = 'player-card';
         
-        // Get face URL - try multiple fields
-        const faceUrl = player.media?.face_url || player.media?.player_face_url || player.face_url || '';
-        let faceHtml = '👤';
+        // Get face URL and apply proxy
+        const rawFaceUrl = player.media?.face_url || player.media?.player_face_url || player.face_url || '';
+        const faceUrl = getProxiedUrl(rawFaceUrl);
         
-        if (faceUrl && faceUrl.trim()) {
-            // Create image with better error handling
+        let faceHtml = '👤';
+        if (faceUrl) {
             faceHtml = `<img src="${faceUrl}" alt="${player.basic_info?.short_name || 'Player'}" 
                 style="width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;" 
-                onerror="console.log('Failed to load face:', '${faceUrl}'); this.style.display='none'; this.parentElement.innerHTML='👤';">`;
+                onerror="this.style.display='none'; this.parentElement.innerHTML='👤';">`;
         }
         
         const positions = player.player_positions || player.position || 'SUB';
