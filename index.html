@@ -457,6 +457,18 @@
     </div>
 
     <script>
+        // CORS Proxy Configuration
+        const USE_CORS_PROXY = false; // Set to true if images don't load
+        const CORS_PROXY_URL = 'https://corsproxy.io/?';
+        
+        function getProxiedUrl(url) {
+            if (!url || !url.trim()) return null;
+            if (USE_CORS_PROXY && url.includes('cdn.sofifa.net')) {
+                return CORS_PROXY_URL + encodeURIComponent(url);
+            }
+            return url;
+        }
+        
         // Particles
         const particles = document.getElementById('particles');
         for (let i = 0; i < 50; i++) {
@@ -514,19 +526,35 @@
             if (!allTeams.length) return;
             
             const team = allTeams[currentIndex];
+            
+            console.log('=== DISPLAYING TEAM ===');
+            console.log('Team name:', team.team_name);
+            console.log('League:', team.league_name);
+            console.log('Country:', team.country);
+            console.log('Rating:', team.overall_rating);
+            console.log('Logo URL:', team.club_logo_url);
+            console.log('Has logo URL?', !!team.club_logo_url);
+            console.log('Full team object:', team);
+            
             document.getElementById('clubName').textContent = team.team_name;
             document.getElementById('leagueName').textContent = team.league_name || 'League';
             document.getElementById('countryName').textContent = team.country || 'Country';
             document.getElementById('clubRating').textContent = team.overall_rating || '75';
             
             const badge = document.getElementById('clubBadge');
-            if (team.club_logo_url && team.club_logo_url.trim()) {
-                badge.innerHTML = `<img src="${team.club_logo_url}" alt="${team.team_name}" 
+            const logoUrl = getProxiedUrl(team.club_logo_url);
+            
+            if (logoUrl) {
+                console.log('✅ Attempting to load logo:', logoUrl);
+                badge.innerHTML = `<img src="${logoUrl}" alt="${team.team_name}" 
                     style="width:100px;height:100px;object-fit:contain;display:block;padding:10px;" 
-                    onerror="console.log('Failed to load logo for ${team.team_name}:', '${team.club_logo_url}'); this.style.display='none'; this.parentElement.textContent='⚽';">`;
+                    onload="console.log('✅ Logo loaded successfully for ${team.team_name}');"
+                    onerror="console.error('❌ Failed to load logo for ${team.team_name}:', '${logoUrl}'); this.style.display='none'; this.parentElement.innerHTML='<div style=\\'font-size:4rem;\\'>⚽</div>';">`;
             } else {
+                console.warn('⚠️ No logo URL found for', team.team_name);
                 badge.innerHTML = '<div style="font-size:4rem;">⚽</div>';
             }
+            console.log('=====================');
         }
 
         function nextTeam() {
