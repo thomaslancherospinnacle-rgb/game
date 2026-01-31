@@ -3,27 +3,26 @@
  * Loads data from teams.json and players.json
  */
 
-// CORS Proxy Configuration (if sofifa.net blocks direct access)
-const USE_CORS_PROXY = true; // Enabled by default to fix CORS blocking
-const CORS_PROXY_URL = 'https://corsproxy.io/?';
+// FORCE CORS PROXY (Simplified for debugging)
+const PROXY = 'https://corsproxy.io/?';
 
 /**
- * Get image URL with optional CORS proxy
+ * Get image URL with CORS proxy - ALWAYS enabled for sofifa.net
  */
 function getProxiedUrl(url) {
-    if (!url || !url.trim()) return null;
-    
-    console.log('🔧 getProxiedUrl called with:', url);
-    console.log('🔧 USE_CORS_PROXY is:', USE_CORS_PROXY);
-    console.log('🔧 CORS_PROXY_URL is:', CORS_PROXY_URL);
-    
-    if (USE_CORS_PROXY && url.includes('cdn.sofifa.net')) {
-        const proxiedUrl = CORS_PROXY_URL + encodeURIComponent(url);
-        console.log('🔧 Returning PROXIED URL:', proxiedUrl);
-        return proxiedUrl;
+    if (!url || !url.trim()) {
+        console.log('⚠️ Empty URL provided to getProxiedUrl');
+        return null;
     }
     
-    console.log('🔧 Returning ORIGINAL URL:', url);
+    // ALWAYS use proxy for sofifa URLs
+    if (url.includes('cdn.sofifa.net')) {
+        const result = PROXY + encodeURIComponent(url);
+        console.log('🟢 PROXY ACTIVE:', url, '→', result);
+        return result;
+    }
+    
+    console.log('🔵 No proxy needed for:', url);
     return url;
 }
 
