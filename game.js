@@ -540,6 +540,110 @@ function updateCentralTab() {
 /**
  * Render squad
  */
+function showSquadList() {
+    const listTab = document.getElementById('tab-squad-list');
+    if (listTab) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        listTab.classList.add('active');
+        renderSquad();
+    }
+}
+
+function showSquadReport() {
+    alert('Squad Report - Coming Soon!\n\nThis will show detailed statistics about your squad including:\n- Average age\n- Squad depth by position\n- Top performers\n- Injury status');
+}
+
+function renderFormation() {
+    if (!gameState.squad || gameState.squad.length === 0) return;
+
+    // Update header
+    const teamNameEl = document.getElementById('formationTeamName');
+    const formationSystemEl = document.getElementById('formationSystem');
+    if (teamNameEl && gameState.selectedTeam) {
+        teamNameEl.textContent = (gameState.selectedTeam.team_name || 'TEAM').toUpperCase() + ' DEFAULT';
+    }
+
+    // Common formations and positions
+    const formations = {
+        '4-3-3': [
+            { pos: 'GK', x: 50, y: 95 },
+            { pos: 'LB', x: 15, y: 75 },
+            { pos: 'CB', x: 35, y: 80 },
+            { pos: 'CB', x: 65, y: 80 },
+            { pos: 'RB', x: 85, y: 75 },
+            { pos: 'CDM', x: 50, y: 60 },
+            { pos: 'CM', x: 30, y: 50 },
+            { pos: 'CM', x: 70, y: 50 },
+            { pos: 'LW', x: 15, y: 25 },
+            { pos: 'ST', x: 50, y: 20 },
+            { pos: 'RW', x: 85, y: 25 }
+        ],
+        '4-5-1': [
+            { pos: 'GK', x: 50, y: 95 },
+            { pos: 'LB', x: 15, y: 75 },
+            { pos: 'CB', x: 35, y: 80 },
+            { pos: 'CB', x: 65, y: 80 },
+            { pos: 'RB', x: 85, y: 75 },
+            { pos: 'LM', x: 15, y: 50 },
+            { pos: 'CDM', x: 35, y: 55 },
+            { pos: 'CDM', x: 65, y: 55 },
+            { pos: 'RM', x: 85, y: 50 },
+            { pos: 'CAM', x: 50, y: 35 },
+            { pos: 'ST', x: 50, y: 15 }
+        ],
+        '4-4-2': [
+            { pos: 'GK', x: 50, y: 95 },
+            { pos: 'LB', x: 15, y: 75 },
+            { pos: 'CB', x: 35, y: 80 },
+            { pos: 'CB', x: 65, y: 80 },
+            { pos: 'RB', x: 85, y: 75 },
+            { pos: 'LM', x: 15, y: 50 },
+            { pos: 'CM', x: 35, y: 55 },
+            { pos: 'CM', x: 65, y: 55 },
+            { pos: 'RM', x: 85, y: 50 },
+            { pos: 'ST', x: 40, y: 20 },
+            { pos: 'ST', x: 60, y: 20 }
+        ]
+    };
+
+    const currentFormation = formations['4-3-3']; // Default formation
+    if (formationSystemEl) formationSystemEl.textContent = '4-3-3';
+
+    // Get starting 11
+    const starting11 = gameState.squad
+        .sort((a, b) => (b.overall || 0) - (a.overall || 0))
+        .slice(0, 11);
+
+    // Render on pitch
+    const pitchEl = document.getElementById('pitch3d');
+    if (!pitchEl) return;
+
+    pitchEl.innerHTML = '';
+
+    currentFormation.forEach((pos, idx) => {
+        const player = starting11[idx];
+        if (!player) return;
+
+        const playerDiv = document.createElement('div');
+        playerDiv.className = 'pitch-player';
+        playerDiv.style.left = pos.x + '%';
+        playerDiv.style.top = pos.y + '%';
+
+        const name = player.short_name || 'Unknown';
+        const rating = player.overall || '?';
+        const number = idx + 1;
+
+        playerDiv.innerHTML = `
+            <div class="player-jersey">${number}</div>
+            <div class="player-name-pitch">${name}</div>
+            <div class="player-rating-pitch">${rating}</div>
+        `;
+
+        playerDiv.onclick = () => openPlayerDetail(player);
+        pitchEl.appendChild(playerDiv);
+    });
+}
+
 function renderSquad() {
     const grid = document.getElementById('squadGrid');
     grid.innerHTML = '';
@@ -990,6 +1094,11 @@ function showTab(tabName) {
     // Populate Career Hub stats when showing central tab
     if (tabName === 'central') {
         updateCareerHub();
+    }
+
+    // Render formation when showing squad tab
+    if (tabName === 'squad') {
+        renderFormation();
     }
 
     // On-demand render for tabs that need fresh data each visit
