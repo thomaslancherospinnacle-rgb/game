@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FIFA Manager - Start</title>
+    <title>FIFA Manager - Team Selection</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;900&display=swap');
 
@@ -11,13 +11,25 @@
 
         body {
             font-family: 'Rajdhani', sans-serif;
-            background: linear-gradient(to bottom, #001a1a 0%, #002233 50%, #003344 100%);
+            background: linear-gradient(to bottom, #0a1520 0%, #152030 50%, #1a2838 100%);
             color: white;
             overflow: hidden;
             height: 100vh;
+            position: relative;
         }
 
-        /* ── Loading ── */
+        /* Stadium background blur */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23081218" width="1200" height="800"/><ellipse cx="600" cy="700" rx="400" ry="200" fill="%23163020" opacity="0.3"/></svg>') center/cover;
+            filter: blur(8px);
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        /* Loading */
         .loading-screen {
             position: fixed; inset: 0;
             background: rgba(0,0,0,0.95);
@@ -37,217 +49,326 @@
         .loading-text { margin-top: 30px; font-size: 1.5rem; color: #00d4ff; font-weight: 700; letter-spacing: 2px; }
         .loading-progress { margin-top: 15px; font-size: 1rem; color: rgba(255,255,255,0.6); }
 
-        /* ── BG ── */
-        .bg-animation { position: fixed; inset: 0; z-index: 0; }
-        .bg-gradient {
-            position: absolute; width: 200%; height: 200%;
-            background: radial-gradient(ellipse at center, rgba(0,150,255,0.3) 0%, transparent 50%);
-            animation: rotate 20s linear infinite;
-        }
-        .bg-gradient:nth-child(2) {
-            background: radial-gradient(ellipse at center, rgba(255,217,0,0.2) 0%, transparent 50%);
-            animation: rotate 15s linear infinite reverse;
-        }
-        @keyframes rotate { from { transform: rotate(0deg) scale(1.5); } to { transform: rotate(360deg) scale(1.5); } }
-
-        /* ── Particles ── */
-        .particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
-        .particle {
-            position: absolute; width: 4px; height: 4px;
-            background: rgba(0,212,255,0.6); border-radius: 50%;
-            animation: float 10s infinite;
-        }
-        .particle:nth-child(2n) { background: rgba(255,217,0,0.6); }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); opacity: 0; }
-            10%, 90% { opacity: 1; }
-            100% { transform: translateY(-100vh); }
-        }
-
-        /* ── Scanline ── */
-        .scanline {
-            position: fixed; inset: 0;
-            background: linear-gradient(to bottom, transparent 0%, rgba(0,212,255,0.05) 50%, transparent 100%);
-            animation: scan 8s linear infinite;
-            pointer-events: none; z-index: 2;
-        }
-        @keyframes scan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
-
-        /* ── Corners ── */
-        .corner {
-            position: fixed; width: 200px; height: 200px;
-            border: 2px solid rgba(0,212,255,0.3); z-index: 5;
-            animation: cornerPulse 3s ease-in-out infinite;
-        }
-        .corner.tl { top: 30px; left: 30px; border-right: none; border-bottom: none; }
-        .corner.tr { top: 30px; right: 30px; border-left: none; border-bottom: none; animation-delay: 0.5s; }
-        .corner.bl { bottom: 30px; left: 30px; border-right: none; border-top: none; animation-delay: 1s; }
-        .corner.br { bottom: 30px; right: 30px; border-left: none; border-top: none; animation-delay: 1.5s; }
-        @keyframes cornerPulse { 0%,100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
-
-        /* ── Main ── */
+        /* Main container */
         .container {
-            position: relative; z-index: 10;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            height: 100vh; padding: 20px;
-            opacity: 0; transition: opacity 0.5s ease-in;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            gap: 40px;
+            padding: 40px;
+            opacity: 0;
+            transition: opacity 0.5s;
         }
         .container.visible { opacity: 1; }
 
-        /* ── Logo ── */
-        .logo {
-            font-size: 5.5rem; font-weight: 900; letter-spacing: 10px;
-            background: linear-gradient(135deg, #00d4ff 0%, #0096ff 50%, #ffd900 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            animation: glow 2s ease-in-out infinite alternate;
-            margin-bottom: 2px;
-        }
-        @keyframes glow { from { filter: drop-shadow(0 0 20px rgba(0,212,255,0.5)); } to { filter: drop-shadow(0 0 40px rgba(0,212,255,1)); } }
-        .subtitle {
-            font-size: 1.8rem; font-weight: 700; letter-spacing: 8px;
-            color: rgba(255,255,255,0.9); margin-bottom: 20px; text-transform: uppercase;
-        }
-
-        /* ── Country Filter ── */
-        .country-filter {
-            display: flex; align-items: center; gap: 10px;
-            margin-bottom: 12px;
-        }
-        .country-filter select {
-            background: rgba(10,30,60,0.85);
-            border: 2px solid rgba(0,212,255,0.4);
-            color: #fff;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1rem; font-weight: 600;
-            padding: 6px 12px; border-radius: 8px;
-            cursor: pointer; outline: none;
-            min-width: 180px;
-            transition: border-color 0.3s;
-        }
-        .country-filter select:hover { border-color: #00d4ff; }
-        .country-filter select option { background: #0a1e3c; color: #fff; }
-        .country-filter label {
-            font-size: 0.8rem; letter-spacing: 2px; color: rgba(255,255,255,0.5);
-            text-transform: uppercase;
-        }
-
-        /* ── Club Select Card (3 rows: 25 / 50 / 25) ── */
-        .club-select {
-            background: rgba(10,30,60,0.8);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(0,212,255,0.4);
-            border-radius: 20px;
+        /* Left panel - Team selector */
+        .team-selector {
             width: 420px;
-            height: 380px;
-            display: flex; flex-direction: column;
+            background: rgba(15, 25, 40, 0.92);
+            border: 2px solid rgba(255,217,0,0.3);
+            border-radius: 12px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .selector-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #ffd900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+        }
+
+        /* Flag display */
+        .flag-display {
+            width: 220px;
+            height: 140px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,212,255,0.3);
-            margin-bottom: 18px;
+            margin-bottom: 20px;
+            background: rgba(0,0,0,0.3);
+            border: 3px solid rgba(255,217,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+        .flag-display img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .flag-placeholder {
+            font-size: 4rem;
         }
 
-        /* top 25% — league */
-        .league-section {
-            height: 25%;
-            background: linear-gradient(135deg, rgba(0,212,255,0.15) 0%, rgba(0,150,200,0.15) 100%);
-            border-bottom: 1px solid rgba(0,212,255,0.25);
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-        }
-        .league-label {
-            font-size: 0.7rem; color: rgba(255,255,255,0.5);
-            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2px;
-        }
-        .league-name {
-            font-size: 1.6rem; font-weight: 700; color: #00d4ff; letter-spacing: 1px;
-            text-align: center; padding: 0 12px;
-        }
-
-        /* middle 50% — logo + name */
-        .club-section {
-            height: 50%;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
+        /* Star rating */
+        .star-rating {
+            display: flex;
             gap: 8px;
+            margin-bottom: 20px;
         }
-        .club-badge {
-            width: 110px; height: 110px;
-            background: rgba(255,255,255,0.07);
-            border: 2px solid rgba(0,212,255,0.4);
-            border-radius: 14px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 3.5rem;
-            overflow: hidden;
-        }
-        .club-badge img { width: 100%; height: 100%; object-fit: contain; display: block; }
-        .club-name {
-            font-size: 1.9rem; font-weight: 900; text-align: center;
-            letter-spacing: 1px; padding: 0 10px;
-            background: linear-gradient(135deg, #ffd900 0%, #ffb700 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-        .club-rating {
-            background: linear-gradient(135deg, #ffd900 0%, #ffb700 100%);
-            color: #000; padding: 4px 20px; border-radius: 6px;
-            font-size: 1.5rem; font-weight: 900;
-            box-shadow: 0 4px 15px rgba(255,217,0,0.4);
+        .star {
+            font-size: 2.2rem;
+            color: #ffd900;
+            text-shadow: 0 0 10px rgba(255,217,0,0.5);
         }
 
-        /* bottom 25% — country */
-        .country-section {
-            height: 25%;
-            background: linear-gradient(135deg, rgba(255,217,0,0.08) 0%, rgba(255,180,0,0.08) 100%);
-            border-top: 1px solid rgba(255,217,0,0.2);
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
+        /* Team stats (ATT/MID/DEF) */
+        .team-stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
         }
-        .country-label {
-            font-size: 0.7rem; color: rgba(255,255,255,0.5);
-            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2px;
+        .stat-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 10px 20px;
+            min-width: 80px;
         }
-        .country-name {
-            font-size: 1.4rem; font-weight: 700; color: #ffd900; letter-spacing: 1px;
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #fff;
         }
 
-        /* ── Arrows ── */
-        .nav-arrows { display: flex; gap: 16px; margin-top: 4px; }
+        /* Team name selector with arrows */
+        .team-name-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
         .arrow-btn {
-            background: linear-gradient(135deg, rgba(0,212,255,0.3) 0%, rgba(0,150,200,0.3) 100%);
-            border: 2px solid rgba(0,212,255,0.5);
-            color: white; width: 54px; height: 54px; border-radius: 50%;
-            font-size: 1.8rem; cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Rajdhani', sans-serif; font-weight: 700;
+            background: rgba(255,217,0,0.15);
+            border: 2px solid rgba(255,217,0,0.4);
+            color: #ffd900;
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .arrow-btn:hover {
-            background: linear-gradient(135deg, rgba(0,212,255,0.5) 0%, rgba(0,150,200,0.5) 100%);
-            border-color: #00d4ff; transform: scale(1.1);
-            box-shadow: 0 0 25px rgba(0,212,255,0.5);
+            background: rgba(255,217,0,0.3);
+            border-color: #ffd900;
+            transform: scale(1.05);
+        }
+        .team-name-display {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(255,217,0,0.2), rgba(255,180,0,0.2));
+            border: 2px solid rgba(255,217,0,0.5);
+            border-radius: 8px;
+            padding: 10px 15px;
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* ── Start ── */
-        .start-btn {
-            background: linear-gradient(135deg, #00d4ff 0%, #0096ff 100%);
-            border: none; color: white;
-            padding: 13px 55px; border-radius: 10px;
-            font-size: 1.4rem; font-weight: 900; letter-spacing: 3px;
-            cursor: pointer; margin-top: 18px;
-            box-shadow: 0 10px 40px rgba(0,212,255,0.4);
-            font-family: 'Rajdhani', sans-serif; text-transform: uppercase;
-            transition: all 0.2s ease;
+        /* League and club name */
+        .league-club-display {
+            text-align: center;
+            margin-bottom: 20px;
         }
-        .start-btn:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 14px 45px rgba(0,212,255,0.6); }
-
-        .press-hint {
-            font-size: 0.85rem; color: rgba(255,255,255,0.4);
-            margin-top: 10px; letter-spacing: 1px;
+        .league-name {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 5px;
         }
-        .key-highlight { color: #00d4ff; font-weight: 700; }
+        .club-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #00d4ff;
+        }
 
-        @media (max-width: 768px) {
-            .club-select { width: 90%; height: 320px; }
-            .logo { font-size: 3.5rem; }
+        /* Advance button */
+        .advance-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #00d4ff, #0096ff);
+            border: none;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 900;
+            padding: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            box-shadow: 0 6px 20px rgba(0,212,255,0.4);
+        }
+        .advance-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,212,255,0.6);
+        }
+
+        /* Right panel - Team information */
+        .team-info {
+            width: 520px;
+            background: rgba(15, 25, 40, 0.92);
+            border: 2px solid rgba(0,212,255,0.3);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #ffd900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* Finances section */
+        .finances-section {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(0,212,255,0.2);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .finances-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+        .finance-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .finance-row:last-child { border-bottom: none; }
+        .finance-label {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.6);
+        }
+        .finance-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #39ff14;
+        }
+
+        /* Starting 11 section */
+        .starting-11-section {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(0,212,255,0.2);
+            border-radius: 8px;
+            padding: 16px;
+            flex: 1;
+            overflow-y: auto;
+        }
+        .starting-11-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+        .starting-11-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .player-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 6px 8px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.03);
+            transition: background 0.15s;
+        }
+        .player-row:hover { background: rgba(255,255,255,0.06); }
+        .position-badge {
+            width: 40px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            padding: 3px 0;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+        .position-badge.gk  { background: rgba(255,180,0,0.8); }
+        .position-badge.def { background: rgba(0,200,100,0.8); }
+        .position-badge.mid { background: rgba(0,150,255,0.8); }
+        .position-badge.att { background: rgba(255,50,100,0.8); }
+        .player-name {
+            flex: 1;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.85);
+        }
+
+        /* Bottom hints */
+        .bottom-hints {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+            z-index: 100;
+        }
+        .hint {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+        }
+        .hint-icon {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.6);
+        }
+
+        @media (max-width: 1100px) {
+            .container { flex-direction: column; gap: 20px; padding: 20px; }
+            .team-selector, .team-info { width: 100%; max-width: 500px; }
         }
     </style>
 </head>
@@ -260,107 +381,150 @@
     <div class="loading-progress" id="loadingProgress">Initializing...</div>
 </div>
 
-<!-- BG -->
-<div class="bg-animation">
-    <div class="bg-gradient"></div>
-    <div class="bg-gradient"></div>
-</div>
-<div class="particles" id="particles"></div>
-<div class="scanline"></div>
-
-<!-- Corners -->
-<div class="corner tl"></div>
-<div class="corner tr"></div>
-<div class="corner bl"></div>
-<div class="corner br"></div>
-
-<!-- Main -->
+<!-- Main container -->
 <div class="container" id="mainContainer">
-    <div class="logo">FIFA</div>
-    <div class="subtitle">MANAGER</div>
+    <!-- Left panel - Team selector -->
+    <div class="team-selector">
+        <div class="selector-title">SELECT TEAM</div>
+        
+        <div class="flag-display" id="flagDisplay">
+            <div class="flag-placeholder">🏴</div>
+        </div>
 
-    <!-- Country filter dropdown -->
-    <div class="country-filter">
-        <label>Filter by</label>
-        <select id="countryFilter" onchange="applyFilter()">
-            <option value="">All Countries</option>
-        </select>
+        <div class="star-rating" id="starRating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+        </div>
+
+        <div class="team-stats">
+            <div class="stat-box">
+                <div class="stat-label">ATT</div>
+                <div class="stat-value" id="attStat">—</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">MID</div>
+                <div class="stat-value" id="midStat">—</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">DEF</div>
+                <div class="stat-value" id="defStat">—</div>
+            </div>
+        </div>
+
+        <div class="team-name-selector">
+            <button class="arrow-btn" onclick="previousTeam()">◀</button>
+            <div class="team-name-display" id="teamNameDisplay">—</div>
+            <button class="arrow-btn" onclick="nextTeam()">▶</button>
+        </div>
+
+        <div class="league-club-display">
+            <div class="league-name" id="leagueDisplay">—</div>
+            <div class="club-name" id="clubDisplay">—</div>
+        </div>
+
+        <button class="advance-btn" onclick="startGame()">⏩ ADVANCE</button>
     </div>
 
-    <!-- 3-row selector card -->
-    <div class="club-select">
-        <!-- top 25% — league -->
-        <div class="league-section">
-            <div class="league-label">League</div>
-            <div class="league-name" id="leagueName">—</div>
+    <!-- Right panel - Team information -->
+    <div class="team-info">
+        <div class="info-title">TEAM INFORMATION</div>
+
+        <div class="finances-section">
+            <div class="finances-title">FINANCES</div>
+            <div class="finance-row">
+                <div class="finance-label">Transfer Budget</div>
+                <div class="finance-value" id="transferBudget">—</div>
+            </div>
+            <div class="finance-row">
+                <div class="finance-label">Weekly Wages</div>
+                <div class="finance-value" id="weeklyWages">—</div>
+            </div>
         </div>
-        <!-- middle 50% — badge + name + rating -->
-        <div class="club-section">
-            <div class="club-badge" id="clubBadge">⚽</div>
-            <div class="club-name" id="clubName">—</div>
-            <div class="club-rating" id="clubRating">—</div>
-        </div>
-        <!-- bottom 25% — country -->
-        <div class="country-section">
-            <div class="country-label">Country</div>
-            <div class="country-name" id="countryName">—</div>
+
+        <div class="starting-11-section">
+            <div class="starting-11-title">STARTING 11</div>
+            <div class="starting-11-list" id="starting11List">
+                <div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;">Loading squad...</div>
+            </div>
         </div>
     </div>
+</div>
 
-    <!-- Arrows -->
-    <div class="nav-arrows">
-        <button class="arrow-btn" onclick="previousTeam()">◀</button>
-        <button class="arrow-btn" onclick="nextTeam()">▶</button>
+<!-- Bottom hints -->
+<div class="bottom-hints">
+    <div class="hint">
+        <div class="hint-icon">⏩</div>
+        <span>Advance</span>
     </div>
-
-    <button class="start-btn" onclick="startGame()">START CAREER</button>
-    <div class="press-hint">Use <span class="key-highlight">← →</span> arrows or press <span class="key-highlight">SPACE</span> to start</div>
+    <div class="hint">
+        <div class="hint-icon">◀</div>
+        <span>Back</span>
+    </div>
+    <div class="hint">
+        <div class="hint-icon">d</div>
+        <span>Swap Teams</span>
+    </div>
 </div>
 
 <script>
-// ── Particles ──
-const particlesEl = document.getElementById('particles');
-for (let i = 0; i < 50; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    p.style.left = Math.random() * 100 + '%';
-    p.style.animationDelay = Math.random() * 10 + 's';
-    particlesEl.appendChild(p);
-}
+// State
+let allTeams = [];
+let allPlayers = [];
+let currentIndex = 0;
+let dataLoaded = false;
 
-// ── State ──
-let allTeams      = [];
-let filteredTeams = [];
-let currentIndex  = 0;
-let dataLoaded    = false;
+// Country code to flag emoji mapping (simplified - extend as needed)
+const countryFlags = {
+    'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    'Spain': '🇪🇸',
+    'Germany': '🇩🇪',
+    'Italy': '🇮🇹',
+    'France': '🇫🇷',
+    'Portugal': '🇵🇹',
+    'Netherlands': '🇳🇱',
+    'Belgium': '🇧🇪',
+    'Brazil': '🇧🇷',
+    'Argentina': '🇦🇷',
+    'United States': '🇺🇸',
+    'Mexico': '🇲🇽',
+    'Japan': '🇯🇵',
+    'South Korea': '🇰🇷',
+    'Australia': '🇦🇺',
+    'Saudi Arabia': '🇸🇦',
+    'Turkey': '🇹🇷',
+    'Poland': '🇵🇱',
+    'Scotland': '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
+    'Wales': '🏴󠁧󠁢󠁷󠁬󠁳󠁿',
+    'Austria': '🇦🇹',
+    'Switzerland': '🇨🇭',
+    'Denmark': '🇩🇰',
+    'Sweden': '🇸🇪',
+    'Norway': '🇳🇴'
+};
 
-// ── Load ──
+// Load data
 async function loadAllData() {
     try {
-        document.getElementById('loadingProgress').textContent = 'Loading teams…';
-
+        document.getElementById('loadingProgress').textContent = 'Loading teams...';
+        
         const teamsRes = await fetch('teams.json');
         if (!teamsRes.ok) throw new Error('teams.json not found');
         allTeams = (await teamsRes.json()).filter(t => t.team_name && t.team_name.trim());
 
-        document.getElementById('loadingProgress').textContent = `Loaded ${allTeams.length} teams…`;
+        document.getElementById('loadingProgress').textContent = 'Loading players...';
+        
+        const playersRes = await fetch('players.json');
+        if (!playersRes.ok) throw new Error('players.json not found');
+        allPlayers = await playersRes.json();
 
-        // pre-fetch players.json so game.html doesn't have to wait
-        fetch('players.json');
+        document.getElementById('loadingProgress').textContent = `Loaded ${allTeams.length} teams and ${allPlayers.length} players...`;
 
-        // Build country dropdown
-        const countries = [...new Set(allTeams.map(t => t.country).filter(Boolean))].sort();
-        const sel = document.getElementById('countryFilter');
-        countries.forEach(c => {
-            const opt = document.createElement('option');
-            opt.value = c; opt.textContent = c;
-            sel.appendChild(opt);
-        });
-
-        // Store teams in localStorage for game.html
+        // Store in localStorage
         localStorage.setItem('fifaAllTeams', JSON.stringify(allTeams));
 
-        filteredTeams = allTeams;
         dataLoaded = true;
 
         setTimeout(() => {
@@ -376,62 +540,132 @@ async function loadAllData() {
     }
 }
 
-// ── Filter ──
-function applyFilter() {
-    const country = document.getElementById('countryFilter').value;
-    filteredTeams = country ? allTeams.filter(t => t.country === country) : allTeams;
-    currentIndex  = 0;
-    displayCurrentTeam();
-}
-
-// ── Display ──
+// Display current team
 function displayCurrentTeam() {
-    if (!filteredTeams.length) return;
-    const team = filteredTeams[currentIndex];
+    if (!allTeams.length) return;
+    const team = allTeams[currentIndex];
 
-    document.getElementById('leagueName').textContent  = team.league_name || '—';
-    document.getElementById('clubName').textContent    = team.team_name;
-    document.getElementById('clubRating').textContent  = team.overall_rating || '—';
-    document.getElementById('countryName').textContent = team.country || '—';
-
-    const badge = document.getElementById('clubBadge');
-    const logo  = team.club_logo_url;
-
-    if (logo) {
-        badge.innerHTML = `<img src="${logo}" alt="${team.team_name}"
-            onerror="this.style.display='none'; this.parentElement.innerHTML='⚽';">`;
+    // Flag
+    const flagEl = document.getElementById('flagDisplay');
+    const flag = countryFlags[team.country];
+    if (flag) {
+        flagEl.innerHTML = `<div style="font-size:6rem;">${flag}</div>`;
     } else {
-        badge.innerHTML = '⚽';
+        flagEl.innerHTML = '<div class="flag-placeholder">🏴</div>';
     }
+
+    // Star rating (based on overall_rating)
+    const rating = team.overall_rating || 70;
+    const stars = Math.min(5, Math.max(1, Math.round(rating / 20)));
+    const starHtml = Array(stars).fill('<span class="star">★</span>').join('') +
+                     Array(5 - stars).fill('<span class="star" style="color:rgba(255,255,255,0.2);">★</span>').join('');
+    document.getElementById('starRating').innerHTML = starHtml;
+
+    // Stats (ATT/MID/DEF) - calculate from team rating or use defaults
+    const att = team.attack || Math.floor(rating - 5 + Math.random() * 10);
+    const mid = team.midfield || Math.floor(rating - 3 + Math.random() * 6);
+    const def = team.defence || Math.floor(rating - 4 + Math.random() * 8);
+    document.getElementById('attStat').textContent = att;
+    document.getElementById('midStat').textContent = mid;
+    document.getElementById('defStat').textContent = def;
+
+    // Team name
+    document.getElementById('teamNameDisplay').textContent = team.country || '—';
+    document.getElementById('leagueDisplay').textContent = team.league_name || '—';
+    document.getElementById('clubDisplay').textContent = team.team_name;
+
+    // Finances (generate realistic values based on rating)
+    const budget = Math.floor((rating / 100) * 150000000 + Math.random() * 50000000);
+    const wages = Math.floor(budget * 0.04);
+    document.getElementById('transferBudget').textContent = '$' + formatMoney(budget);
+    document.getElementById('weeklyWages').textContent = '$' + formatMoney(wages);
+
+    // Starting 11 (get top 11 players from this team)
+    displayStarting11(team);
 }
 
-// ── Nav ──
+function formatMoney(val) {
+    if (val >= 1000000) return (val / 1000000).toFixed(1) + 'M';
+    if (val >= 1000) return (val / 1000).toFixed(0) + 'K';
+    return val.toString();
+}
+
+function displayStarting11(team) {
+    const teamPlayers = allPlayers.filter(p => p.club?.name === team.team_name);
+    
+    if (teamPlayers.length === 0) {
+        document.getElementById('starting11List').innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;">No player data available</div>';
+        return;
+    }
+
+    // Sort by overall and take top 11
+    const top11 = teamPlayers
+        .sort((a, b) => {
+            const ovrA = typeof a.basic_info?.overall === 'object' ? a.basic_info.overall.max : (a.basic_info?.overall || 0);
+            const ovrB = typeof b.basic_info?.overall === 'object' ? b.basic_info.overall.max : (b.basic_info?.overall || 0);
+            return ovrB - ovrA;
+        })
+        .slice(0, 11);
+
+    // Render list
+    const html = top11.map(p => {
+        const pos = (p.player_positions || '').split(',')[0]?.trim() || 'SUB';
+        let posClass = 'mid';
+        if (pos === 'GK') posClass = 'gk';
+        else if (['RB','LB','CB','RWB','LWB','RCB','LCB'].includes(pos)) posClass = 'def';
+        else if (['ST','CF','LW','RW','CAM','LF','RF'].includes(pos)) posClass = 'att';
+        
+        const name = p.basic_info?.short_name || 'Unknown';
+        
+        return `<div class="player-row">
+            <div class="position-badge ${posClass}">${pos}</div>
+            <div class="player-name">${name}</div>
+        </div>`;
+    }).join('');
+
+    document.getElementById('starting11List').innerHTML = html;
+}
+
+// Navigation
 function nextTeam() {
-    if (!dataLoaded || !filteredTeams.length) return;
-    currentIndex = (currentIndex + 1) % filteredTeams.length;
+    if (!dataLoaded || !allTeams.length) return;
+    currentIndex = (currentIndex + 1) % allTeams.length;
     displayCurrentTeam();
 }
+
 function previousTeam() {
-    if (!dataLoaded || !filteredTeams.length) return;
-    currentIndex = (currentIndex - 1 + filteredTeams.length) % filteredTeams.length;
+    if (!dataLoaded || !allTeams.length) return;
+    currentIndex = (currentIndex - 1 + allTeams.length) % allTeams.length;
     displayCurrentTeam();
 }
 
-// ── Start ──
+// Start game
 function startGame() {
-    if (!dataLoaded || !filteredTeams.length) { alert('Please wait for data to load!'); return; }
-    localStorage.setItem('fifaSelectedTeam', JSON.stringify(filteredTeams[currentIndex]));
+    if (!dataLoaded || !allTeams.length) {
+        alert('Please wait for data to load!');
+        return;
+    }
+    localStorage.setItem('fifaSelectedTeam', JSON.stringify(allTeams[currentIndex]));
     document.body.style.transition = 'opacity 0.5s';
-    document.body.style.opacity   = '0';
-    setTimeout(() => { window.location.href = 'game.html'; }, 500);
+    document.body.style.opacity = '0';
+    setTimeout(() => {
+        window.location.href = 'game.html';
+    }, 500);
 }
 
-// ── Keys ──
+// Keyboard controls
 document.addEventListener('keydown', e => {
     if (!dataLoaded) return;
-    if (e.code === 'Space')      { e.preventDefault(); startGame(); }
-    else if (e.code === 'ArrowLeft')  { e.preventDefault(); previousTeam(); }
-    else if (e.code === 'ArrowRight') { e.preventDefault(); nextTeam(); }
+    if (e.code === 'Space' || e.code === 'Enter') {
+        e.preventDefault();
+        startGame();
+    } else if (e.code === 'ArrowLeft') {
+        e.preventDefault();
+        previousTeam();
+    } else if (e.code === 'ArrowRight') {
+        e.preventDefault();
+        nextTeam();
+    }
 });
 
 loadAllData();
