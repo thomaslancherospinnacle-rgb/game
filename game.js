@@ -987,9 +987,61 @@ function showTab(tabName) {
         }
     });
 
+    // Populate Career Hub stats when showing squad tab
+    if (tabName === 'squad') {
+        updateCareerHub();
+    }
+
     // On-demand render for tabs that need fresh data each visit
     if (tabName === 'office'    && typeof renderOffice === 'function')     renderOffice();
     if (tabName === 'transfers' && typeof renderTransferHub === 'function') renderTransferHub();
+}
+
+function updateCareerHub() {
+    // Squad count
+    const squadCountEl = document.getElementById('hubSquadCount');
+    if (squadCountEl) squadCountEl.textContent = `${gameState.squad.length} players`;
+
+    // Budget
+    const budgetEl = document.getElementById('hubBudget');
+    if (budgetEl && transferSystem) {
+        budgetEl.textContent = '€' + transferSystem.formatMoney(transferSystem.transferBudget);
+    }
+
+    // Next match
+    const nextMatchEl = document.getElementById('hubNextMatch');
+    if (nextMatchEl && gameState.nextMatch) {
+        nextMatchEl.textContent = gameState.nextMatch.opponent;
+    } else if (nextMatchEl) {
+        nextMatchEl.textContent = 'No fixtures';
+    }
+
+    // Table position (calculate from fixtures)
+    const tableEl = document.getElementById('hubTablePos');
+    if (tableEl) {
+        const table = calculateLeagueTable();
+        const myPos = table.findIndex(t => t.team === gameState.selectedTeam?.team_name) + 1;
+        tableEl.textContent = myPos > 0 ? `${myPos}${getOrdinalSuffix(myPos)}` : '—';
+    }
+
+    // Season stats
+    const hubWinsEl = document.getElementById('hubWins');
+    const hubDrawsEl = document.getElementById('hubDraws');
+    const hubLossesEl = document.getElementById('hubLosses');
+    const hubGFEl = document.getElementById('hubGF');
+    const hubGAEl = document.getElementById('hubGA');
+
+    if (hubWinsEl) hubWinsEl.textContent = gameState.seasonStats.wins;
+    if (hubDrawsEl) hubDrawsEl.textContent = gameState.seasonStats.draws;
+    if (hubLossesEl) hubLossesEl.textContent = gameState.seasonStats.losses;
+    if (hubGFEl) hubGFEl.textContent = gameState.seasonStats.goalsScored;
+    if (hubGAEl) hubGAEl.textContent = gameState.seasonStats.goalsConceded;
+}
+
+function getOrdinalSuffix(n) {
+    const s = ['th', 'st', 'nd', 'rd'];
+    const v = n % 100;
+    return s[(v - 20) % 10] || s[v] || s[0];
 }
 
 /* ============================================================

@@ -170,7 +170,91 @@
 
         <!-- Squad Tab -->
         <div id="tab-squad" class="tab-content">
+            <div class="career-hub">
+                <div class="hub-title">CAREER</div>
+                <div class="hub-subtitle">Manager Dashboard</div>
+                
+                <div class="hub-grid">
+                    <!-- Squad tile -->
+                    <div class="hub-tile hub-tile-large" onclick="showTab('squad-detail')">
+                        <div class="tile-icon">👥</div>
+                        <div class="tile-title">SQUAD</div>
+                        <div class="tile-subtitle">Manage your players</div>
+                        <div class="tile-stat" id="hubSquadCount">—</div>
+                    </div>
+
+                    <!-- Transfers tile -->
+                    <div class="hub-tile hub-tile-large" onclick="showTab('transfers')">
+                        <div class="tile-icon">🔄</div>
+                        <div class="tile-title">TRANSFERS</div>
+                        <div class="tile-subtitle">Search & scout players</div>
+                        <div class="tile-stat" id="hubBudget">—</div>
+                    </div>
+
+                    <!-- Fixtures tile -->
+                    <div class="hub-tile hub-tile-large" onclick="showTab('fixtures')">
+                        <div class="tile-icon">📅</div>
+                        <div class="tile-title">FIXTURES</div>
+                        <div class="tile-subtitle">Upcoming matches</div>
+                        <div class="tile-stat" id="hubNextMatch">—</div>
+                    </div>
+
+                    <!-- Table tile -->
+                    <div class="hub-tile hub-tile-medium" onclick="showTab('table')">
+                        <div class="tile-icon">🏆</div>
+                        <div class="tile-title">TABLE</div>
+                        <div class="tile-subtitle">League standings</div>
+                        <div class="tile-stat" id="hubTablePos">—</div>
+                    </div>
+
+                    <!-- Office tile -->
+                    <div class="hub-tile hub-tile-medium" onclick="showTab('office')">
+                        <div class="tile-icon">💼</div>
+                        <div class="tile-title">OFFICE</div>
+                        <div class="tile-subtitle">Finances & contracts</div>
+                    </div>
+
+                    <!-- News tile -->
+                    <div class="hub-tile hub-tile-medium" onclick="showTab('news')">
+                        <div class="tile-icon">📰</div>
+                        <div class="tile-title">NEWS</div>
+                        <div class="tile-subtitle">Latest updates</div>
+                    </div>
+
+                    <!-- Stats tile -->
+                    <div class="hub-tile hub-tile-wide">
+                        <div class="tile-title">SEASON STATS</div>
+                        <div class="hub-stats-grid">
+                            <div class="hub-stat-box">
+                                <div class="hub-stat-val" id="hubWins">0</div>
+                                <div class="hub-stat-lbl">Wins</div>
+                            </div>
+                            <div class="hub-stat-box">
+                                <div class="hub-stat-val" id="hubDraws">0</div>
+                                <div class="hub-stat-lbl">Draws</div>
+                            </div>
+                            <div class="hub-stat-box">
+                                <div class="hub-stat-val" id="hubLosses">0</div>
+                                <div class="hub-stat-lbl">Losses</div>
+                            </div>
+                            <div class="hub-stat-box">
+                                <div class="hub-stat-val" id="hubGF">0</div>
+                                <div class="hub-stat-lbl">Goals For</div>
+                            </div>
+                            <div class="hub-stat-box">
+                                <div class="hub-stat-val" id="hubGA">0</div>
+                                <div class="hub-stat-lbl">Goals Against</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Squad Detail (sub-page) -->
+        <div id="tab-squad-detail" class="tab-content">
             <div class="main-content">
+                <button class="back-btn" onclick="showTab('squad')">← Back to Career Hub</button>
                 <div class="card">
                     <div class="card-title">Your Squad</div>
                     <div class="card-subtitle" id="squadSubtitle">Loading...</div>

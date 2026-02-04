@@ -449,6 +449,193 @@
         }
 
         /* Squad Grid */
+        /* Career Hub Dashboard */
+        .career-hub {
+            padding: 30px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hub-title {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ffd900;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            margin-bottom: 5px;
+            text-align: center;
+            text-shadow: 0 0 30px rgba(255,217,0,0.5);
+        }
+
+        .hub-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .hub-tile {
+            background: linear-gradient(135deg, rgba(10,25,50,0.9), rgba(15,30,60,0.9));
+            border: 2px solid rgba(0,212,255,0.3);
+            border-radius: 12px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hub-tile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00d4ff, #0096ff);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .hub-tile:hover {
+            border-color: #00d4ff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0,212,255,0.4);
+        }
+
+        .hub-tile:hover::before {
+            opacity: 1;
+        }
+
+        .hub-tile-large {
+            grid-column: span 1;
+            min-height: 220px;
+        }
+
+        .hub-tile-medium {
+            grid-column: span 1;
+            min-height: 180px;
+        }
+
+        .hub-tile-wide {
+            grid-column: span 3;
+            min-height: 150px;
+        }
+
+        .tile-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .tile-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .tile-subtitle {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 15px;
+        }
+
+        .tile-stat {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-top: auto;
+        }
+
+        .hub-stats-grid {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .hub-stat-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .hub-stat-val {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #00d4ff;
+        }
+
+        .hub-stat-lbl {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .back-btn {
+            background: rgba(0,212,255,0.15);
+            border: 2px solid rgba(0,212,255,0.4);
+            color: #00d4ff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .back-btn:hover {
+            background: rgba(0,212,255,0.25);
+            border-color: #00d4ff;
+            transform: translateX(-3px);
+        }
+
+        @media (max-width: 1200px) {
+            .hub-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hub-tile-wide {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hub-grid {
+                grid-template-columns: 1fr;
+            }
+            .hub-tile-large,
+            .hub-tile-medium,
+            .hub-tile-wide {
+                grid-column: span 1;
+            }
+            .hub-title {
+                font-size: 2.5rem;
+            }
+        }
+
         .squad-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
