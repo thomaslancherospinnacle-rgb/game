@@ -987,8 +987,8 @@ function showTab(tabName) {
         }
     });
 
-    // Populate Career Hub stats when showing squad tab
-    if (tabName === 'squad') {
+    // Populate Career Hub stats when showing central tab
+    if (tabName === 'central') {
         updateCareerHub();
     }
 

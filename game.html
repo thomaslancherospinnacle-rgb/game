@@ -106,70 +106,6 @@
 
         <!-- Central Tab -->
         <div id="tab-central" class="tab-content active">
-            <div class="main-content">
-                <div class="training-card">
-                    <div class="training-header">Training Day</div>
-                    <div class="training-date" id="currentDate">Monday, January 30, 2025</div>
-                    <div class="training-stats">
-                        <div class="training-stat">
-                            <div class="training-icon">âš½</div>
-                            <div>
-                                <div id="nextOpponent">--</div>
-                                <div class="training-label">Next Opponent</div>
-                            </div>
-                        </div>
-                        <div class="training-stat">
-                            <div class="training-icon">ðŸ“…</div>
-                            <div>
-                                <div id="daysUntilMatch">--</div>
-                                <div class="training-label">Days Until Match</div>
-                            </div>
-                        </div>
-                        <div class="training-stat">
-                            <div class="training-icon">ðŸ‘¥</div>
-                            <div>
-                                <div id="availablePlayers">--</div>
-                                <div class="training-label">Available Players</div>
-                            </div>
-                        </div>
-                        <div class="training-stat">
-                            <div class="training-icon">ðŸ¥</div>
-                            <div>
-                                <div id="injuredPlayers">0</div>
-                                <div class="training-label">Injured</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="content-grid">
-                    <div class="card next-match">
-                        <div class="card-title" style="color: #ff3366;">Next Match</div>
-                        <div class="match-date" id="nextMatchDate">Saturday, February 3, 2025</div>
-                        <div class="match-teams">
-                            <div class="match-team">
-                                <div class="match-team-badge" id="homeTeamBadge">âš½</div>
-                                <div id="homeTeamName">--</div>
-                            </div>
-                            <div class="match-vs">VS</div>
-                            <div class="match-team">
-                                <div class="match-team-badge" id="awayTeamBadge">âš½</div>
-                                <div id="awayTeamName">--</div>
-                            </div>
-                        </div>
-                        <button class="simulate-btn" id="simulateMatchBtn" onclick="simulateMatch()">Simulate Match</button>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-title">Latest News</div>
-                        <div id="centralNewsGrid" class="news-grid"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Squad Tab -->
-        <div id="tab-squad" class="tab-content">
             <div class="fifa-career-layout">
                 <!-- Top Header Bar -->
                 <div class="career-header">
@@ -192,7 +128,7 @@
                 <!-- Navigation Tabs -->
                 <div class="career-nav">
                     <div class="career-nav-item active">CENTRAL</div>
-                    <div class="career-nav-item" onclick="showTab('squad-detail')">SQUAD</div>
+                    <div class="career-nav-item" onclick="showTab('squad')">SQUAD</div>
                     <div class="career-nav-item" onclick="showTab('transfers')">TRANSFERS</div>
                     <div class="career-nav-item" onclick="showTab('office')">OFFICE</div>
                     <div class="career-nav-item" onclick="showTab('table')">SEASON</div>
@@ -242,7 +178,7 @@
                         <div class="panel-title">GLOBAL TRANSFER NETWORK</div>
                         <div class="transfer-header">
                             <span class="transfer-scout-name" id="scoutName">B. WOOD</span>
-                            <span class="transfer-new">↑ <strong id="newScoutCount">12</strong> New</span>
+                            <span class="transfer-new">↑ <strong id="newScoutCount">0</strong> New</span>
                             <span class="transfer-updates">↓ <strong>0</strong> Updates</span>
                         </div>
                         <div class="transfer-player-list" id="transferPlayerList">
@@ -282,10 +218,9 @@
             </div>
         </div>
 
-        <!-- Squad Detail (sub-page) -->
-        <div id="tab-squad-detail" class="tab-content">
+        <!-- Squad Tab (Formation View) -->
+        <div id="tab-squad" class="tab-content">
             <div class="main-content">
-                <button class="back-btn" onclick="showTab('squad')">← Back to Central</button>
                 <div class="card">
                     <div class="card-title">Your Squad</div>
                     <div class="card-subtitle" id="squadSubtitle">Loading...</div>
@@ -293,6 +228,7 @@
                 </div>
             </div>
         </div>
+
 
         <!-- Table Tab -->
         <div id="tab-table" class="tab-content">
