@@ -998,44 +998,94 @@ function showTab(tabName) {
 }
 
 function updateCareerHub() {
-    // Squad count
-    const squadCountEl = document.getElementById('hubSquadCount');
-    if (squadCountEl) squadCountEl.textContent = `${gameState.squad.length} players`;
-
-    // Budget
-    const budgetEl = document.getElementById('hubBudget');
-    if (budgetEl && transferSystem) {
-        budgetEl.textContent = '€' + transferSystem.formatMoney(transferSystem.transferBudget);
+    // Header club info
+    const headerClubNameEl = document.getElementById('headerClubName');
+    const headerClubBadgeEl = document.getElementById('headerClubBadge');
+    
+    if (headerClubNameEl && gameState.selectedTeam) {
+        headerClubNameEl.textContent = gameState.selectedTeam.team_name;
+    }
+    
+    if (headerClubBadgeEl && gameState.selectedTeam?.club_logo_url) {
+        headerClubBadgeEl.innerHTML = `<img src="${gameState.selectedTeam.club_logo_url}" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none';this.parentElement.innerHTML='⚽';">`;
     }
 
-    // Next match
-    const nextMatchEl = document.getElementById('hubNextMatch');
-    if (nextMatchEl && gameState.nextMatch) {
-        nextMatchEl.textContent = gameState.nextMatch.opponent;
-    } else if (nextMatchEl) {
-        nextMatchEl.textContent = 'No fixtures';
+    // Advance date
+    const advanceDateEl = document.getElementById('advanceDate');
+    if (advanceDateEl && gameState.currentDate) {
+        const monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+        advanceDateEl.textContent = monthNames[gameState.currentDate.getMonth()] + ' ' + gameState.currentDate.getFullYear();
     }
 
-    // Table position (calculate from fixtures)
-    const tableEl = document.getElementById('hubTablePos');
-    if (tableEl) {
-        const table = calculateLeagueTable();
-        const myPos = table.findIndex(t => t.team === gameState.selectedTeam?.team_name) + 1;
-        tableEl.textContent = myPos > 0 ? `${myPos}${getOrdinalSuffix(myPos)}` : '—';
+    // Featured news
+    const featuredHeadlineEl = document.getElementById('featuredHeadline');
+    const featuredDateEl = document.getElementById('featuredDate');
+    if (featuredHeadlineEl) {
+        featuredHeadlineEl.textContent = 'SEASON UNDERWAY - FIXTURES SCHEDULED';
+    }
+    if (featuredDateEl && gameState.currentDate) {
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        featuredDateEl.textContent = dayNames[gameState.currentDate.getDay()] + ', ' + monthNames[gameState.currentDate.getMonth()] + ' ' + gameState.currentDate.getDate() + ', ' + gameState.currentDate.getFullYear();
     }
 
-    // Season stats
-    const hubWinsEl = document.getElementById('hubWins');
-    const hubDrawsEl = document.getElementById('hubDraws');
-    const hubLossesEl = document.getElementById('hubLosses');
-    const hubGFEl = document.getElementById('hubGF');
-    const hubGAEl = document.getElementById('hubGA');
+    // Transfer network - show scouted players
+    updateTransferNetwork();
+}
 
-    if (hubWinsEl) hubWinsEl.textContent = gameState.seasonStats.wins;
-    if (hubDrawsEl) hubDrawsEl.textContent = gameState.seasonStats.draws;
-    if (hubLossesEl) hubLossesEl.textContent = gameState.seasonStats.losses;
-    if (hubGFEl) hubGFEl.textContent = gameState.seasonStats.goalsScored;
-    if (hubGAEl) hubGAEl.textContent = gameState.seasonStats.goalsConceded;
+function updateTransferNetwork() {
+    const listEl = document.getElementById('transferPlayerList');
+    if (!listEl) return;
+
+    // Get completed scout reports
+    const completedScouts = Object.keys(scoutQueue).filter(pid => scoutQueue[pid].status === 'complete');
+    const scoutCountEl = document.getElementById('newScoutCount');
+    if (scoutCountEl) scoutCountEl.textContent = completedScouts.length;
+
+    if (completedScouts.length === 0) {
+        listEl.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.4);padding:30px;">No scouting reports<br><span style="font-size:0.8rem;">Scout players from Transfers tab</span></div>';
+        return;
+    }
+
+    // Show completed scouts as player cards
+    const html = completedScouts.slice(0, 5).map(playerId => {
+        const player = gameState.allPlayers.find(p => p.player_id === playerId);
+        if (!player) return '';
+        
+        const faceUrl = player.media?.face_url || '';
+        const name = player.basic_info?.short_name || 'Unknown';
+        const pos = (player.player_positions || '').split(',')[0]?.trim() || 'SUB';
+        const nat = player.basic_info?.nationality || '';
+        
+        return `<div class="transfer-player-card" onclick="openPlayerFromScout('${playerId}')">
+            <div class="transfer-player-face">
+                ${faceUrl ? `<img src="${faceUrl}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';">` : ''}
+            </div>
+            <div class="transfer-player-info">
+                <div class="transfer-player-name">${name}</div>
+                <div class="transfer-player-pos">${pos} ${nat}</div>
+            </div>
+        </div>`;
+    }).join('');
+
+    listEl.innerHTML = html;
+}
+
+function openPlayerFromScout(playerId) {
+    if (!transferSystem) return;
+    const filters = { query: '__id__' + playerId, position:'', league:'', country:'', minOvr:0, maxOvr:0, maxPrice:0, freeAgents:false };
+    const results = transferSystem.searchPlayers(filters);
+    if (results.length > 0) {
+        openPlayerDetail(results[0]);
+    }
+}
+
+function advanceToNextMatch() {
+    if (gameState.nextMatch) {
+        simulateMatch();
+    } else {
+        alert('No upcoming matches scheduled!');
+    }
 }
 
 function getOrdinalSuffix(n) {

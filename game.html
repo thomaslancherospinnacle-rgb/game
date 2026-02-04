@@ -170,82 +170,113 @@
 
         <!-- Squad Tab -->
         <div id="tab-squad" class="tab-content">
-            <div class="career-hub">
-                <div class="hub-title">CAREER</div>
-                <div class="hub-subtitle">Manager Dashboard</div>
-                
-                <div class="hub-grid">
-                    <!-- Squad tile -->
-                    <div class="hub-tile hub-tile-large" onclick="showTab('squad-detail')">
-                        <div class="tile-icon">👥</div>
-                        <div class="tile-title">SQUAD</div>
-                        <div class="tile-subtitle">Manage your players</div>
-                        <div class="tile-stat" id="hubSquadCount">—</div>
+            <div class="fifa-career-layout">
+                <!-- Top Header Bar -->
+                <div class="career-header">
+                    <div class="header-left">
+                        <div class="club-badge-header" id="headerClubBadge">⚽</div>
+                        <div class="header-info">
+                            <div class="header-club-name" id="headerClubName">—</div>
+                            <div class="header-manager">Mr. Manager</div>
+                        </div>
                     </div>
-
-                    <!-- Transfers tile -->
-                    <div class="hub-tile hub-tile-large" onclick="showTab('transfers')">
-                        <div class="tile-icon">🔄</div>
-                        <div class="tile-title">TRANSFERS</div>
-                        <div class="tile-subtitle">Search & scout players</div>
-                        <div class="tile-stat" id="hubBudget">—</div>
+                    <div class="header-right">
+                        <div class="header-notice">
+                            <span class="notice-icon">⚠</span>
+                            <span class="notice-text">PRESS <strong>R</strong> TO RE-CONNECT</span>
+                        </div>
+                        <div class="ea-logo">EA SPORTS</div>
                     </div>
+                </div>
 
-                    <!-- Fixtures tile -->
-                    <div class="hub-tile hub-tile-large" onclick="showTab('fixtures')">
-                        <div class="tile-icon">📅</div>
-                        <div class="tile-title">FIXTURES</div>
-                        <div class="tile-subtitle">Upcoming matches</div>
-                        <div class="tile-stat" id="hubNextMatch">—</div>
-                    </div>
+                <!-- Navigation Tabs -->
+                <div class="career-nav">
+                    <div class="career-nav-item active">CENTRAL</div>
+                    <div class="career-nav-item" onclick="showTab('squad-detail')">SQUAD</div>
+                    <div class="career-nav-item" onclick="showTab('transfers')">TRANSFERS</div>
+                    <div class="career-nav-item" onclick="showTab('office')">OFFICE</div>
+                    <div class="career-nav-item" onclick="showTab('table')">SEASON</div>
+                </div>
 
-                    <!-- Table tile -->
-                    <div class="hub-tile hub-tile-medium" onclick="showTab('table')">
-                        <div class="tile-icon">🏆</div>
-                        <div class="tile-title">TABLE</div>
-                        <div class="tile-subtitle">League standings</div>
-                        <div class="tile-stat" id="hubTablePos">—</div>
-                    </div>
-
-                    <!-- Office tile -->
-                    <div class="hub-tile hub-tile-medium" onclick="showTab('office')">
-                        <div class="tile-icon">💼</div>
-                        <div class="tile-title">OFFICE</div>
-                        <div class="tile-subtitle">Finances & contracts</div>
-                    </div>
-
-                    <!-- News tile -->
-                    <div class="hub-tile hub-tile-medium" onclick="showTab('news')">
-                        <div class="tile-icon">📰</div>
-                        <div class="tile-title">NEWS</div>
-                        <div class="tile-subtitle">Latest updates</div>
-                    </div>
-
-                    <!-- Stats tile -->
-                    <div class="hub-tile hub-tile-wide">
-                        <div class="tile-title">SEASON STATS</div>
-                        <div class="hub-stats-grid">
-                            <div class="hub-stat-box">
-                                <div class="hub-stat-val" id="hubWins">0</div>
-                                <div class="hub-stat-lbl">Wins</div>
+                <!-- Main Content Grid -->
+                <div class="career-content-grid">
+                    <!-- Top Left: Advance & Calendar -->
+                    <div class="career-panel panel-advance">
+                        <div class="panel-title">ADVANCE</div>
+                        <div class="panel-subtitle" id="advanceDate">JUL 2014</div>
+                        <div class="calendar-days">
+                            <div class="calendar-day">
+                                <div class="day-label">TUE</div>
+                                <div class="day-icon">📅</div>
                             </div>
-                            <div class="hub-stat-box">
-                                <div class="hub-stat-val" id="hubDraws">0</div>
-                                <div class="hub-stat-lbl">Draws</div>
+                            <div class="calendar-day">
+                                <div class="day-label">WED</div>
+                                <div class="day-icon">📅</div>
                             </div>
-                            <div class="hub-stat-box">
-                                <div class="hub-stat-val" id="hubLosses">0</div>
-                                <div class="hub-stat-lbl">Losses</div>
+                            <div class="calendar-day">
+                                <div class="day-label">THU</div>
+                                <div class="day-icon">📅</div>
                             </div>
-                            <div class="hub-stat-box">
-                                <div class="hub-stat-val" id="hubGF">0</div>
-                                <div class="hub-stat-lbl">Goals For</div>
+                            <div class="calendar-day">
+                                <div class="day-label">FRI</div>
+                                <div class="day-icon">📅</div>
                             </div>
-                            <div class="hub-stat-box">
-                                <div class="hub-stat-val" id="hubGA">0</div>
-                                <div class="hub-stat-lbl">Goals Against</div>
+                            <div class="calendar-day">
+                                <div class="day-label">SAT</div>
+                                <div class="day-icon">📅</div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Top Right: Featured News -->
+                    <div class="career-panel panel-featured">
+                        <div class="featured-headline" id="featuredHeadline">LATEST TRANSFER NEWS</div>
+                        <div class="featured-date" id="featuredDate">—</div>
+                        <div class="featured-image" id="featuredImage">
+                            <div style="width:100%;height:100%;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:3rem;">📰</div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Left: Global Transfer Network -->
+                    <div class="career-panel panel-transfers">
+                        <div class="panel-title">GLOBAL TRANSFER NETWORK</div>
+                        <div class="transfer-header">
+                            <span class="transfer-scout-name" id="scoutName">B. WOOD</span>
+                            <span class="transfer-new">↑ <strong id="newScoutCount">12</strong> New</span>
+                            <span class="transfer-updates">↓ <strong>0</strong> Updates</span>
+                        </div>
+                        <div class="transfer-player-list" id="transferPlayerList">
+                            <div style="text-align:center;color:rgba(255,255,255,0.4);padding:30px;">No scouting reports</div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Middle: News List -->
+                    <div class="career-panel panel-news">
+                        <div class="panel-title-news">NEWS</div>
+                        <div class="news-list" id="newsList">
+                            <div class="news-item">
+                                <div class="news-bar"></div>
+                                <div class="news-text">Season fixtures scheduled</div>
+                            </div>
+                            <div class="news-item">
+                                <div class="news-bar"></div>
+                                <div class="news-text">Transfer window begins</div>
+                            </div>
+                            <div class="news-item">
+                                <div class="news-bar"></div>
+                                <div class="news-text">Pre-season training starts</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Right: Fixtures -->
+                    <div class="career-panel panel-fixtures">
+                        <div class="panel-title-fixtures">FIXTURES</div>
+                        <div class="fixtures-subtitle">View all results and fixtures</div>
+                        <div class="fixtures-image">
+                            <div style="width:100%;height:100%;background:rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;font-size:3rem;">🏆</div>
+                        </div>
+                        <button class="advance-button" onclick="advanceToNextMatch()">▶ ADVANCE TO NEXT MATCH</button>
                     </div>
                 </div>
             </div>
@@ -254,7 +285,7 @@
         <!-- Squad Detail (sub-page) -->
         <div id="tab-squad-detail" class="tab-content">
             <div class="main-content">
-                <button class="back-btn" onclick="showTab('squad')">← Back to Career Hub</button>
+                <button class="back-btn" onclick="showTab('squad')">← Back to Central</button>
                 <div class="card">
                     <div class="card-title">Your Squad</div>
                     <div class="card-subtitle" id="squadSubtitle">Loading...</div>
