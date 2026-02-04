@@ -864,6 +864,7 @@ function simulateMatch() {
     // Tick transfer system (may generate new incoming offers)
     if (transferSystem) {
         transferSystem.tickOffers();
+        tickScouting();
         updateOfferBadge();
     }
     
@@ -988,149 +989,787 @@ function showTab(tabName) {
 
     // On-demand render for tabs that need fresh data each visit
     if (tabName === 'office'    && typeof renderOffice === 'function')     renderOffice();
-    if (tabName === 'transfers' && typeof updateOfferBadge === 'function') updateOfferBadge();
+    if (tabName === 'transfers' && typeof renderTransferHub === 'function') renderTransferHub();
 }
 
 /* ============================================================
-   TRANSFER & OFFICE UI FUNCTIONS
+/* ============================================================
+   TRANSFER & OFFICE UI FUNCTIONS — HUB + SEARCH OVERLAY + SCOUTING
    ============================================================ */
 
-/** Populate league & country dropdowns in search filters */
-function populateTransferFilters() {
-    const leagues  = [...new Set(gameState.allTeams.map(t => t.league_name).filter(Boolean))].sort();
-    const countries = [...new Set(gameState.allTeams.map(t => t.country).filter(Boolean))].sort();
+/* ── SCOUTING STATE (persists across the session) ── */
+// scoutQueue: { playerId: { status:'queued'|'scouting'|'done', startDay: number, daysNeeded: number } }
+const scoutQueue = {};
 
-    const leagueSel  = document.getElementById('filterLeague');
-    const countrySel = document.getElementById('filterCountry');
-    if (!leagueSel || !countrySel) return;
-
-    leagueSel.innerHTML  = '<option value="">All Leagues</option>' + leagues.map(l => `<option value="${l}">${l}</option>`).join('');
-    countrySel.innerHTML = '<option value="">All Countries</option>' + countries.map(c => `<option value="${c}">${c}</option>`).join('');
+function getScoutDaysNeeded(report) {
+    // Full intel = already known, partial = 2 days, continental = 4, distant = 6, unknown = 8
+    const map = { full:0, partial:2, continental:4, distant:6, unknown:8 };
+    return map[report?.tier] || 6;
 }
 
-/** Debounced search trigger */
-let searchTimeout = null;
-function debounceSearch() {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(runSearch, 320);
-}
+function isPlayerScouting(playerId) { return scoutQueue[playerId] && scoutQueue[playerId].status !== 'done'; }
+function isPlayerScoutDone(playerId) { return scoutQueue[playerId] && scoutQueue[playerId].status === 'done'; }
 
-/** Read filters and run search */
-function runSearch() {
-    if (!transferSystem) return;
-    const filters = {
-        query:       document.getElementById('searchQuery')?.value || '',
-        position:    document.getElementById('filterPosition')?.value || '',
-        league:      document.getElementById('filterLeague')?.value || '',
-        country:     document.getElementById('filterCountry')?.value || '',
-        minOvr:      parseInt(document.getElementById('filterMinOvr')?.value) || 0,
-        maxOvr:      parseInt(document.getElementById('filterMaxOvr')?.value) || 0,
-        maxPrice:    parseInt(document.getElementById('filterMaxPrice')?.value) || 0,
-        freeAgents:  document.getElementById('filterFreeAgents')?.checked || false
-    };
-
-    // Need at least something to search
-    if (!filters.query && !filters.position && !filters.league && !filters.country && !filters.freeAgents && !filters.minOvr) {
-        document.getElementById('resultsCount').textContent = 'Use filters or search above to find players';
-        document.getElementById('searchResults').innerHTML = '';
-        return;
-    }
-
-    const results = transferSystem.searchPlayers(filters);
-    document.getElementById('resultsCount').textContent = `${results.length} player${results.length !== 1 ? 's' : ''} found`;
-    renderSearchResults(results);
-}
-
-/** Render the scout cards in the search grid */
-function renderSearchResults(reports) {
-    const grid = document.getElementById('searchResults');
-    grid.innerHTML = '';
-
-    reports.forEach(r => {
-        const card = document.createElement('div');
-        card.className = 'scout-card';
-        card.onclick = () => openPlayerDetail(r);
-
-        // Overall display
-        const ovrDisplay = typeof r.overall === 'object' ? `${r.overall.min}-${r.overall.max}` : r.overall;
-
-        // ── Face image – always rendered. SVG silhouette sits behind; img covers it on load ──
-        let faceHtml;
-        if (r.face_url) {
-            faceHtml = `<div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#1a3a6a,#0d2240);display:flex;align-items:center;justify-content:center;position:relative;">
-                <svg width="24" height="28" viewBox="0 0 32 36" fill="none" style="position:relative;z-index:0;"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
-                <img src="${r.face_url}" alt="${r.short_name}" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:50%;z-index:1;" onerror="this.style.display='none';">
-            </div>`;
-        } else {
-            faceHtml = `<div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#1a3a6a,#0d2240);display:flex;align-items:center;justify-content:center;">
-                <svg width="24" height="28" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
-            </div>`;
+/** Call this after every match sim to tick scouting progress */
+function tickScouting() {
+    const currentDay = gameState.fixtures.filter(f=>f.played).length; // simple day counter
+    Object.keys(scoutQueue).forEach(id => {
+        const entry = scoutQueue[id];
+        if (entry.status === 'done') return;
+        if (entry.status === 'queued') { entry.status = 'scouting'; entry.startDay = currentDay; }
+        if (entry.status === 'scouting' && (currentDay - entry.startDay) >= entry.daysNeeded) {
+            entry.status = 'done';
         }
-
-        // Stats row
-        const statsHtml = r.stats_known
-            ? ['pace','shooting','passing','dribbling','defending','physic'].map(key => {
-                const labels = { pace:'PAC', shooting:'SHO', passing:'PAS', dribbling:'DRI', defending:'DEF', physic:'PHY' };
-                const val = r[key];
-                if (val === null) return `<div class="scout-stat"><div class="scout-stat-label">${labels[key]}</div><div class="scout-stat-value hidden">?</div></div>`;
-                if (typeof val === 'object') return `<div class="scout-stat"><div class="scout-stat-label">${labels[key]}</div><div class="scout-stat-value range">${val.min}-${val.max}</div></div>`;
-                return `<div class="scout-stat"><div class="scout-stat-label">${labels[key]}</div><div class="scout-stat-value">${val}</div></div>`;
-            }).join('')
-            : '<div style="grid-column:1/-1;text-align:center;font-size:0.72rem;color:rgba(255,255,255,0.28);font-style:italic;padding:4px 0;">Scouts have limited information</div>';
-
-        // Price
-        let priceHtml;
-        if (r.value_known && r.market_value !== null) {
-            const mv = typeof r.market_value === 'object' ? `${transferSystem.formatMoney(r.market_value.min)}-${transferSystem.formatMoney(r.market_value.max)}` : transferSystem.formatMoney(r.market_value);
-            priceHtml = `<div class="scout-price">€${mv}</div>`;
-        } else {
-            priceHtml = `<div class="scout-price unknown-price">Value unknown</div>`;
-        }
-
-        // Age display
-        const ageStr = r.age ? `Age ${r.age}` : '—';
-
-        card.innerHTML = `
-            <span class="intel-tier ${r.tier}">${r.tier}</span>
-            <div class="scout-card-top">
-                <div class="scout-card-face">${faceHtml}</div>
-                <div class="scout-card-right">
-                    <div class="scout-card-ovr">
-                        <div class="ovr-num">${ovrDisplay}</div>
-                        <div class="ovr-label">OVR</div>
-                    </div>
-                    <div class="scout-card-info">
-                        <div class="scout-card-name">${r.short_name}</div>
-                        <div class="scout-card-club">${r.club} · ${r.league}</div>
-                        <div class="scout-card-pos">${r.position} · ${ageStr}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="scout-card-stats">${statsHtml}</div>
-            <div class="scout-card-footer">
-                ${priceHtml}
-                <div class="scout-wage">${r.value_known && r.wage !== null ? 'Wage: €' + transferSystem.formatMoney(typeof r.wage === 'object' ? r.wage.min : r.wage) + '/wk' : 'Wage unknown'}</div>
-            </div>`;
-
-        grid.appendChild(card);
     });
 }
 
-/** Open the player detail modal with full scout report + bid form */
+/* ── SEARCH OVERLAY STATE ── */
+const soPositions  = ['Any','GK','CB','LB','RB','CDM','CM','CAM','LW','RW','ST','CF'];
+const soStatuses   = ['Any','Available','Free Agents'];
+let soIdx = { pos:0, nat:0, status:0, country:0, league:0, team:0 };
+let soNats=[], soCountries=[], soLeagues=[], soTeams=[];
+let soSelectedPlayer = null;
+
+// Current search results + selected index for the 50/50 preview
+let currentSearchResults = [];
+let selectedResultIdx = 0;
+
+/** Called after team selected – seed dropdown arrays + render hub */
+function populateTransferFilters() {
+    soLeagues   = ['Any', ...new Set(gameState.allTeams.map(t=>t.league_name).filter(Boolean)).values()].sort((a,b)=> a==='Any'?-1: b==='Any'?1: a.localeCompare(b));
+    soCountries = ['Any', ...new Set(gameState.allTeams.map(t=>t.country).filter(Boolean)).values()].sort((a,b)=> a==='Any'?-1: b==='Any'?1: a.localeCompare(b));
+    soNats      = ['Any', ...new Set(gameState.allPlayers.map(p=>p.basic_info?.nationality).filter(Boolean)).values()].sort((a,b)=> a==='Any'?-1: b==='Any'?1: a.localeCompare(b));
+    soTeams     = ['Any', ...new Set(gameState.allPlayers.map(p=>p.club?.name).filter(Boolean)).values()].sort((a,b)=> a==='Any'?-1: b==='Any'?1: a.localeCompare(b));
+    renderTransferHub();
+}
+
+/* ── OPEN / CLOSE SEARCH OVERLAY ── */
+function openSearchOverlay() {
+    document.getElementById('searchOverlay').classList.remove('hidden');
+    soResetFilters();
+    soPopulateList();
+}
+function closeSearchOverlay() {
+    document.getElementById('searchOverlay').classList.add('hidden');
+}
+
+/* ── CYCLE HELPERS ── */
+function cycleArr(arr, idxKey, dir) {
+    soIdx[idxKey] = (soIdx[idxKey] + dir + arr.length) % arr.length;
+}
+function cyclePosition(d)   { cycleArr(soPositions,  'pos',     d); document.getElementById('soPosVal').textContent     = soPositions[soIdx.pos]; updatePosRole(); soPopulateList(); }
+function cycleNationality(d){ cycleArr(soNats,       'nat',     d); document.getElementById('soNatVal').textContent     = soNats[soIdx.nat]; soPopulateList(); }
+function cycleStatus(d)     { cycleArr(soStatuses,   'status',  d); document.getElementById('soStatusVal').textContent  = soStatuses[soIdx.status]; soPopulateList(); }
+function cycleCountry(d)    { cycleArr(soCountries,  'country', d); document.getElementById('soCountryVal').textContent = soCountries[soIdx.country]; soPopulateList(); }
+function cycleLeague(d)     { cycleArr(soLeagues,    'league',  d); document.getElementById('soLeagueVal').textContent  = soLeagues[soIdx.league]; soPopulateList(); }
+function cycleTeam(d)       { cycleArr(soTeams,      'team',    d); document.getElementById('soTeamVal').textContent    = soTeams[soIdx.team]; soPopulateList(); }
+
+function updatePosRole() {
+    const roleMap = { GK:'Goalkeeper', CB:'Centre-Back', LB:'Left-Back', RB:'Right-Back', CDM:'Defensive Mid', CM:'Central Mid', CAM:'Attacking Mid', LW:'Left Winger', RW:'Right Winger', ST:'Striker', CF:'Centre Forward' };
+    document.getElementById('soPosRole').textContent = roleMap[soPositions[soIdx.pos]] || 'Promising';
+}
+
+/* ── SEARCH OVERLAY: live search with split view ── */
+let soSortKey = 'potential';
+let soSelectedPlayerIdx = null;
+
+function soSetSort(key) {
+    soSortKey = key;
+    document.querySelectorAll('.so-list-sort span').forEach(el => {
+        el.classList.toggle('active', el.textContent.toLowerCase() === key);
+    });
+    soPopulateList();
+}
+
+function soRunSearch() {
+    const query = document.getElementById('soNameInput').value.trim().toLowerCase();
+    const container = document.getElementById('soNameResults');
+
+    // Name autocomplete dropdown
+    if (query.length < 1) {
+        container.innerHTML = '';
+    } else {
+        const ageMin = parseInt(document.getElementById('soAgeMin').value) || 16;
+        const ageMax = parseInt(document.getElementById('soAgeMax').value) || 40;
+        const pos    = soPositions[soIdx.pos];
+        const currentYear = gameState.currentDate?.getFullYear() || 2025;
+
+        let matches = gameState.allPlayers.filter(p => {
+            const name = (p.basic_info?.short_name || '').toLowerCase();
+            if (!name.includes(query)) return false;
+            const age  = p.basic_info?.age || 25;
+            if (age < ageMin || age > ageMax) return false;
+            if (pos !== 'Any' && !(p.player_positions||'').includes(pos)) return false;
+            if (gameState.squad.find(s => s.player_id === p.player_id)) return false;
+            return true;
+        }).slice(0, 10);
+
+        container.innerHTML = matches.map(p => {
+            const faceUrl = p.media?.face_url || '';
+            const faceImg = faceUrl ? `<img src="${faceUrl}" onerror="this.style.display='none';">` : '';
+            return `<div class="so-name-row" onclick="soPickPlayer('${p.player_id}')">
+                <div class="so-name-row-face">
+                    <svg width="12" height="14" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
+                    ${faceImg}
+                </div>
+                <div class="so-name-row-info">
+                    <div class="so-name-row-name">${p.basic_info?.short_name||'?'}</div>
+                    <div class="so-name-row-club">${p.club?.name||'Free'} · ${p.club?.league||''}</div>
+                </div>
+                <div class="so-name-row-age">${p.basic_info?.age||'?'}</div>
+            </div>`;
+        }).join('');
+    }
+
+    // Also update the list
+    soPopulateList();
+}
+
+function soPopulateList() {
+    const results = soGetCurrentResults();
+
+    // Update count
+    document.getElementById('soListCount').textContent = results.length;
+
+    // Render list
+    const listEl = document.getElementById('soListScroll');
+    if (results.length === 0) {
+        listEl.innerHTML = '<div class="so-list-empty">No players match your filters.<br>Try broadening your search criteria.</div>';
+        soRenderPreview(null);
+        return;
+    }
+
+    listEl.innerHTML = results.map((r, idx) => {
+        const faceUrl = r.face_url || '';
+        const faceImg = faceUrl ? `<img src="${faceUrl}" onerror="this.style.display='none';">` : '';
+        const ovrDisplay = typeof r.overall === 'object' ? `${r.overall.min}-${r.overall.max}` : (r.overall || '?');
+        const scoutMark = isPlayerScoutDone(r.player_id) ? ' ✓' : '';
+        const activeClass = (soSelectedPlayerIdx === idx) ? ' active' : '';
+        return `<div class="so-list-card${activeClass}" onclick="soSelectPlayer(${idx})">
+            <div class="so-card-face">
+                <svg width="18" height="20" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
+                ${faceImg}
+            </div>
+            <div class="so-card-info">
+                <div class="so-card-name">${r.short_name}${scoutMark}</div>
+                <div class="so-card-club">${r.club} <span class="pos-tag">${r.position}</span></div>
+            </div>
+            <div class="so-card-right">
+                <div class="so-card-ovr">${ovrDisplay}</div>
+                <div class="so-card-age">${r.age || '?'}</div>
+            </div>
+        </div>`;
+    }).join('');
+
+    // Auto-select first if none selected
+    if (soSelectedPlayerIdx === null && results.length > 0) {
+        soSelectedPlayerIdx = 0;
+        soRenderPreview(results[0]);
+    } else if (soSelectedPlayerIdx !== null && results[soSelectedPlayerIdx]) {
+        soRenderPreview(results[soSelectedPlayerIdx]);
+    } else {
+        soRenderPreview(null);
+    }
+}
+
+function soSelectPlayer(idx) {
+    soSelectedPlayerIdx = idx;
+    const results = soGetCurrentResults();
+    if (results[idx]) {
+        soRenderPreview(results[idx]);
+        // Update active class on cards
+        document.querySelectorAll('.so-list-card').forEach((el, i) => {
+            el.classList.toggle('active', i === idx);
+        });
+    }
+}
+
+function soRenderPreview(report) {
+    const previewEl = document.getElementById('soPreviewWrap');
+    if (!report) {
+        previewEl.innerHTML = '<div class="so-preview-empty">Select a player to view details</div>';
+        return;
+    }
+
+    const faceUrl = report.face_url || '';
+    const ovrDisplay = typeof report.overall === 'object' ? `${report.overall.min}-${report.overall.max}` : (report.overall || '?');
+    const potDisplay = typeof report.potential === 'object' ? `${report.potential.min}-${report.potential.max}` : (report.potential || '?');
+
+    const scouted = isPlayerScoutDone(report.player_id);
+    const scouting = isPlayerScouting(report.player_id);
+
+    // Stats
+    const statKeys = ['pace','shooting','passing','dribbling','defending','physic'];
+    const statLabels = { pace:'Pace', shooting:'Shooting', passing:'Passing', dribbling:'Dribbling', defending:'Defending', physic:'Physical' };
+    let statsHtml = statKeys.map(key => {
+        const val = report[key];
+        let displayVal, cls = '';
+        if (val === null || val === undefined) {
+            displayVal = '?'; cls = 'unknown';
+        } else if (typeof val === 'object') {
+            displayVal = `${val.min}-${val.max}`; cls = 'range';
+        } else {
+            displayVal = val;
+        }
+        return `<div class="so-prev-stat">
+            <div class="so-prev-stat-label">${statLabels[key]}</div>
+            <div class="so-prev-stat-val ${cls}">${displayVal}</div>
+        </div>`;
+    }).join('');
+
+    // Scout status
+    let scoutStatus = '';
+    if (!scouted && !scouting) {
+        scoutStatus = '<div class="so-prev-scout-status not">⚠ Unknown — Scout for full details</div>';
+    } else if (scouting) {
+        scoutStatus = '<div class="so-prev-scout-status scouting">⏳ Scouting in progress...</div>';
+    } else {
+        scoutStatus = '<div class="so-prev-scout-status done">✓ Full scout report available</div>';
+    }
+
+    // Finances
+    const fmtVal = (v) => {
+        if (v === null || v === undefined) return '?';
+        if (typeof v === 'object') return `€${transferSystem.formatMoney(v.min)}-${transferSystem.formatMoney(v.max)}`;
+        return `€${transferSystem.formatMoney(v)}`;
+    };
+    const valueDisplay = report.value_known ? fmtVal(report.market_value) : '?';
+    const wageDisplay = report.value_known && report.wage !== null ? fmtVal(report.wage)+'/wk' : '?';
+
+    // Action button
+    let actionBtn = '';
+    if (!scouted && !scouting) {
+        actionBtn = `<button class="so-prev-action" onclick="soStartScouting('${report.player_id}', ${getScoutDaysNeeded(report)})">📋 Ask Scout to Scout ${report.short_name}</button>`;
+    } else if (scouting) {
+        actionBtn = `<button class="so-prev-action disabled">⏳ Scouting in progress...</button>`;
+    } else {
+        actionBtn = `<button class="so-prev-action" onclick="soOpenBidModal('${report.player_id}')">💰 Place a Bid</button>`;
+    }
+
+    previewEl.innerHTML = `<div class="so-preview-content">
+        <div class="so-prev-header">
+            <div class="so-prev-face-wrap">
+                <svg width="44" height="50" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.2)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.12)"/></svg>
+                ${faceUrl ? `<img src="${faceUrl}" onerror="this.style.display='none';">` : ''}
+            </div>
+            <div class="so-prev-info">
+                <div class="so-prev-name">${report.long_name || report.short_name}</div>
+                <div class="so-prev-meta">${report.age || '?'} · ${report.position} · ${report.preferred_foot || '—'}</div>
+                <div class="so-prev-club">${report.club}</div>
+                <span class="intel-tier ${report.tier}">${report.tier}</span>
+            </div>
+            <div class="so-prev-ovr-block">
+                <div class="so-prev-ovr-num">${ovrDisplay}</div>
+                <div class="so-prev-ovr-pot">POT ${potDisplay}</div>
+            </div>
+        </div>
+        ${scoutStatus}
+        <div class="so-prev-stats">${statsHtml}</div>
+        <div class="so-prev-finances">
+            <div class="so-prev-fin">
+                <div class="so-prev-fin-label">Value</div>
+                <div class="so-prev-fin-value ${report.value_known?'':'unknown'}">${valueDisplay}</div>
+            </div>
+            <div class="so-prev-fin">
+                <div class="so-prev-fin-label">Wage</div>
+                <div class="so-prev-fin-value ${report.value_known?'':'unknown'}">${wageDisplay}</div>
+            </div>
+            <div class="so-prev-fin">
+                <div class="so-prev-fin-label">Contract</div>
+                <div class="so-prev-fin-value">${report.contract_until || '?'}</div>
+            </div>
+            ${report.release_clause ? `<div class="so-prev-fin">
+                <div class="so-prev-fin-label">Release</div>
+                <div class="so-prev-fin-value">€${transferSystem.formatMoney(report.release_clause)}</div>
+            </div>` : ''}
+        </div>
+        ${report.traits ? `<div style="font-size:0.68rem;color:#00d4ff;padding:6px 10px;background:rgba(0,212,255,0.08);border-radius:5px;text-align:center;">⚡ ${report.traits}</div>` : ''}
+        ${actionBtn}
+    </div>`;
+}
+
+function soStartScouting(playerId, daysNeeded) {
+    scoutQueue[playerId] = { status:'queued', startDay: gameState.fixtures.filter(f=>f.played).length, daysNeeded: daysNeeded };
+    soPopulateList(); // Refresh to show scouting status
+}
+
+function soOpenBidModal(playerId) {
+    // Find the report and open the full detail modal
+    const results = soGetCurrentResults();
+    const report = results.find(r => r.player_id === playerId);
+    if (report) {
+        currentSearchResults = results;
+        selectedResultIdx = results.indexOf(report);
+        openPlayerDetail(report);
+    }
+}
+
+function soPickPlayer(playerId) {
+    soSelectedPlayer = playerId;
+    document.getElementById('soNameResults').innerHTML = '';
+    soPopulateList();
+}
+
+function soGetCurrentResults() {
+    // Rebuild the current filtered results (same logic as soPopulateResults but returns array)
+    const query   = document.getElementById('soNameInput').value.trim();
+    const pos     = soPositions[soIdx.pos];
+    const nat     = soNats[soIdx.nat];
+    const league  = soLeagues[soIdx.league];
+    const country = soCountries[soIdx.country];
+    const status  = soStatuses[soIdx.status];
+    const team    = soTeams[soIdx.team];
+    const ageMin  = parseInt(document.getElementById('soAgeMin').value) || 16;
+    const ageMax  = parseInt(document.getElementById('soAgeMax').value) || 40;
+
+    const filters = {
+        query:      soSelectedPlayer ? '__id__' + soSelectedPlayer : query,
+        position:   pos === 'Any' ? '' : pos,
+        league:     league === 'Any' ? '' : league,
+        country:    country === 'Any' ? '' : country,
+        nationality: nat === 'Any' ? '' : nat,
+        team:       team === 'Any' ? '' : team,
+        status, ageMin, ageMax,
+        minOvr: 0, maxOvr: 0, maxPrice: 0,
+        freeAgents: status === 'Free Agents'
+    };
+    if (!transferSystem) return [];
+    const hasFilter = filters.query || filters.position || filters.league || filters.country || filters.nationality || filters.team || filters.freeAgents || ageMin > 16 || ageMax < 35;
+    let results;
+    if (hasFilter) {
+        results = transferSystem.searchPlayers(filters);
+    } else {
+        results = transferSystem.searchPlayers({ position:'', league:'', country:'', query:'', minOvr:55, maxOvr:99, maxPrice:0, freeAgents:false });
+    }
+    results.sort((a, b) => {
+        const getVal = (r, key) => {
+            if (key === 'potential') { const v = r.potential; return typeof v === 'object' ? (v.min+v.max)/2 : (v||0); }
+            if (key === 'overall')   { const v = r.overall;   return typeof v === 'object' ? (v.min+v.max)/2 : (v||0); }
+            if (key === 'value')     { const v = r.market_value; if (!r.value_known || v == null) return -1; return typeof v === 'object' ? (v.min+v.max)/2 : v; }
+            if (key === 'age')       { return -(r.age||99); }
+            return 0;
+        };
+        return getVal(b, soSortKey) - getVal(a, soSortKey);
+    });
+    return results.slice(0, 80);
+}
+
+/* ── RESET / SUBMIT ── */
+function soResetFilters() {
+    soIdx = { pos:0, nat:0, status:0, country:0, league:0, team:0 };
+    soSelectedPlayer = null;
+    soSelectedPlayerIdx = null;
+    document.getElementById('soNameInput').value = '';
+    document.getElementById('soNameResults').innerHTML = '';
+    document.getElementById('soPosVal').textContent     = 'Any';
+    document.getElementById('soPosRole').textContent    = 'Promising';
+    document.getElementById('soNatVal').textContent     = 'Any';
+    document.getElementById('soStatusVal').textContent  = 'Any';
+    document.getElementById('soCountryVal').textContent = 'Any';
+    document.getElementById('soLeagueVal').textContent  = 'Any';
+    document.getElementById('soTeamVal').textContent    = 'Any';
+    document.getElementById('soAgeMin').value = '16';
+    document.getElementById('soAgeMax').value = '35';
+    soPopulateList();
+}
+
+function soSubmitSearch() {
+    // Push current results to main tab player list and close overlay
+    currentSearchResults = soGetCurrentResults();
+    selectedResultIdx = 0;
+    closeSearchOverlay();
+    renderPlayerList(currentSearchResults);
+}
+
+/* ── RENDER PLAYER LIST: 50/50 split layout ── */
+function renderPlayerList(reports) {
+    const container = document.getElementById('tpPlayerList');
+    const titleEl   = document.getElementById('tpTitle');
+    const subEl     = document.getElementById('tpPositionLabel');
+
+    const pos = soPositions[soIdx.pos];
+    titleEl.textContent = pos === 'Any' ? 'SEARCH RESULTS' : pos + ' PLAYERS';
+    subEl.textContent = reports.length + ' found';
+
+    // Left column: compact boxes
+    let leftHtml = reports.map((r, i) => {
+        const faceUrl = r.face_url || '';
+        const faceImg = faceUrl ? `<img src="${faceUrl}" onerror="this.style.display='none';">` : '';
+        const ovrDisplay = typeof r.overall === 'object' ? `${r.overall.min}-${r.overall.max}` : r.overall;
+        const activeClass = (i === selectedResultIdx) ? ' active' : '';
+        const scoutStatus = isPlayerScoutDone(r.player_id) ? ' scouted' : (isPlayerScouting(r.player_id) ? ' scouting' : '');
+        return `<div class="tp-player-row${activeClass}${scoutStatus}" onclick="selectPlayerResult(${i})" onmouseenter="hoverPlayerResult(${i})">
+            <div class="tp-player-face">
+                <svg width="14" height="16" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
+                ${faceImg}
+            </div>
+            <div class="tp-player-info">
+                <div class="tp-player-name">${r.short_name}</div>
+                <div class="tp-player-club">${r.club} · ${r.position}</div>
+            </div>
+            <div class="tp-player-right">
+                <div class="tp-player-ovr">${ovrDisplay}</div>
+                <div class="tp-player-age">${r.age || '?'}</div>
+            </div>
+        </div>`;
+    }).join('');
+
+    // Right column: preview of selected player
+    const rightHtml = renderPlayerPreview(reports[selectedResultIdx] || null);
+
+    container.innerHTML = `<div class="tp-split">
+        <div class="tp-split-left">${leftHtml}</div>
+        <div class="tp-split-right">${rightHtml}</div>
+    </div>`;
+}
+
+function hoverPlayerResult(idx) {
+    if (idx === selectedResultIdx) return;
+    // Update active highlight on left
+    document.querySelectorAll('.tp-player-row').forEach((el,i) => el.classList.toggle('active', i===idx));
+    // Update right preview
+    const right = document.querySelector('.tp-split-right');
+    if (right) right.innerHTML = renderPlayerPreview(currentSearchResults[idx] || null);
+}
+
+function selectPlayerResult(idx) {
+    selectedResultIdx = idx;
+    const report = currentSearchResults[idx];
+    if (!report) return;
+    // Open the detail overlay
+    openScoutOverlay(report);
+}
+
+/* ── RENDER RIGHT-SIDE PLAYER PREVIEW ── */
+function renderPlayerPreview(r) {
+    if (!r) return `<div class="tp-preview-empty">Select a player</div>`;
+
+    const faceUrl = r.face_url || '';
+    const ovrDisplay = typeof r.overall === 'object' ? `${r.overall.min}-${r.overall.max}` : r.overall;
+    const potDisplay = typeof r.potential === 'object' ? `${r.potential.min}-${r.potential.max}` : (r.potential || '?');
+
+    // Build stat rows — show known or "?"
+    const statKeys = ['pace','shooting','passing','dribbling','defending','physic'];
+    const statLabels = { pace:'Pace', shooting:'Shooting', passing:'Passing', dribbling:'Dribbling', defending:'Defending', physic:'Physical' };
+    let statsHtml = statKeys.map(key => {
+        const val = r[key];
+        let displayVal, barW, cls = '';
+        if (val === null || val === undefined) {
+            displayVal = '?'; barW = 0; cls = 'unknown';
+        } else if (typeof val === 'object') {
+            displayVal = `${val.min}-${val.max}`; barW = ((val.min+val.max)/2); cls = 'range';
+        } else {
+            displayVal = val; barW = val;
+        }
+        return `<div class="tp-prev-stat">
+            <div class="tp-prev-stat-label">${statLabels[key]}</div>
+            <div class="tp-prev-stat-bar"><div class="tp-prev-stat-fill ${cls}" style="width:${barW}%;"></div></div>
+            <div class="tp-prev-stat-val ${cls}">${displayVal}</div>
+        </div>`;
+    }).join('');
+
+    // Scout status indicators
+    const scouted = isPlayerScoutDone(r.player_id);
+    const scouting = isPlayerScouting(r.player_id);
+    let scoutInfo = '';
+    if (scouted) {
+        scoutInfo = `<div class="tp-prev-scout-status done">✓ Scout Report Complete</div>`;
+    } else if (scouting) {
+        scoutInfo = `<div class="tp-prev-scout-status scouting">⏳ Scouting in progress...</div>`;
+    } else {
+        scoutInfo = `<div class="tp-prev-scout-status not">◯ Not Scouting</div>`;
+    }
+
+    // Traits / notes
+    const traitsHtml = r.traits ? `<div class="tp-prev-trait">⚡ ${r.traits}</div>` : '';
+
+    return `<div class="tp-preview">
+        <div class="tp-preview-face">
+            <div class="tp-preview-face-circle">
+                <svg width="48" height="56" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.2)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.12)"/></svg>
+                ${faceUrl ? `<img src="${faceUrl}" alt="${r.short_name}" onerror="this.style.display='none';">` : ''}
+            </div>
+            <div class="tp-preview-name">${r.long_name || r.short_name}</div>
+            <div class="tp-preview-club">${r.club}</div>
+            <div class="tp-preview-meta">
+                <span>${r.age || '?'} · ${r.position}</span>
+                <span class="intel-tier ${r.tier}">${r.tier}</span>
+            </div>
+            ${scoutInfo}
+            ${traitsHtml}
+        </div>
+        <div class="tp-preview-stats">
+            <div class="tp-preview-ovr-row">
+                <div class="tp-prev-ovr-box"><div class="tp-prev-ovr-num">${ovrDisplay}</div><div class="tp-prev-ovr-lbl">OVR</div></div>
+                <div class="tp-prev-ovr-box pot"><div class="tp-prev-ovr-num">${potDisplay}</div><div class="tp-prev-ovr-lbl">POT</div></div>
+            </div>
+            ${statsHtml}
+            <div class="tp-preview-finances">
+                <div class="tp-prev-fin"><div class="tp-prev-fin-lbl">Value</div><div class="tp-prev-fin-val ${r.value_known?'':'unknown'}">${r.value_known ? (typeof r.market_value==='object' ? '€'+transferSystem.formatMoney(r.market_value.min)+'-'+transferSystem.formatMoney(r.market_value.max) : '€'+transferSystem.formatMoney(r.market_value)) : '?'}</div></div>
+                <div class="tp-prev-fin"><div class="tp-prev-fin-lbl">Wage</div><div class="tp-prev-fin-val ${r.value_known?'':'unknown'}">${r.value_known && r.wage !== null ? '€'+(typeof r.wage==='object'?transferSystem.formatMoney(r.wage.min):transferSystem.formatMoney(r.wage))+'/wk' : '?'}</div></div>
+                <div class="tp-prev-fin"><div class="tp-prev-fin-lbl">Contract</div><div class="tp-prev-fin-val">${r.contract_until || '?'}</div></div>
+            </div>
+        </div>
+    </div>`;
+}
+
+/* ── SCOUT OVERLAY (click on player) ── */
+function openScoutOverlay(report) {
+    const overlay = document.getElementById('scoutOverlay');
+    const content = document.getElementById('scoutOverlayContent');
+    if (!overlay || !content) return;
+
+    const faceUrl = report.face_url || '';
+    const ovrDisplay = typeof report.overall === 'object' ? `${report.overall.min}-${report.overall.max}` : report.overall;
+    const potDisplay = typeof report.potential === 'object' ? `${report.potential.min}-${report.potential.max}` : (report.potential || '?');
+
+    const scouted = isPlayerScoutDone(report.player_id);
+    const scouting = isPlayerScouting(report.player_id);
+
+    // Left side: big face + basic info + scout status/actions
+    const statKeys = ['pace','shooting','passing','dribbling','defending','physic'];
+    const statLabels = { pace:'Pace', shooting:'Shooting', passing:'Passing', dribbling:'Dribbling', defending:'Defending', physic:'Physical' };
+
+    let leftStatsHtml = `<div class="sco-stats-grid">`;
+    ['overall','value','wage','form'].forEach(key => {
+        let label, val;
+        if (key === 'overall')  { label = 'OVERALL'; val = report.value_known ? ovrDisplay : '?'; }
+        if (key === 'value')    { label = 'VALUE';   val = report.value_known && report.market_value ? (typeof report.market_value==='object'?'€'+transferSystem.formatMoney(report.market_value.min)+'-'+transferSystem.formatMoney(report.market_value.max):'€'+transferSystem.formatMoney(report.market_value)) : '?'; }
+        if (key === 'wage')     { label = 'WAGE';    val = report.value_known && report.wage !== null ? '€'+(typeof report.wage==='object'?transferSystem.formatMoney(report.wage.min):transferSystem.formatMoney(report.wage))+'/wk' : '?'; }
+        if (key === 'form')     { label = 'FORM';    val = 'Okay'; }
+        const isUnknown = (val === '?');
+        leftStatsHtml += `<div class="sco-stat-row">
+            <div class="sco-stat-label">${label}</div>
+            <div class="sco-stat-val ${isUnknown?'unknown':''}">${val}</div>
+        </div>`;
+    });
+    leftStatsHtml += `</div>`;
+
+    // Scout indicators
+    let scoutIndicators = '';
+    if (!scouted && !scouting) {
+        scoutIndicators = `<div class="sco-indicator unknown">⚠ Unknown</div>
+            <div class="sco-indicator warning">⚠ Match Fit</div>
+            <div class="sco-indicator info">💡 Showing Great Potential</div>`;
+    } else if (scouting) {
+        scoutIndicators = `<div class="sco-indicator info">⏳ Scout is gathering information...</div>`;
+    } else {
+        scoutIndicators = `<div class="sco-indicator success">✓ Full scout report available</div>
+            <div class="sco-indicator success">✓ Match Fit confirmed</div>`;
+    }
+
+    // Scout actions
+    let scoutActions = '';
+    if (!scouted && !scouting) {
+        scoutActions = `<div class="sco-actions">
+            <div class="sco-action-btn primary" onclick="startScouting('${report.player_id}', ${getScoutDaysNeeded(report)})">📋 Ask Scout to Scout ${report.short_name}</div>
+            <div class="sco-action-btn" onclick="shortlistPlayer('${report.player_id}')">📌 Shortlist in Transfer Hub</div>
+            <div class="sco-action-btn" onclick="shortlistAndView('${report.player_id}')">📌 Shortlist & View in Transfer Hub</div>
+        </div>`;
+    } else if (scouting) {
+        scoutActions = `<div class="sco-actions">
+            <div class="sco-action-btn disabled">⏳ Scouting in progress... (complete after next match)</div>
+            <div class="sco-action-btn" onclick="shortlistPlayer('${report.player_id}')">📌 Shortlist in Transfer Hub</div>
+        </div>`;
+    } else {
+        scoutActions = `<div class="sco-actions">
+            <div class="sco-action-btn primary" onclick="openBidModal('${report.player_id}')">💰 Place a Bid</div>
+            <div class="sco-action-btn" onclick="shortlistPlayer('${report.player_id}')">📌 Shortlist in Transfer Hub</div>
+        </div>`;
+    }
+
+    // Right side: another face + summary stats
+    let rightStatsHtml = statKeys.map(key => {
+        const val = report[key];
+        let displayVal;
+        if (val === null || val === undefined) displayVal = '?';
+        else if (typeof val === 'object') displayVal = `${val.min}-${val.max}`;
+        else displayVal = val;
+        return `<div class="sco-right-stat"><span class="sco-right-stat-label">${statLabels[key]}</span><span class="sco-right-stat-val">${displayVal}</span></div>`;
+    }).join('');
+
+    // Scouting report label
+    let reportLabel = 'Preliminary Report';
+    if (scouted) reportLabel = 'Full Report';
+    else if (scouting) reportLabel = 'Scouting...';
+
+    content.innerHTML = `
+        <button class="sco-close" onclick="closeScoutOverlay()">✕</button>
+        <div class="sco-split">
+            <!-- LEFT: big face + info + actions -->
+            <div class="sco-left">
+                <div class="sco-left-header">
+                    <div class="sco-left-face">
+                        <svg width="56" height="64" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.2)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.12)"/></svg>
+                        ${faceUrl ? `<img src="${faceUrl}" onerror="this.style.display='none';">` : ''}
+                    </div>
+                    <div class="sco-left-info">
+                        <div class="sco-left-name">${report.long_name || report.short_name}</div>
+                        <div class="sco-left-age">Age ${report.age || '?'} · ${report.position}</div>
+                        <div class="sco-left-meta">
+                            <span>Height: ${report.height || '—'}</span>
+                            <span>Foot: ${report.preferred_foot || '—'}</span>
+                        </div>
+                    </div>
+                    <div class="sco-left-club">
+                        <div class="sco-left-club-name">${report.club}</div>
+                        <span class="intel-tier ${report.tier}">${report.tier}</span>
+                    </div>
+                </div>
+                ${leftStatsHtml}
+                <div class="sco-indicators">${scoutIndicators}</div>
+                ${scoutActions}
+            </div>
+            <!-- RIGHT: face again + summary / report -->
+            <div class="sco-right">
+                <div class="sco-right-header">
+                    <div class="sco-right-face">
+                        <svg width="40" height="46" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.2)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.12)"/></svg>
+                        ${faceUrl ? `<img src="${faceUrl}" onerror="this.style.display='none';">` : ''}
+                    </div>
+                    <div class="sco-right-info">
+                        <div class="sco-right-name">${report.short_name}</div>
+                        <div class="sco-right-club">${report.club}</div>
+                        <div class="sco-right-pos">${report.age || '?'} · ${report.position} · ${report.preferred_foot || '—'}</div>
+                    </div>
+                </div>
+                <div class="sco-right-report-label ${scouted?'done':(scouting?'scouting':'')}">${scouting ? '⏳' : (scouted ? '✓' : '◯')} ${reportLabel}</div>
+                <div class="sco-right-stats">${rightStatsHtml}</div>
+                ${report.traits ? `<div class="sco-right-trait">⚡ ${report.traits}</div>` : ''}
+            </div>
+        </div>`;
+
+    overlay.classList.remove('hidden');
+}
+
+function closeScoutOverlay() {
+    document.getElementById('scoutOverlay').classList.add('hidden');
+}
+
+function startScouting(playerId, daysNeeded) {
+    scoutQueue[playerId] = { status:'queued', startDay: gameState.fixtures.filter(f=>f.played).length, daysNeeded: daysNeeded };
+    // Re-render to show updated status
+    const report = currentSearchResults.find(r => r.player_id === playerId);
+    if (report) openScoutOverlay(report);
+    // Also refresh the list
+    renderPlayerList(currentSearchResults);
+}
+
+function shortlistPlayer(playerId) {
+    // Visual feedback only for now
+    closeScoutOverlay();
+}
+
+function shortlistAndView(playerId) {
+    closeScoutOverlay();
+}
+
+function openBidModal(playerId) {
+    // Close scout overlay, open the full bid modal
+    closeScoutOverlay();
+    const report = currentSearchResults.find(r => r.player_id === playerId);
+    if (report) openPlayerDetail(report);
+}
+
+/* ── RENDER TRANSFER HUB (called on tab open) ── */
+function renderTransferHub() {
+    if (!transferSystem) return;
+
+    const budgetEl = document.getElementById('thubBudget');
+    if (budgetEl) budgetEl.textContent = '€' + transferSystem.formatMoney(transferSystem.transferBudget);
+
+    updateOfferBadge();
+    renderNetworkOffers();
+    renderHistoryPanel();
+
+    // Default player list: top prospects
+    const defaults = transferSystem.searchPlayers({ position:'', league:'', country:'', query:'', minOvr:60, maxOvr:99, maxPrice:0, freeAgents:false });
+    defaults.sort((a,b) => {
+        const potA = typeof a.potential === 'object' ? (a.potential.min+a.potential.max)/2 : (a.potential||0);
+        const potB = typeof b.potential === 'object' ? (b.potential.min+b.potential.max)/2 : (b.potential||0);
+        return potB - potA;
+    });
+    currentSearchResults = defaults.slice(0, 50);
+    selectedResultIdx = 0;
+    renderPlayerList(currentSearchResults);
+}
+
+/* ── GLOBAL TRANSFER NETWORK ── */
+function renderNetworkOffers() {
+    const container = document.getElementById('tnetOffers');
+    if (!container || !transferSystem) return;
+    const pending = transferSystem.getPendingOffers();
+    if (pending.length === 0) {
+        container.innerHTML = '<div class="tnet-empty">No incoming offers at this time.<br><span style="font-size:0.65rem;opacity:0.6;">Offers arrive as the season progresses.</span></div>';
+        return;
+    }
+    container.innerHTML = pending.map(offer => `
+        <div class="tnet-offer-row">
+            <div class="tnet-offer-info">
+                <div class="tnet-offer-player">${offer.playerName}</div>
+                <div class="tnet-offer-detail">OVR ${offer.playerOvr} · Your squad</div>
+            </div>
+            <div class="tnet-offer-right">
+                <div class="tnet-offer-amount">€${transferSystem.formatMoney(offer.amount)}</div>
+                <div class="tnet-offer-from">from ${offer.club}</div>
+            </div>
+            <div class="tnet-offer-btns">
+                <button class="tnet-btn accept" onclick="acceptIncomingOffer(${offer.id})">Accept</button>
+                <button class="tnet-btn reject" onclick="rejectIncomingOffer(${offer.id})">Reject</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function acceptIncomingOffer(offerId) {
+    const result = transferSystem.acceptOffer(offerId);
+    if (result.success) { renderSquad(); renderTransferHub(); }
+}
+function rejectIncomingOffer(offerId) {
+    transferSystem.rejectOffer(offerId);
+    renderTransferHub();
+}
+
+/* ── TRANSFER HISTORY ── */
+function renderHistoryPanel() {
+    const container = document.getElementById('thistContent');
+    if (!container || !transferSystem) return;
+    const history = transferSystem.transferHistory;
+    if (history.length === 0) {
+        container.innerHTML = '<div class="thist-empty">No transfers completed yet this window.</div>';
+        return;
+    }
+    container.innerHTML = history.map(deal => `
+        <div class="thist-row">
+            <div class="thist-type ${deal.type.toLowerCase()}">${deal.type}</div>
+            <div class="thist-info">
+                <div class="thist-name">${deal.player}</div>
+                <div class="thist-detail">${deal.type === 'IN' ? 'from ' + deal.from : 'to ' + deal.to} · ${deal.date?.toLocaleDateString('en-US',{month:'short',day:'numeric'})||''}</div>
+            </div>
+            <div class="thist-fee">€${transferSystem.formatMoney(deal.fee)}</div>
+        </div>
+    `).join('');
+}
+
+function switchTransferView(view) {
+    if (view === 'offers') renderNetworkOffers();
+    if (view === 'history') renderHistoryPanel();
+}
+
+/* ── PLAYER DETAIL MODAL (full bid flow) ── */
 function openPlayerDetail(report) {
-    const modal  = document.getElementById('playerDetailModal');
+    if (typeof report === 'string') { try { report = JSON.parse(report); } catch(e) { return; } }
+    const modal   = document.getElementById('playerDetailModal');
     const content = document.getElementById('playerDetailContent');
 
-    // Overall & potential display helpers
     const fmtOvr = v => typeof v === 'object' ? `${v.min}-${v.max}` : v;
-    const fmtVal = (v, prefix='€') => {
+    const fmtVal = (v) => {
         if (v === null || v === undefined) return '?';
-        if (typeof v === 'object') return `${prefix}${transferSystem.formatMoney(v.min)}-${transferSystem.formatMoney(v.max)}`;
-        return `${prefix}${transferSystem.formatMoney(v)}`;
+        if (typeof v === 'object') return `€${transferSystem.formatMoney(v.min)}-${transferSystem.formatMoney(v.max)}`;
+        return `€${transferSystem.formatMoney(v)}`;
     };
 
-    // Attribute bars
-    const attrKeys = ['pace','shooting','passing','dribbling','defending','physic'];
+    const attrKeys   = ['pace','shooting','passing','dribbling','defending','physic'];
     const attrLabels = { pace:'Pace', shooting:'Shooting', passing:'Passing', dribbling:'Dribbling', defending:'Defending', physic:'Physical' };
     let attrsHtml = '';
     attrKeys.forEach(key => {
@@ -1141,32 +1780,32 @@ function openPlayerDetail(report) {
             const pct = ((val.min + val.max) / 2) / 100 * 100;
             attrsHtml += `<div class="detail-attr"><div class="detail-attr-label">${attrLabels[key]}</div><div class="detail-attr-bar-wrap"><div class="detail-attr-bar"><div class="detail-attr-bar-fill" style="width:${pct}%;"></div></div><div class="detail-attr-val range">${val.min}-${val.max}</div></div></div>`;
         } else {
-            const pct = val / 100 * 100;
-            attrsHtml += `<div class="detail-attr"><div class="detail-attr-label">${attrLabels[key]}</div><div class="detail-attr-bar-wrap"><div class="detail-attr-bar"><div class="detail-attr-bar-fill" style="width:${pct}%;"></div></div><div class="detail-attr-val">${val}</div></div></div>`;
+            attrsHtml += `<div class="detail-attr"><div class="detail-attr-label">${attrLabels[key]}</div><div class="detail-attr-bar-wrap"><div class="detail-attr-bar"><div class="detail-attr-bar-fill" style="width:${val}%;"></div></div><div class="detail-attr-val">${val}</div></div></div>`;
         }
     });
 
-    // Contract status
-    const currentYear = gameState.currentDate.getFullYear();
+    const currentYear = gameState.currentDate?.getFullYear() || 2025;
     const contractEnd = report.contract_until || 2025;
     const isFreeAgent = contractEnd <= currentYear;
     const isExpiring  = contractEnd <= currentYear + 1;
-
-    // Release clause
     const releaseHtml = report.release_clause ? `<div class="detail-fin-item"><div class="detail-fin-label">Release Clause</div><div class="detail-fin-value">€${transferSystem.formatMoney(report.release_clause)}</div></div>` : '';
 
-    // Face image for modal header – SVG silhouette behind, img layered on top
+    const faceUrl = report.face_url || '';
     let modalFaceHtml;
-    if (report.face_url) {
+    if (faceUrl) {
         modalFaceHtml = `<div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#1a3a6a,#0d2240);display:flex;align-items:center;justify-content:center;position:relative;">
             <svg width="36" height="42" viewBox="0 0 32 36" fill="none" style="position:relative;z-index:0;"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
-            <img src="${report.face_url}" alt="${report.short_name}" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:50%;z-index:1;" onerror="this.style.display='none';">
+            <img src="${faceUrl}" alt="${report.short_name}" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:50%;z-index:1;" onerror="this.style.display='none';">
         </div>`;
     } else {
         modalFaceHtml = `<div style="width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#1a3a6a,#0d2240);display:flex;align-items:center;justify-content:center;">
             <svg width="36" height="42" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="12" rx="8" ry="9" fill="rgba(255,255,255,0.25)"/><ellipse cx="16" cy="34" rx="14" ry="10" fill="rgba(255,255,255,0.15)"/></svg>
         </div>`;
     }
+
+    const bidPlaceholder = report.value_known && report.market_value
+        ? 'e.g. ' + transferSystem.formatMoney(typeof report.market_value === 'object' ? report.market_value.min : report.market_value)
+        : 'Enter amount';
 
     content.innerHTML = `
         <button class="modal-close-btn" onclick="closePlayerDetail()">×</button>
@@ -1182,75 +1821,51 @@ function openPlayerDetail(report) {
                     <span>🏴 ${report.nationality || '—'}</span>
                     <span>📍 ${report.club}</span>
                     <span>👟 ${report.preferred_foot || '—'}</span>
-                    <span>⚡ ${report.work_rate || '—'}</span>
                 </div>
                 <div class="detail-meta" style="margin-top:3px;">
                     <span>📋 ${report.position}</span>
                     ${report.age ? `<span>🎂 Age ${report.age}</span>` : ''}
-                    <span class="intel-tier ${report.tier}" style="display:inline-block;margin-left:4px;">${report.tier}</span>
+                    <span class="intel-tier ${report.tier}" style="margin-left:4px;">${report.tier}</span>
                 </div>
             </div>
         </div>
-
         <div class="detail-attrs">${attrsHtml}</div>
-
         <div class="detail-finances">
-            <div class="detail-fin-item"><div class="detail-fin-label">Market Value</div><div class="detail-fin-value ${report.value_known ? '' : 'unknown'}">${fmtVal(report.market_value)}</div></div>
-            <div class="detail-fin-item"><div class="detail-fin-label">Weekly Wage</div><div class="detail-fin-value ${report.value_known ? '' : 'unknown'}">${fmtVal(report.wage)}/wk</div></div>
+            <div class="detail-fin-item"><div class="detail-fin-label">Market Value</div><div class="detail-fin-value ${report.value_known?'':'unknown'}">${fmtVal(report.market_value)}</div></div>
+            <div class="detail-fin-item"><div class="detail-fin-label">Weekly Wage</div><div class="detail-fin-value ${report.value_known?'':'unknown'}">${fmtVal(report.wage)}/wk</div></div>
             ${releaseHtml}
         </div>
-
         <div class="detail-contract-info">
-            <span>📄 Contract until: <strong style="color:${isExpiring ? '#ff3366' : '#fff'}">${isFreeAgent ? 'FREE AGENT' : contractEnd}</strong></span>
+            <span>📄 Contract until: <strong style="color:${isExpiring?'#ff3366':'#fff'}">${isFreeAgent?'FREE AGENT':contractEnd}</strong></span>
             ${report.traits ? `<span>🏷️ ${report.traits}</span>` : ''}
         </div>
-
-        <!-- Bid / Transfer Form -->
         <div class="bid-form" id="bidForm">
             <div class="bid-form-title">${isFreeAgent ? '✍️ Sign Free Agent' : '💰 Place a Bid'}</div>
             ${isFreeAgent ? `
-                <div style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:10px;">No transfer fee required. Negotiate contract directly.</div>
+                <div style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:10px;">No transfer fee required.</div>
                 <button class="bid-btn success" onclick="startContractNegotiation('${report.player_id}', 0)">Negotiate Contract</button>
             ` : `
                 <div class="bid-form-row">
                     <span style="font-size:0.82rem;color:rgba(255,255,255,0.5);">€</span>
-                    <input type="number" class="bid-input" id="bidAmount" placeholder="${report.value_known ? 'e.g. ' + transferSystem.formatMoney(typeof report.market_value === 'object' ? report.market_value.min : report.market_value) : 'Enter amount'}">
+                    <input type="number" class="bid-input" id="bidAmount" placeholder="${bidPlaceholder}">
                     <button class="bid-btn" onclick="submitBid('${report.player_id}')">Place Bid</button>
                 </div>
                 <div class="bid-result" id="bidResult"></div>
             `}
         </div>
-
-        <!-- Contract Negotiation Form (hidden until bid accepted) -->
         <div class="contract-form" id="contractForm">
             <div class="bid-form-title">✍️ Contract Negotiation</div>
             <div class="contract-form-row">
-                <div class="contract-field">
-                    <label>Contract Length</label>
-                    <select id="contractLength">
-                        <option value="1">1 Year</option>
-                        <option value="2">2 Years</option>
-                        <option value="3" selected>3 Years</option>
-                        <option value="4">4 Years</option>
-                        <option value="5">5 Years</option>
-                    </select>
-                </div>
-                <div class="contract-field">
-                    <label>Weekly Wage (€)</label>
-                    <input type="number" id="contractWage" placeholder="e.g. 50000">
-                </div>
-                <div class="contract-field">
-                    <label>Signing Bonus (€)</label>
-                    <input type="number" id="contractBonus" placeholder="e.g. 500000">
-                </div>
+                <div class="contract-field"><label>Contract Length</label><select id="contractLength"><option value="1">1 Year</option><option value="2">2 Years</option><option value="3" selected>3 Years</option><option value="4">4 Years</option><option value="5">5 Years</option></select></div>
+                <div class="contract-field"><label>Weekly Wage (€)</label><input type="number" id="contractWage" placeholder="e.g. 50000"></div>
+                <div class="contract-field"><label>Signing Bonus (€)</label><input type="number" id="contractBonus" placeholder="e.g. 500000"></div>
             </div>
             <div class="contract-form-row">
                 <button class="bid-btn success" onclick="submitContract('${report.player_id}')">Sign Contract</button>
                 <button class="bid-btn danger" onclick="closePlayerDetail()">Cancel</button>
             </div>
             <div class="bid-result" id="contractResult"></div>
-        </div>
-    `;
+        </div>`;
 
     modal.classList.remove('hidden');
     modal.classList.add('active');
@@ -1263,23 +1878,18 @@ function closePlayerDetail() {
 }
 
 /* ── BID LOGIC ── */
-// Store pending transfer fee for contract step
 let pendingTransferFee = 0;
 
 function submitBid(playerId) {
     const amount = parseInt(document.getElementById('bidAmount')?.value) || 0;
     if (amount <= 0) { showBidResult('Enter a valid bid amount.', 'rejected'); return; }
-
     const result = transferSystem.placeBid(playerId, amount);
-
     if (result.status === 'accepted' || result.status === 'release_clause') {
         pendingTransferFee = result.fee || amount;
         showBidResult(result.message, 'success');
-        // Show contract form
         setTimeout(() => {
             const cf = document.getElementById('contractForm');
             if (cf) cf.classList.add('show');
-            // Pre-fill wage suggestion
             const player = gameState.allPlayers.find(p => p.player_id === playerId);
             if (player) {
                 const suggestedWage = Math.floor((player.value?.wage_eur || transferSystem.estimateWage(player)) * 1.05 / 1000) * 1000;
@@ -1289,10 +1899,7 @@ function submitBid(playerId) {
         }, 800);
     } else if (result.status === 'counter') {
         showBidResult(result.message, 'counter');
-        // Update bid input with counter value
         document.getElementById('bidAmount').value = result.counter;
-    } else if (result.status === 'rejected_open') {
-        showBidResult(result.message, 'rejected');
     } else {
         showBidResult(result.message, 'rejected');
     }
@@ -1305,12 +1912,11 @@ function showBidResult(msg, type) {
     el.className = 'bid-result show ' + type;
 }
 
-/* ── CONTRACT NEGOTIATION ── */
+/* ── CONTRACT ── */
 function startContractNegotiation(playerId, fee) {
     pendingTransferFee = fee;
     const cf = document.getElementById('contractForm');
     if (cf) cf.classList.add('show');
-    // Pre-fill
     const player = gameState.allPlayers.find(p => p.player_id === playerId);
     if (player) {
         const suggestedWage = Math.floor((player.value?.wage_eur || transferSystem.estimateWage(player)) * 1.1 / 1000) * 1000;
@@ -1323,27 +1929,18 @@ function submitContract(playerId) {
     const length = parseInt(document.getElementById('contractLength')?.value) || 3;
     const wage   = parseInt(document.getElementById('contractWage')?.value) || 0;
     const bonus  = parseInt(document.getElementById('contractBonus')?.value) || 0;
-
     if (wage <= 0) { showContractResult('Enter a weekly wage.', 'rejected'); return; }
-
     const player = gameState.allPlayers.find(p => p.player_id === playerId);
     if (!player) { showContractResult('Player not found.', 'rejected'); return; }
-
     const contractOffer = { length, weeklyWage: wage, signingBonus: bonus };
     const result = transferSystem.negotiateContract(player, contractOffer, pendingTransferFee);
-
     if (result.success) {
-        // Finalise!
         transferSystem.finaliseTransfer(player, pendingTransferFee, contractOffer);
         showContractResult(`✅ ${result.message} Transfer complete!`, 'success');
-        // Refresh squad view
-        renderSquad();
-        updateOfferBadge();
-        // Close modal after a moment
-        setTimeout(() => { closePlayerDetail(); runSearch(); }, 1200);
+        renderSquad(); updateOfferBadge();
+        setTimeout(() => { closePlayerDetail(); renderTransferHub(); }, 1200);
     } else if (result.reason === 'counter') {
         showContractResult(result.message, 'counter');
-        // Auto-fill the counter values
         document.getElementById('contractLength').value = result.counter.length;
         document.getElementById('contractWage').value   = result.counter.weeklyWage;
     } else {
@@ -1358,107 +1955,7 @@ function showContractResult(msg, type) {
     el.className = 'bid-result show ' + type;
 }
 
-/* ── TRANSFER SUB-VIEW SWITCHER ── */
-function switchTransferView(view) {
-    // Hide all views
-    ['search','offers','history'].forEach(v => {
-        const el = document.getElementById('transferView-' + v);
-        if (el) el.style.display = 'none';
-    });
-    // Show selected
-    const target = document.getElementById('transferView-' + view);
-    if (target) target.style.display = 'block';
-
-    // Update subnav active state
-    document.querySelectorAll('.transfer-subnav-btn').forEach((btn, i) => {
-        btn.classList.toggle('active', ['search','offers','history'][i] === view);
-    });
-
-    // Render content for the view
-    if (view === 'offers') renderOffers();
-    if (view === 'history') renderHistory();
-}
-
-/* ── RENDER INCOMING OFFERS ── */
-function renderOffers() {
-    const container = document.getElementById('offersContent');
-    if (!container || !transferSystem) return;
-
-    const pending = transferSystem.getPendingOffers();
-    updateOfferBadge();
-
-    if (pending.length === 0) {
-        container.innerHTML = '<div class="offers-empty">📬 No pending offers at this time.<br><span style="font-size:0.78rem;opacity:0.6;">Offers arrive as the season progresses.</span></div>';
-        return;
-    }
-
-    container.innerHTML = pending.map(offer => `
-        <div class="offer-card">
-            <div class="offer-card-left">
-                <div class="offer-card-player">
-                    <div class="offer-card-player-name">${offer.playerName}</div>
-                    <div class="offer-card-player-detail">OVR ${offer.playerOvr} · Your squad</div>
-                </div>
-            </div>
-            <div style="text-align:right;flex-shrink:0;">
-                <div class="offer-card-amount">€${transferSystem.formatMoney(offer.amount)}</div>
-                <div class="offer-card-from">from ${offer.club}</div>
-            </div>
-            <div class="offer-card-actions">
-                <button class="offer-btn accept" onclick="acceptIncomingOffer(${offer.id})">Accept</button>
-                <button class="offer-btn counter" onclick="promptCounter(${offer.id}, ${offer.amount})">Counter</button>
-                <button class="offer-btn reject" onclick="rejectIncomingOffer(${offer.id})">Reject</button>
-            </div>
-        </div>
-    `).join('');
-}
-
-function acceptIncomingOffer(offerId) {
-    const result = transferSystem.acceptOffer(offerId);
-    if (result.success) {
-        renderSquad();
-        renderOffers();
-    }
-}
-
-function rejectIncomingOffer(offerId) {
-    transferSystem.rejectOffer(offerId);
-    renderOffers();
-}
-
-function promptCounter(offerId, currentAmount) {
-    const newVal = prompt('Enter your counter-offer (€):', currentAmount);
-    if (newVal === null) return;
-    const amount = parseInt(newVal);
-    if (isNaN(amount) || amount <= 0) return;
-    const result = transferSystem.counterOffer(offerId, amount);
-    renderOffers();
-}
-
-/* ── RENDER DEAL HISTORY ── */
-function renderHistory() {
-    const container = document.getElementById('historyContent');
-    if (!container || !transferSystem) return;
-
-    const history = transferSystem.transferHistory;
-    if (history.length === 0) {
-        container.innerHTML = '<div class="offers-empty">📋 No transfers completed yet this window.</div>';
-        return;
-    }
-
-    container.innerHTML = history.map(deal => `
-        <div class="history-card">
-            <div class="history-type ${deal.type.toLowerCase()}">${deal.type}</div>
-            <div class="history-card-info">
-                <div class="history-card-name">${deal.player}</div>
-                <div class="history-card-detail">${deal.type === 'IN' ? 'from ' + deal.from : 'to ' + deal.to} · ${deal.date?.toLocaleDateString('en-US', {month:'short', day:'numeric'}) || ''}</div>
-            </div>
-            <div class="history-card-fee">€${transferSystem.formatMoney(deal.fee)}</div>
-        </div>
-    `).join('');
-}
-
-/* ── RENDER OFFICE TAB ── */
+/* ── OFFICE ── */
 function renderOffice() {
     if (!transferSystem) return;
     renderBudgetCards();
@@ -1468,85 +1965,44 @@ function renderOffice() {
 function renderBudgetCards() {
     const container = document.getElementById('officeBudgetCard');
     if (!container) return;
-
     const tb = transferSystem.transferBudget;
     const wb = transferSystem.wageBudget;
     const tw = transferSystem.totalWages;
     const teamOvr = gameState.selectedTeam?.overall_rating || 75;
     const maxWages = Math.floor(teamOvr * 18000);
-
     const tbClass = tb > 10000000 ? 'green' : (tb > 2000000 ? 'yellow' : 'red');
     const wbClass = wb > 20000  ? 'green' : (wb > 5000 ? 'yellow' : 'red');
-    const tbItemClass = tb < 5000000 ? 'warning' : '';
-    const wbItemClass = wb < 10000  ? 'danger' : '';
-
     container.innerHTML = `
-        <div class="budget-item ${tbItemClass}">
-            <div class="budget-label">Transfer Budget</div>
-            <div class="budget-value ${tbClass}">€${transferSystem.formatMoney(tb)}</div>
-            <div class="budget-sub">Available for signings</div>
-        </div>
-        <div class="budget-item ${wbItemClass}">
-            <div class="budget-label">Wage Budget</div>
-            <div class="budget-value ${wbClass}">€${transferSystem.formatMoney(wb)}/wk</div>
-            <div class="budget-sub">Remaining wage capacity</div>
-        </div>
-        <div class="budget-item">
-            <div class="budget-label">Total Wages</div>
-            <div class="budget-value" style="color:#ffd900;">€${transferSystem.formatMoney(tw)}/wk</div>
-            <div class="budget-sub">of €${transferSystem.formatMoney(maxWages)} max</div>
-        </div>
-        <div class="budget-item">
-            <div class="budget-label">Squad Size</div>
-            <div class="budget-value">${gameState.squad.length}</div>
-            <div class="budget-sub">Players registered</div>
-        </div>
-    `;
+        <div class="budget-item ${tb < 5000000?'warning':''}"><div class="budget-label">Transfer Budget</div><div class="budget-value ${tbClass}">€${transferSystem.formatMoney(tb)}</div><div class="budget-sub">Available for signings</div></div>
+        <div class="budget-item ${wb < 10000?'danger':''}"><div class="budget-label">Wage Budget</div><div class="budget-value ${wbClass}">€${transferSystem.formatMoney(wb)}/wk</div><div class="budget-sub">Remaining wage capacity</div></div>
+        <div class="budget-item"><div class="budget-label">Total Wages</div><div class="budget-value" style="color:#ffd900;">€${transferSystem.formatMoney(tw)}/wk</div><div class="budget-sub">of €${transferSystem.formatMoney(maxWages)} max</div></div>
+        <div class="budget-item"><div class="budget-label">Squad Size</div><div class="budget-value">${gameState.squad.length}</div><div class="budget-sub">Players registered</div></div>`;
 }
 
 function renderContractsTable() {
     const container = document.getElementById('contractsTable');
     if (!container) return;
-
     const currentYear = gameState.currentDate.getFullYear();
-
-    container.innerHTML = `
-        <div class="contracts-header">
-            <div>Player</div>
-            <div>Position</div>
-            <div>OVR</div>
-            <div>Weekly Wage</div>
-            <div>Contract Ends</div>
-            <div></div>
-        </div>
-    `;
-
-    // Sort squad by wage descending
-    const sorted = [...gameState.squad].sort((a, b) => {
+    container.innerHTML = `<div class="contracts-header"><div>Player</div><div>Position</div><div>OVR</div><div>Weekly Wage</div><div>Contract Ends</div><div></div></div>`;
+    [...gameState.squad].sort((a,b) => {
         const wA = a.contract?.wage || transferSystem.estimateWage(a);
         const wB = b.contract?.wage || transferSystem.estimateWage(b);
         return wB - wA;
-    });
-
-    sorted.forEach(player => {
+    }).forEach(player => {
         const info = player.basic_info || {};
         const ovr  = player.ratings?.overall || 70;
         const wage = player.contract?.wage || transferSystem.estimateWage(player);
         const ends = player.contract?.endYear || player.club?.contract_until || 2025;
         const isExpiring = ends <= currentYear + 1;
-
         const row = document.createElement('div');
         row.className = 'contract-row';
         row.innerHTML = `
-            <div>
-                <div class="cr-name">${info.short_name || 'Unknown'}</div>
-            </div>
-            <div class="cr-pos">${(player.player_positions || '—').split(',')[0].trim()}</div>
+            <div><div class="cr-name">${info.short_name || 'Unknown'}</div></div>
+            <div class="cr-pos">${(player.player_positions||'—').split(',')[0].trim()}</div>
             <div class="cr-val">${ovr}</div>
             <div class="cr-wage">€${transferSystem.formatMoney(wage)}/wk</div>
-            <div class="cr-ends ${isExpiring ? 'expiring' : ''}">${isExpiring ? '⚠️ ' : ''}${ends}</div>
-            <div><button class="cr-sell-btn" onclick="quickSell('${player.player_id}', '${(info.short_name||'').replace(/'/g,"\\'")}')">Sell</button></div>
-        `;
+            <div class="cr-ends ${isExpiring?'expiring':''}">${isExpiring?'⚠️ ':''}${ends}</div>
+            <div><button class="cr-sell-btn" onclick="quickSell('${player.player_id}','${(info.short_name||'').replace(/'/g,"\\'")}')" >Sell</button></div>`;
         container.appendChild(row);
     });
 }
@@ -1555,30 +2011,21 @@ function quickSell(playerId, playerName) {
     const player = gameState.squad.find(p => p.player_id === playerId);
     if (!player) return;
     const mv = player.value?.market_value_eur || transferSystem.estimateMarketValue(player);
-    // Sell at 70-85% of market value (quick sale)
     const fee = Math.floor(mv * (0.70 + Math.random() * 0.15) / 1000) * 1000;
     if (confirm(`Sell ${playerName} for €${transferSystem.formatMoney(fee)}?`)) {
         transferSystem.sellPlayer(playerId, fee);
-        transferSystem.transferHistory.push({
-            type: 'OUT', player: playerName, fee: fee,
-            date: new Date(gameState.currentDate), to: 'Transfer Market'
-        });
-        renderSquad();
-        renderOffice();
+        transferSystem.transferHistory.push({ type:'OUT', player:playerName, fee, date:new Date(gameState.currentDate), to:'Transfer Market' });
+        renderSquad(); renderOffice(); renderTransferHub();
     }
 }
 
-/** Update the offer badge count in the nav */
 function updateOfferBadge() {
     if (!transferSystem) return;
     const count = transferSystem.getPendingOffers().length;
     const badge = document.getElementById('offerBadge');
-    if (badge) {
-        badge.textContent = count;
-        badge.style.display = count > 0 ? 'inline' : 'none';
-    }
+    if (badge) { badge.textContent = count; badge.style.display = count > 0 ? 'inline' : 'none'; }
     const countEl = document.getElementById('offerCount');
-    if (countEl) countEl.textContent = count;
+    if (countEl) { countEl.textContent = count; countEl.style.display = count > 0 ? 'inline' : 'none'; }
 }
 
 // Start game when page loads
