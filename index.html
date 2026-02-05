@@ -4,52 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FIFA Manager - Team Selection</title>
+    
+    <!-- Oxanium Font -->
+    <link rel="stylesheet" href="https://use.typekit.net/iys5clu.css">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;900&display=swap');
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
-            font-family: 'Rajdhani', sans-serif;
-            background: linear-gradient(to bottom, #0a1520 0%, #152030 50%, #1a2838 100%);
+            font-family: "oxanium", sans-serif;
+            font-weight: 600;
+            font-style: normal;
+            background: url('background.jpg') center/cover fixed no-repeat;
+            background-color: #0a0f19;
             color: white;
             overflow: hidden;
             height: 100vh;
             position: relative;
         }
 
-        /* Stadium background blur */
+        /* Dark overlay on background */
         body::before {
             content: '';
             position: fixed;
             inset: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23081218" width="1200" height="800"/><ellipse cx="600" cy="700" rx="400" ry="200" fill="%23163020" opacity="0.3"/></svg>') center/cover;
-            filter: blur(8px);
-            opacity: 0.4;
+            background: rgba(5, 10, 15, 0.75);
             z-index: 0;
         }
 
-        /* Loading */
+        /* Loading Screen */
         .loading-screen {
-            position: fixed; inset: 0;
-            background: rgba(0,0,0,0.95);
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.96);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             z-index: 9999;
         }
         .loading-screen.hidden { display: none; }
+        
         .loading-spinner {
-            width: 80px; height: 80px;
-            border: 4px solid rgba(0,212,255,0.2);
-            border-top-color: #00d4ff;
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(255, 217, 0, 0.2);
+            border-top-color: #ffd900;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .loading-text { margin-top: 30px; font-size: 1.5rem; color: #00d4ff; font-weight: 700; letter-spacing: 2px; }
-        .loading-progress { margin-top: 15px; font-size: 1rem; color: rgba(255,255,255,0.6); }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            margin-top: 30px;
+            font-size: 1.8rem;
+            color: #ffd900;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        .loading-progress {
+            margin-top: 15px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
 
-        /* Main container */
+        /* Main Container */
         .container {
             position: relative;
             z-index: 10;
@@ -57,340 +86,466 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            gap: 40px;
+            gap: 60px;
             padding: 40px;
             opacity: 0;
-            transition: opacity 0.5s;
+            transition: opacity 0.6s;
         }
-        .container.visible { opacity: 1; }
+        .container.visible {
+            opacity: 1;
+        }
 
-        /* Left panel - Team selector */
+        /* LEFT PANEL - Team Selector */
         .team-selector {
-            width: 420px;
-            background: rgba(15, 25, 40, 0.92);
-            border: 2px solid rgba(255,217,0,0.3);
+            width: 480px;
+            background: rgba(15, 20, 30, 0.92);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 217, 0, 0.25);
             border-radius: 12px;
-            padding: 30px;
+            padding: 35px 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
         }
 
         .selector-title {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 900;
             color: #ffd900;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 30px;
+            letter-spacing: 4px;
+            margin-bottom: 35px;
+            text-shadow: 0 2px 10px rgba(255, 217, 0, 0.5);
         }
 
-        /* Flag display */
+        /* Flag Display Circle */
         .flag-display {
-            width: 220px;
-            height: 140px;
-            border-radius: 12px;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
             overflow: hidden;
-            margin-bottom: 20px;
-            background: rgba(0,0,0,0.3);
-            border: 3px solid rgba(255,217,0,0.4);
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, rgba(20, 30, 45, 0.95), rgba(10, 15, 25, 0.95));
+            border: 4px solid rgba(255, 217, 0, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.6),
+                inset 0 0 40px rgba(0, 0, 0, 0.4);
+            position: relative;
         }
+
         .flag-display img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+
         .flag-placeholder {
-            font-size: 4rem;
+            font-size: 5rem;
+            opacity: 0.5;
         }
 
-        /* Star rating */
+        /* Star Rating */
         .star-rating {
             display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-        .star {
-            font-size: 2.2rem;
-            color: #ffd900;
-            text-shadow: 0 0 10px rgba(255,217,0,0.5);
-        }
-
-        /* Team stats (ATT/MID/DEF) */
-        .team-stats {
-            display: flex;
-            gap: 15px;
+            gap: 10px;
             margin-bottom: 25px;
         }
+        
+        .star {
+            font-size: 2.6rem;
+            color: #ffd900;
+            text-shadow: 0 0 12px rgba(255, 217, 0, 0.6);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+        }
+        
+        .star.inactive {
+            color: rgba(255, 255, 255, 0.15);
+            text-shadow: none;
+        }
+
+        /* Team Stats (ATT/MID/DEF) */
+        .team-stats {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+        
         .stat-box {
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 8px;
-            padding: 10px 20px;
-            min-width: 80px;
+            padding: 12px 24px;
+            min-width: 90px;
         }
+        
         .stat-label {
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+            font-weight: 700;
         }
+        
         .stat-value {
-            font-size: 2rem;
+            font-size: 2.4rem;
             font-weight: 900;
             color: #fff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
         }
 
-        /* Team name selector with arrows */
+        /* Team Name Selector with Arrows */
         .team-name-selector {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
+        
         .arrow-btn {
-            background: rgba(255,217,0,0.15);
-            border: 2px solid rgba(255,217,0,0.4);
+            background: rgba(255, 217, 0, 0.12);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 217, 0, 0.35);
             color: #ffd900;
-            width: 40px;
-            height: 40px;
-            border-radius: 6px;
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            font-weight: 900;
             transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
+        
         .arrow-btn:hover {
-            background: rgba(255,217,0,0.3);
+            background: rgba(255, 217, 0, 0.25);
             border-color: #ffd900;
-            transform: scale(1.05);
+            transform: scale(1.08);
+            box-shadow: 0 4px 16px rgba(255, 217, 0, 0.4);
         }
+        
         .team-name-display {
             flex: 1;
-            background: linear-gradient(135deg, rgba(255,217,0,0.2), rgba(255,180,0,0.2));
-            border: 2px solid rgba(255,217,0,0.5);
+            background: linear-gradient(135deg, rgba(180, 140, 0, 0.9), rgba(140, 100, 0, 0.9));
+            backdrop-filter: blur(10px);
+            border: none;
             border-radius: 8px;
-            padding: 10px 15px;
+            padding: 12px 20px;
             text-align: center;
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             font-weight: 900;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* League and club name */
-        .league-club-display {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .league-name {
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.5);
+            color: #000;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            margin-bottom: 5px;
-        }
-        .club-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #00d4ff;
+            box-shadow: 0 4px 16px rgba(255, 217, 0, 0.3);
         }
 
-        /* Advance button */
+        /* League and Club Display */
+        .league-club-display {
+            text-align: center;
+            margin-bottom: 25px;
+            width: 100%;
+        }
+        
+        .league-name {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        
+        .club-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Advance Button */
         .advance-btn {
             width: 100%;
-            background: linear-gradient(135deg, #00d4ff, #0096ff);
+            background: linear-gradient(135deg, #0096ff, #0066cc);
             border: none;
             color: #fff;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.2rem;
+            font-family: "oxanium", sans-serif;
+            font-size: 1.3rem;
             font-weight: 900;
-            padding: 14px;
+            padding: 16px;
             border-radius: 8px;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             transition: all 0.3s;
-            box-shadow: 0 6px 20px rgba(0,212,255,0.4);
+            box-shadow: 0 8px 24px rgba(0, 150, 255, 0.4);
         }
+        
         .advance-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0,212,255,0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(0, 150, 255, 0.6);
+            background: linear-gradient(135deg, #00aaff, #0077dd);
         }
 
-        /* Right panel - Team information */
+        /* RIGHT PANEL - Team Information */
         .team-info {
-            width: 520px;
-            background: rgba(15, 25, 40, 0.92);
-            border: 2px solid rgba(0,212,255,0.3);
+            width: 580px;
+            background: rgba(15, 20, 30, 0.92);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 217, 0, 0.25);
             border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            padding: 35px 30px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
+            max-height: 85vh;
         }
 
         .info-title {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 900;
             color: #ffd900;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             text-align: center;
             margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(255, 217, 0, 0.5);
         }
 
-        /* Finances section */
+        /* Finances Section */
         .finances-section {
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(0,212,255,0.2);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 8px;
-            padding: 16px;
+            padding: 20px;
         }
+        
         .finances-title {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.6);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
+            letter-spacing: 2.5px;
+            margin-bottom: 15px;
         }
+        
         .finance-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
-        .finance-row:last-child { border-bottom: none; }
+        
+        .finance-row:last-child {
+            border-bottom: none;
+        }
+        
         .finance-label {
-            font-size: 0.95rem;
-            color: rgba(255,255,255,0.6);
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 600;
         }
+        
         .finance-value {
-            font-size: 1.1rem;
-            font-weight: 700;
+            font-size: 1.3rem;
+            font-weight: 900;
             color: #39ff14;
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
         }
 
-        /* Starting 11 section */
+        /* Starting 11 Section */
         .starting-11-section {
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(0,212,255,0.2);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 8px;
-            padding: 16px;
+            padding: 20px;
             flex: 1;
             overflow-y: auto;
         }
+        
         .starting-11-title {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.6);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
+            letter-spacing: 2.5px;
+            margin-bottom: 15px;
         }
+        
         .starting-11-list {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
         }
+        
         .player-row {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 6px 8px;
-            border-radius: 4px;
-            background: rgba(255,255,255,0.03);
-            transition: background 0.15s;
+            gap: 14px;
+            padding: 8px 10px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.2s;
+            border: 1px solid transparent;
         }
-        .player-row:hover { background: rgba(255,255,255,0.06); }
+        
+        .player-row:hover {
+            background: rgba(255, 217, 0, 0.08);
+            border-color: rgba(255, 217, 0, 0.3);
+            transform: translateX(4px);
+        }
+        
         .position-badge {
-            width: 40px;
-            font-size: 0.75rem;
-            font-weight: 700;
+            width: 44px;
+            font-size: 0.8rem;
+            font-weight: 900;
             color: #fff;
             text-align: center;
-            padding: 3px 0;
-            border-radius: 3px;
+            padding: 4px 0;
+            border-radius: 4px;
             flex-shrink: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .position-badge.gk  { background: rgba(255,180,0,0.8); }
-        .position-badge.def { background: rgba(0,200,100,0.8); }
-        .position-badge.mid { background: rgba(0,150,255,0.8); }
-        .position-badge.att { background: rgba(255,50,100,0.8); }
+        
+        .position-badge.gk {
+            background: linear-gradient(135deg, #ffb400, #ff8800);
+        }
+        
+        .position-badge.def {
+            background: linear-gradient(135deg, #00c864, #009648);
+        }
+        
+        .position-badge.mid {
+            background: linear-gradient(135deg, #0096ff, #0066cc);
+        }
+        
+        .position-badge.att {
+            background: linear-gradient(135deg, #ff3264, #cc0032);
+        }
+        
         .player-name {
             flex: 1;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: rgba(255,255,255,0.85);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.9);
         }
 
-        /* Bottom hints */
+        /* Bottom Hints */
         .bottom-hints {
             position: fixed;
-            bottom: 30px;
+            bottom: 35px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 30px;
+            gap: 35px;
             z-index: 100;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            padding: 12px 30px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        
         .hint {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.4);
-        }
-        .hint-icon {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 4px 10px;
-            border-radius: 4px;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
             font-weight: 700;
-            color: rgba(255,255,255,0.6);
+        }
+        
+        .hint-icon {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 6px 14px;
+            border-radius: 5px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
         }
 
-        @media (max-width: 1100px) {
-            .container { flex-direction: column; gap: 20px; padding: 20px; }
-            .team-selector, .team-info { width: 100%; max-width: 500px; }
+        /* Scrollbar */
+        .starting-11-section::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .starting-11-section::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+        
+        .starting-11-section::-webkit-scrollbar-thumb {
+            background: rgba(255, 217, 0, 0.4);
+            border-radius: 4px;
+        }
+        
+        .starting-11-section::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 217, 0, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .container {
+                flex-direction: column;
+                gap: 30px;
+                padding: 20px;
+                overflow-y: auto;
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            .team-selector,
+            .team-info {
+                width: 100%;
+                max-width: 550px;
+            }
+            
+            .flag-display {
+                width: 200px;
+                height: 200px;
+            }
         }
     </style>
 </head>
 <body>
 
-<!-- Loading -->
+<!-- Loading Screen -->
 <div class="loading-screen" id="loadingScreen">
     <div class="loading-spinner"></div>
     <div class="loading-text">LOADING FIFA MANAGER</div>
     <div class="loading-progress" id="loadingProgress">Initializing...</div>
 </div>
 
-<!-- Main container -->
+<!-- Main Container -->
 <div class="container" id="mainContainer">
-    <!-- Left panel - Team selector -->
+    
+    <!-- LEFT PANEL - Team Selector -->
     <div class="team-selector">
         <div class="selector-title">SELECT TEAM</div>
         
+        <!-- Flag Display -->
         <div class="flag-display" id="flagDisplay">
-            <div class="flag-placeholder">🏴</div>
+            <div class="flag-placeholder">PLACEHOLDER</div>
         </div>
 
+        <!-- Star Rating -->
         <div class="star-rating" id="starRating">
             <span class="star">★</span>
             <span class="star">★</span>
@@ -399,6 +554,7 @@
             <span class="star">★</span>
         </div>
 
+        <!-- Team Stats -->
         <div class="team-stats">
             <div class="stat-box">
                 <div class="stat-label">ATT</div>
@@ -414,24 +570,28 @@
             </div>
         </div>
 
+        <!-- Team Name Selector -->
         <div class="team-name-selector">
             <button class="arrow-btn" onclick="previousTeam()">◀</button>
             <div class="team-name-display" id="teamNameDisplay">—</div>
             <button class="arrow-btn" onclick="nextTeam()">▶</button>
         </div>
 
+        <!-- League/Club Display -->
         <div class="league-club-display">
             <div class="league-name" id="leagueDisplay">—</div>
             <div class="club-name" id="clubDisplay">—</div>
         </div>
 
+        <!-- Advance Button -->
         <button class="advance-btn" onclick="startGame()">⏩ ADVANCE</button>
     </div>
 
-    <!-- Right panel - Team information -->
+    <!-- RIGHT PANEL - Team Information -->
     <div class="team-info">
         <div class="info-title">TEAM INFORMATION</div>
 
+        <!-- Finances -->
         <div class="finances-section">
             <div class="finances-title">FINANCES</div>
             <div class="finance-row">
@@ -444,65 +604,66 @@
             </div>
         </div>
 
+        <!-- Starting 11 -->
         <div class="starting-11-section">
             <div class="starting-11-title">STARTING 11</div>
             <div class="starting-11-list" id="starting11List">
-                <div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;">Loading squad...</div>
+                <div style="text-align:center;color:rgba(255,255,255,0.3);padding:30px;">Loading squad...</div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Bottom hints -->
+<!-- Bottom Hints -->
 <div class="bottom-hints">
     <div class="hint">
         <div class="hint-icon">⏩</div>
         <span>Advance</span>
     </div>
     <div class="hint">
-        <div class="hint-icon">◀</div>
-        <span>Back</span>
+        <div class="hint-icon">◀ ▶</div>
+        <span>Navigate</span>
     </div>
     <div class="hint">
-        <div class="hint-icon">d</div>
-        <span>Swap Teams</span>
+        <div class="hint-icon">ESC</div>
+        <span>Back</span>
     </div>
 </div>
 
 <script>
-// State
+// Game State
 let allTeams = [];
 let allPlayers = [];
 let currentIndex = 0;
 let dataLoaded = false;
 
-// Country code to flag emoji mapping (simplified - extend as needed)
-const countryFlags = {
-    'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
-    'Spain': '🇪🇸',
-    'Germany': '🇩🇪',
-    'Italy': '🇮🇹',
-    'France': '🇫🇷',
-    'Portugal': '🇵🇹',
-    'Netherlands': '🇳🇱',
-    'Belgium': '🇧🇪',
-    'Brazil': '🇧🇷',
-    'Argentina': '🇦🇷',
-    'United States': '🇺🇸',
-    'Mexico': '🇲🇽',
-    'Japan': '🇯🇵',
-    'South Korea': '🇰🇷',
-    'Australia': '🇦🇺',
-    'Saudi Arabia': '🇸🇦',
-    'Turkey': '🇹🇷',
-    'Poland': '🇵🇱',
-    'Scotland': '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
-    'Wales': '🏴󠁧󠁢󠁷󠁬󠁳󠁿',
-    'Austria': '🇦🇹',
-    'Switzerland': '🇨🇭',
-    'Denmark': '🇩🇰',
-    'Sweden': '🇸🇪',
-    'Norway': '🇳🇴'
+// Country to flag file mapping (will use flags folder later)
+const countryToFile = {
+    'England': 'england',
+    'Spain': 'spain',
+    'Germany': 'germany',
+    'Italy': 'italy',
+    'France': 'france',
+    'Portugal': 'portugal',
+    'Netherlands': 'netherlands',
+    'Belgium': 'belgium',
+    'Brazil': 'brazil',
+    'Argentina': 'argentina',
+    'United States': 'united-states',
+    'Mexico': 'mexico',
+    'Japan': 'japan',
+    'South Korea': 'south-korea',
+    'Australia': 'australia',
+    'Saudi Arabia': 'saudi-arabia',
+    'Turkey': 'turkey',
+    'Poland': 'poland',
+    'Scotland': 'scotland',
+    'Wales': 'wales',
+    'Austria': 'austria',
+    'Switzerland': 'switzerland',
+    'Denmark': 'denmark',
+    'Sweden': 'sweden',
+    'Norway': 'norway'
 };
 
 // Load data
@@ -531,7 +692,7 @@ async function loadAllData() {
             document.getElementById('loadingScreen').classList.add('hidden');
             document.getElementById('mainContainer').classList.add('visible');
             displayCurrentTeam();
-        }, 400);
+        }, 500);
 
     } catch (e) {
         console.error(e);
@@ -545,42 +706,58 @@ function displayCurrentTeam() {
     if (!allTeams.length) return;
     const team = allTeams[currentIndex];
 
-    // Flag
+    // Flag - try to load from flags folder, fallback to PLACEHOLDER
     const flagEl = document.getElementById('flagDisplay');
-    const flag = countryFlags[team.country];
-    if (flag) {
-        flagEl.innerHTML = `<div style="font-size:6rem;">${flag}</div>`;
+    const countryFile = countryToFile[team.country];
+    
+    if (countryFile) {
+        // Try PNG first, then fallback to PLACEHOLDER
+        const flagImg = new Image();
+        flagImg.onerror = () => {
+            flagEl.innerHTML = '<div class="flag-placeholder">PLACEHOLDER</div>';
+        };
+        flagImg.onload = () => {
+            flagEl.innerHTML = `<img src="flags/${countryFile}.png" alt="${team.country}">`;
+        };
+        flagImg.src = `flags/${countryFile}.png`;
     } else {
-        flagEl.innerHTML = '<div class="flag-placeholder">🏴</div>';
+        flagEl.innerHTML = '<div class="flag-placeholder">PLACEHOLDER</div>';
     }
 
-    // Star rating (based on overall_rating)
+    // Star rating
     const rating = team.overall_rating || 70;
     const stars = Math.min(5, Math.max(1, Math.round(rating / 20)));
-    const starHtml = Array(stars).fill('<span class="star">★</span>').join('') +
-                     Array(5 - stars).fill('<span class="star" style="color:rgba(255,255,255,0.2);">★</span>').join('');
+    let starHtml = '';
+    for (let i = 1; i <= 5; i++) {
+        if (i <= stars) {
+            starHtml += '<span class="star">★</span>';
+        } else {
+            starHtml += '<span class="star inactive">★</span>';
+        }
+    }
     document.getElementById('starRating').innerHTML = starHtml;
 
-    // Stats (ATT/MID/DEF) - calculate from team rating or use defaults
+    // Stats (ATT/MID/DEF)
     const att = team.attack || Math.floor(rating - 5 + Math.random() * 10);
     const mid = team.midfield || Math.floor(rating - 3 + Math.random() * 6);
     const def = team.defence || Math.floor(rating - 4 + Math.random() * 8);
-    document.getElementById('attStat').textContent = att;
-    document.getElementById('midStat').textContent = mid;
-    document.getElementById('defStat').textContent = def;
+    
+    document.getElementById('attStat').textContent = Math.max(40, Math.min(99, att));
+    document.getElementById('midStat').textContent = Math.max(40, Math.min(99, mid));
+    document.getElementById('defStat').textContent = Math.max(40, Math.min(99, def));
 
     // Team name
     document.getElementById('teamNameDisplay').textContent = team.country || '—';
     document.getElementById('leagueDisplay').textContent = team.league_name || '—';
     document.getElementById('clubDisplay').textContent = team.team_name;
 
-    // Finances (generate realistic values based on rating)
+    // Finances
     const budget = Math.floor((rating / 100) * 150000000 + Math.random() * 50000000);
     const wages = Math.floor(budget * 0.04);
     document.getElementById('transferBudget').textContent = '$' + formatMoney(budget);
     document.getElementById('weeklyWages').textContent = '$' + formatMoney(wages);
 
-    // Starting 11 (get top 11 players from this team)
+    // Starting 11
     displayStarting11(team);
 }
 
@@ -594,15 +771,15 @@ function displayStarting11(team) {
     const teamPlayers = allPlayers.filter(p => p.club?.name === team.team_name);
     
     if (teamPlayers.length === 0) {
-        document.getElementById('starting11List').innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;">No player data available</div>';
+        document.getElementById('starting11List').innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.3);padding:30px;">No player data available</div>';
         return;
     }
 
     // Sort by overall and take top 11
     const top11 = teamPlayers
         .sort((a, b) => {
-            const ovrA = typeof a.basic_info?.overall === 'object' ? a.basic_info.overall.max : (a.basic_info?.overall || 0);
-            const ovrB = typeof b.basic_info?.overall === 'object' ? b.basic_info.overall.max : (b.basic_info?.overall || 0);
+            const ovrA = a.ratings?.overall || 0;
+            const ovrB = b.ratings?.overall || 0;
             return ovrB - ovrA;
         })
         .slice(0, 11);
@@ -611,6 +788,7 @@ function displayStarting11(team) {
     const html = top11.map(p => {
         const pos = (p.player_positions || '').split(',')[0]?.trim() || 'SUB';
         let posClass = 'mid';
+        
         if (pos === 'GK') posClass = 'gk';
         else if (['RB','LB','CB','RWB','LWB','RCB','LCB'].includes(pos)) posClass = 'def';
         else if (['ST','CF','LW','RW','CAM','LF','RF'].includes(pos)) posClass = 'att';
@@ -656,6 +834,7 @@ function startGame() {
 // Keyboard controls
 document.addEventListener('keydown', e => {
     if (!dataLoaded) return;
+    
     if (e.code === 'Space' || e.code === 'Enter') {
         e.preventDefault();
         startGame();
@@ -665,10 +844,15 @@ document.addEventListener('keydown', e => {
     } else if (e.code === 'ArrowRight') {
         e.preventDefault();
         nextTeam();
+    } else if (e.code === 'Escape') {
+        e.preventDefault();
+        // Could add back navigation if needed
     }
 });
 
+// Start loading
 loadAllData();
 </script>
+
 </body>
 </html>
