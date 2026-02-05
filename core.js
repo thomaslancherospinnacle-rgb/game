@@ -65,10 +65,20 @@
             organizeData();
             
             // Initialize match simulator
-            window.matchSimulator = new MatchSimulation();
+            if (typeof MatchSimulation !== 'undefined') {
+                window.matchSimulator = new MatchSimulation();
+                console.log('✅ Match simulator initialized');
+            } else {
+                console.warn('⚠️ MatchSimulation class not found');
+            }
             
             // Initialize transfer system
-            window.transferSystem = new TransferSystem(window.gameState);
+            if (typeof TransferSystem !== 'undefined') {
+                window.transferSystem = new TransferSystem(window.gameState);
+                console.log('✅ Transfer system initialized');
+            } else {
+                console.warn('⚠️ TransferSystem class not found');
+            }
             
             // Check if data was preloaded from index.html
             const preloadedTeams = localStorage.getItem('fifaAllTeams');
@@ -95,13 +105,19 @@
             
             // No team selected, show team selection
             hideLoading();
-            showTeamSelection();
+            if (typeof showTeamSelection === 'function') {
+                showTeamSelection();
+            } else {
+                console.error('❌ showTeamSelection function not found');
+            }
             
             console.log('✅ Game initialized successfully');
             
         } catch (error) {
             console.error('❌ Error initializing game:', error);
-            showError('Failed to load game data. Please ensure teams.json and players.json are in the same directory.');
+            if (typeof showError === 'function') {
+                showError('Failed to load game data. Please ensure teams.json and players.json are in the same directory.');
+            }
         }
     };
 
@@ -197,20 +213,27 @@
      */
     window.showTeamSelection = function() {
         const modal = document.getElementById('teamSelectModal');
+        if (!modal) {
+            console.error('❌ Team selection modal not found');
+            return;
+        }
+        
         const filterContainer = document.getElementById('leagueFilter');
         
-        // Get unique leagues
-        const leagues = ['All', ...new Set(window.gameState.allTeams.map(t => t.league_name).filter(Boolean))];
-        
-        // Create league filters
-        filterContainer.innerHTML = '';
-        leagues.forEach(league => {
-            const btn = document.createElement('button');
-            btn.className = 'filter-btn' + (league === 'All' ? ' active' : '');
-            btn.textContent = league;
-            btn.onclick = () => window.filterTeams(league);
-            filterContainer.appendChild(btn);
-        });
+        if (filterContainer) {
+            // Get unique leagues
+            const leagues = ['All', ...new Set(window.gameState.allTeams.map(t => t.league_name).filter(Boolean))];
+            
+            // Create league filters
+            filterContainer.innerHTML = '';
+            leagues.forEach(league => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn' + (league === 'All' ? ' active' : '');
+                btn.textContent = league;
+                btn.onclick = () => window.filterTeams(league);
+                filterContainer.appendChild(btn);
+            });
+        }
         
         // Display teams
         window.displayTeams();
@@ -238,6 +261,11 @@
      */
     window.displayTeams = function() {
         const grid = document.getElementById('teamGrid');
+        if (!grid) {
+            console.error('❌ Team grid element not found');
+            return;
+        }
+        
         grid.innerHTML = '';
         
         const filteredTeams = window.gameState.currentLeagueFilter === 'All' 
@@ -281,20 +309,52 @@
         generateFixtures();
         
         // Hide modal
-        document.getElementById('teamSelectModal').classList.add('hidden');
+        const modal = document.getElementById('teamSelectModal');
+        if (modal) {
+            modal.classList.add('hidden');
+        }
         
-        // Update UI
-        window.updateHeader();
-        window.renderSquad();
-        window.generateLeagueTable();
-        window.generateNews();
-        window.updateCentralTab();
-        window.renderFixtures();
+        // Update UI with null checks
+        if (typeof window.updateHeader === 'function') {
+            window.updateHeader();
+        }
         
-        // Initialize transfer system and populate filter dropdowns
-        window.transferSystem.init();
-        window.populateTransferFilters();
-        window.updateOfferBadge();
+        if (typeof window.renderSquad === 'function') {
+            window.renderSquad();
+        }
+        
+        if (typeof window.generateLeagueTable === 'function') {
+            window.generateLeagueTable();
+        }
+        
+        if (typeof window.generateNews === 'function') {
+            window.generateNews();
+        }
+        
+        if (typeof window.updateCentralTab === 'function') {
+            window.updateCentralTab();
+        }
+        
+        if (typeof window.renderFixtures === 'function') {
+            window.renderFixtures();
+        }
+        
+        // Initialize transfer system
+        if (window.transferSystem && typeof window.transferSystem.init === 'function') {
+            window.transferSystem.init();
+        }
+        
+        // Populate transfer filters - WITH NULL CHECK
+        if (typeof window.populateTransferFilters === 'function') {
+            window.populateTransferFilters();
+        } else {
+            console.warn('⚠️ populateTransferFilters function not found - skipping');
+        }
+        
+        // Update offer badge
+        if (typeof window.updateOfferBadge === 'function') {
+            window.updateOfferBadge();
+        }
     };
 
     /**

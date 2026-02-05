@@ -14,15 +14,24 @@
      * Show loading screen with message
      */
     window.showLoading = function(message) {
-        document.getElementById('loadingScreen').classList.remove('hidden');
-        document.getElementById('loadingProgress').textContent = message;
+        const loadingScreen = document.getElementById('loadingScreen');
+        if (loadingScreen) {
+            loadingScreen.classList.remove('hidden');
+        }
+        const loadingProgress = document.getElementById('loadingProgress');
+        if (loadingProgress) {
+            loadingProgress.textContent = message;
+        }
     };
 
     /**
      * Hide loading screen
      */
     window.hideLoading = function() {
-        document.getElementById('loadingScreen').classList.add('hidden');
+        const loadingScreen = document.getElementById('loadingScreen');
+        if (loadingScreen) {
+            loadingScreen.classList.add('hidden');
+        }
     };
 
     /**
@@ -30,18 +39,20 @@
      */
     window.showError = function(message) {
         const loadingScreen = document.getElementById('loadingScreen');
-        loadingScreen.innerHTML = `
-            <div class="error-message">
-                <div class="error-title">⚠️ Error Loading Game</div>
-                <div class="error-text">${message}</div>
-                <div class="error-text" style="margin-top: 15px;">
-                    <strong>Required files:</strong><br>
-                    • teams.json<br>
-                    • players.json<br>
-                    • Make sure they are in the root directory of your GitHub Pages site.
+        if (loadingScreen) {
+            loadingScreen.innerHTML = `
+                <div class="error-message">
+                    <div class="error-title">⚠️ Error Loading Game</div>
+                    <div class="error-text">${message}</div>
+                    <div class="error-text" style="margin-top: 15px;">
+                        <strong>Required files:</strong><br>
+                        • teams.json<br>
+                        • players.json<br>
+                        • Make sure they are in the root directory of your GitHub Pages site.
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        }
     };
 
     // ============================================================
@@ -52,23 +63,39 @@
      * Update header with team info
      */
     window.updateHeader = function() {
-        document.getElementById('clubName').textContent = window.gameState.selectedTeam.team_name;
-        
-        const logoUrl = window.gameState.selectedTeam.club_logo_url;
-        const badgeEl = document.getElementById('clubBadge');
-        
-        if (logoUrl) {
-            badgeEl.innerHTML = `<img src="${logoUrl}" alt="${window.gameState.selectedTeam.team_name}" 
-                style="width:45px;height:45px;object-fit:contain;display:block;" 
-                onerror="this.style.display='none'; this.parentElement.innerHTML='⚽';">`;
-        } else {
-            badgeEl.innerHTML = '⚽';
+        const clubNameEl = document.getElementById('clubName');
+        if (clubNameEl && window.gameState.selectedTeam) {
+            clubNameEl.textContent = window.gameState.selectedTeam.team_name;
         }
         
-        const budget = window.gameState.selectedTeam.budget / 1000000;
-        document.getElementById('clubBudget').textContent = '£' + budget.toFixed(0) + 'M';
-        document.getElementById('currentSeason').textContent = window.gameState.season;
-        document.getElementById('teamOverall').textContent = window.gameState.selectedTeam.overall_rating;
+        const logoUrl = window.gameState.selectedTeam?.club_logo_url;
+        const badgeEl = document.getElementById('clubBadge');
+        
+        if (badgeEl) {
+            if (logoUrl) {
+                badgeEl.innerHTML = `<img src="${logoUrl}" alt="${window.gameState.selectedTeam.team_name}" 
+                    style="width:45px;height:45px;object-fit:contain;display:block;" 
+                    onerror="this.style.display='none'; this.parentElement.innerHTML='⚽';">`;
+            } else {
+                badgeEl.innerHTML = '⚽';
+            }
+        }
+        
+        const budget = (window.gameState.selectedTeam?.budget || 50000000) / 1000000;
+        const budgetEl = document.getElementById('clubBudget');
+        if (budgetEl) {
+            budgetEl.textContent = '£' + budget.toFixed(0) + 'M';
+        }
+        
+        const seasonEl = document.getElementById('currentSeason');
+        if (seasonEl) {
+            seasonEl.textContent = window.gameState.season;
+        }
+        
+        const overallEl = document.getElementById('teamOverall');
+        if (overallEl && window.gameState.selectedTeam) {
+            overallEl.textContent = window.gameState.selectedTeam.overall_rating;
+        }
     };
 
     /**
@@ -121,20 +148,43 @@
      * Update central tab
      */
     window.updateCentralTab = function() {
-        const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById('currentDate').textContent = window.gameState.currentDate.toLocaleDateString('en-US', dateOptions);
+        const currentDateEl = document.getElementById('currentDate');
+        if (currentDateEl && window.gameState.currentDate) {
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            currentDateEl.textContent = window.gameState.currentDate.toLocaleDateString('en-US', dateOptions);
+        }
         
         if (window.gameState.nextMatch) {
             const opponent = window.gameState.nextMatch.home.team_name === window.gameState.selectedTeam.team_name 
                 ? window.gameState.nextMatch.away 
                 : window.gameState.nextMatch.home;
             
-            document.getElementById('nextOpponent').textContent = opponent.team_name;
-            const daysUntil = Math.ceil((window.gameState.nextMatch.date - window.gameState.currentDate) / (1000 * 60 * 60 * 24));
-            document.getElementById('daysUntilMatch').textContent = Math.max(0, daysUntil);
-            document.getElementById('nextMatchDate').textContent = window.gameState.nextMatch.date.toLocaleDateString('en-US', dateOptions);
-            document.getElementById('homeTeamName').textContent = window.gameState.nextMatch.home.team_name;
-            document.getElementById('awayTeamName').textContent = window.gameState.nextMatch.away.team_name;
+            const nextOpponentEl = document.getElementById('nextOpponent');
+            if (nextOpponentEl) {
+                nextOpponentEl.textContent = opponent.team_name;
+            }
+            
+            const daysUntilMatchEl = document.getElementById('daysUntilMatch');
+            if (daysUntilMatchEl && window.gameState.currentDate) {
+                const daysUntil = Math.ceil((window.gameState.nextMatch.date - window.gameState.currentDate) / (1000 * 60 * 60 * 24));
+                daysUntilMatchEl.textContent = Math.max(0, daysUntil);
+            }
+            
+            const nextMatchDateEl = document.getElementById('nextMatchDate');
+            if (nextMatchDateEl) {
+                const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                nextMatchDateEl.textContent = window.gameState.nextMatch.date.toLocaleDateString('en-US', dateOptions);
+            }
+            
+            const homeTeamNameEl = document.getElementById('homeTeamName');
+            if (homeTeamNameEl) {
+                homeTeamNameEl.textContent = window.gameState.nextMatch.home.team_name;
+            }
+            
+            const awayTeamNameEl = document.getElementById('awayTeamName');
+            if (awayTeamNameEl) {
+                awayTeamNameEl.textContent = window.gameState.nextMatch.away.team_name;
+            }
             
             // Update badges
             const homeLogoUrl = window.gameState.nextMatch.home.club_logo_url;
@@ -143,23 +193,35 @@
             const homeBadge = document.getElementById('homeTeamBadge');
             const awayBadge = document.getElementById('awayTeamBadge');
             
-            if (homeLogoUrl) {
-                homeBadge.innerHTML = `<img src="${homeLogoUrl}" alt="${window.gameState.nextMatch.home.team_name}" 
-                    onerror="this.onerror=null; this.style.display='none'; this.parentElement.textContent='⚽';">`;
-            } else {
-                homeBadge.textContent = '⚽';
+            if (homeBadge) {
+                if (homeLogoUrl) {
+                    homeBadge.innerHTML = `<img src="${homeLogoUrl}" alt="${window.gameState.nextMatch.home.team_name}" 
+                        onerror="this.onerror=null; this.style.display='none'; this.parentElement.textContent='⚽';">`;
+                } else {
+                    homeBadge.textContent = '⚽';
+                }
             }
             
-            if (awayLogoUrl) {
-                awayBadge.innerHTML = `<img src="${awayLogoUrl}" alt="${window.gameState.nextMatch.away.team_name}" 
-                    onerror="this.onerror=null; this.style.display='none'; this.parentElement.textContent='⚽';">`;
-            } else {
-                awayBadge.textContent = '⚽';
+            if (awayBadge) {
+                if (awayLogoUrl) {
+                    awayBadge.innerHTML = `<img src="${awayLogoUrl}" alt="${window.gameState.nextMatch.away.team_name}" 
+                        onerror="this.onerror=null; this.style.display='none'; this.parentElement.textContent='⚽';">`;
+                } else {
+                    awayBadge.textContent = '⚽';
+                }
             }
         }
         
-        document.getElementById('availablePlayers').textContent = window.gameState.squad.length;
-        document.getElementById('injuredPlayers').textContent = '0';
+        // FIXED: Added null checks to prevent "Cannot set properties of null" error
+        const availPlayersEl = document.getElementById('availablePlayers');
+        if (availPlayersEl && window.gameState.squad) {
+            availPlayersEl.textContent = window.gameState.squad.length;
+        }
+        
+        const injuredPlayersEl = document.getElementById('injuredPlayers');
+        if (injuredPlayersEl) {
+            injuredPlayersEl.textContent = '0';
+        }
         
         window.generateNews();
     };
@@ -197,7 +259,9 @@
         }
 
         // Transfer network
-        window.updateTransferNetwork();
+        if (typeof window.updateTransferNetwork === 'function') {
+            window.updateTransferNetwork();
+        }
     };
 
     window.advanceToNextMatch = function() {
@@ -305,6 +369,8 @@
         table.sort((a, b) => b.points - a.points);
 
         const tableEl = document.getElementById('leagueTable');
+        if (!tableEl) return;
+        
         tableEl.innerHTML = `
             <div class="table-header">
                 <div>POS</div>
@@ -332,7 +398,11 @@
             tableEl.appendChild(row);
         });
 
-        document.getElementById('leagueName').textContent = league + ' Table';
+        const leagueNameEl = document.getElementById('leagueName');
+        if (leagueNameEl) {
+            leagueNameEl.textContent = league + ' Table';
+        }
+        
         window.updateSeasonStats();
     };
 
@@ -340,12 +410,35 @@
      * Update season stats display
      */
     window.updateSeasonStats = function() {
-        document.getElementById('matchesPlayed').textContent = window.gameState.seasonStats.matches;
-        document.getElementById('wins').textContent = window.gameState.seasonStats.wins;
-        document.getElementById('draws').textContent = window.gameState.seasonStats.draws;
-        document.getElementById('losses').textContent = window.gameState.seasonStats.losses;
-        document.getElementById('goalsScored').textContent = window.gameState.seasonStats.goalsScored;
-        document.getElementById('goalsConceded').textContent = window.gameState.seasonStats.goalsConceded;
+        const matchesPlayedEl = document.getElementById('matchesPlayed');
+        if (matchesPlayedEl) {
+            matchesPlayedEl.textContent = window.gameState.seasonStats.matches;
+        }
+        
+        const winsEl = document.getElementById('wins');
+        if (winsEl) {
+            winsEl.textContent = window.gameState.seasonStats.wins;
+        }
+        
+        const drawsEl = document.getElementById('draws');
+        if (drawsEl) {
+            drawsEl.textContent = window.gameState.seasonStats.draws;
+        }
+        
+        const lossesEl = document.getElementById('losses');
+        if (lossesEl) {
+            lossesEl.textContent = window.gameState.seasonStats.losses;
+        }
+        
+        const goalsScoredEl = document.getElementById('goalsScored');
+        if (goalsScoredEl) {
+            goalsScoredEl.textContent = window.gameState.seasonStats.goalsScored;
+        }
+        
+        const goalsConcededEl = document.getElementById('goalsConceded');
+        if (goalsConcededEl) {
+            goalsConcededEl.textContent = window.gameState.seasonStats.goalsConceded;
+        }
     };
 
     // ============================================================
