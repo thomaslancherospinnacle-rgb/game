@@ -497,4 +497,16 @@
 
     console.log('✅ Core module loaded');
 
+    // ============================================================
+    // AUTO-START
+    // ============================================================
+    
+    // Start game when page loads
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.init);
+    } else {
+        // DOM is already loaded
+        window.init();
+    }
+
 })(window);
