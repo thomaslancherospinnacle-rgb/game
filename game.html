@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FIFA Manager - Career Mode</title>
+    
+    <!-- Oxanium Font -->
     <link rel="stylesheet" href="https://use.typekit.net/iys5clu.css">
-    <link rel="stylesheet" href="formation-styles.css">
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Glass Morphism Styles -->
+    <link rel="stylesheet" href="style-complete-glass.css">
+    <link rel="stylesheet" href="formation-styles-glass.css">
+    
     <style>
-        /* Additional styles for images */
+        /* Additional inline styles for compatibility */
         .match-team-badge {
             width: 60px;
             height: 60px;
@@ -50,473 +55,145 @@
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loadingScreen" class="loading-screen">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">Loading FIFA Manager...</div>
-        <div class="loading-progress" id="loadingProgress">Initializing...</div>
-    </div>
 
-    <!-- Team Selection Modal -->
-    <div id="teamSelectModal" class="modal hidden">
-        <div class="modal-content">
-            <h1 class="modal-title">SELECT YOUR TEAM</h1>
-            <p class="modal-subtitle">Choose a club to begin your managerial career</p>
-            <div class="league-filter" id="leagueFilter"></div>
-            <div id="teamGrid" class="team-grid"></div>
-        </div>
-    </div>
+<!-- Loading Screen -->
+<div class="loading-screen" id="loadingScreen">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">LOADING FIFA MANAGER</div>
+    <div class="loading-progress" id="loadingProgress">Initializing...</div>
+</div>
 
-    <!-- Match Result Modal -->
-    <div id="matchResultModal" class="modal hidden">
-        <div class="modal-content match-result-modal">
-            <div id="matchResultContent"></div>
-        </div>
-    </div>
-
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="club-badge" id="clubBadge">âš½</div>
-            <div class="manager-info">
-                <div class="manager-name">Manager</div>
-                <div class="club-name" id="clubName">Select a Team</div>
-            </div>
-            <div class="header-stats">
-                <div class="header-stat">
-                    <div class="header-stat-label">Budget</div>
-                    <div class="header-stat-value" id="clubBudget">Â£0M</div>
-                </div>
-                <div class="header-stat">
-                    <div class="header-stat-label">Season</div>
-                    <div class="header-stat-value" id="currentSeason">2024/25</div>
-                </div>
-            </div>
-            <div class="overall-badge" id="teamOverall">--</div>
-        </div>
-
-        <!-- Navigation -->
-        <nav class="nav-bar">
-            <div class="nav-item active" onclick="showTab('central')">Central</div>
-            <div class="nav-item" onclick="showTab('squad')">Squad</div>
-            <div class="nav-item" onclick="showTab('table')">Table</div>
-            <div class="nav-item" onclick="showTab('fixtures')">Fixtures</div>
-            <div class="nav-item" onclick="showTab('transfers')">Transfers <span class="badge" id="offerBadge" style="display:none;">0</span></div>
-            <div class="nav-item" onclick="showTab('office')">Office</div>
-            <div class="nav-item" onclick="showTab('news')">News</div>
-        </nav>
-
-        <!-- Central Tab -->
-        <div id="tab-central" class="tab-content active">
-            <div class="fifa-career-layout">
-                <!-- Main Content Grid -->
-                <div class="career-content-grid">
-                    <!-- Top Left: Advance & Calendar -->
-                    <div class="career-panel panel-advance">
-                        <div class="panel-title">ADVANCE</div>
-                        <div class="panel-subtitle" id="advanceDate">JAN 2025</div>
-                        <div class="calendar-days">
-                            <div class="calendar-day">
-                                <div class="day-label">TUE</div>
-                                <div class="day-icon">📅</div>
-                            </div>
-                            <div class="calendar-day">
-                                <div class="day-label">WED</div>
-                                <div class="day-icon">📅</div>
-                            </div>
-                            <div class="calendar-day">
-                                <div class="day-label">THU</div>
-                                <div class="day-icon">📅</div>
-                            </div>
-                            <div class="calendar-day">
-                                <div class="day-label">FRI</div>
-                                <div class="day-icon">📅</div>
-                            </div>
-                            <div class="calendar-day">
-                                <div class="day-label">SAT</div>
-                                <div class="day-icon">📅</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Top Right: Featured News -->
-                    <div class="career-panel panel-featured">
-                        <div class="featured-headline" id="featuredHeadline">SEASON UNDERWAY - FIXTURES SCHEDULED</div>
-                        <div class="featured-date" id="featuredDate">Thursday, January 30, 2025</div>
-                        <div class="featured-image" id="featuredImage">
-                            <div style="width:100%;height:100%;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:3rem;">📰</div>
-                        </div>
-                    </div>
-
-                    <!-- Bottom Left: Global Transfer Network -->
-                    <div class="career-panel panel-transfers">
-                        <div class="panel-title">GLOBAL TRANSFER NETWORK</div>
-                        <div class="transfer-header">
-                            <span class="transfer-scout-name" id="scoutName">B. WOOD</span>
-                            <span class="transfer-new">↑ <strong id="newScoutCount">0</strong> New</span>
-                            <span class="transfer-updates">↓ <strong>0</strong> Updates</span>
-                        </div>
-                        <div class="transfer-player-list" id="transferPlayerList">
-                            <div style="text-align:center;color:rgba(255,255,255,0.4);padding:30px;font-size:0.85rem;">No scouting reports<br><span style="font-size:0.75rem;opacity:0.6;">Scout players from Transfers tab</span></div>
-                        </div>
-                    </div>
-
-                    <!-- Bottom Middle: News List -->
-                    <div class="career-panel panel-news">
-                        <div class="panel-title-news">NEWS</div>
-                        <div class="news-list" id="newsList">
-                            <div class="news-item">
-                                <div class="news-bar"></div>
-                                <div class="news-text">Season fixtures scheduled</div>
-                            </div>
-                            <div class="news-item">
-                                <div class="news-bar"></div>
-                                <div class="news-text">Transfer window begins</div>
-                            </div>
-                            <div class="news-item">
-                                <div class="news-bar"></div>
-                                <div class="news-text">Pre-season training starts</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Bottom Right: Fixtures -->
-                    <div class="career-panel panel-fixtures">
-                        <div class="panel-title-fixtures">FIXTURES</div>
-                        <div class="fixtures-subtitle">View all results and fixtures</div>
-                        <div class="fixtures-image">
-                            <div style="width:100%;height:100%;background:rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;font-size:3rem;">🏆</div>
-                        </div>
-                        <button class="advance-button" onclick="advanceToNextMatch()">▶ ADVANCE TO NEXT MATCH</button>
-                    </div>
+<!-- Main Game Container -->
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <div class="club-info">
+            <div class="club-badge" id="clubBadge">⚽</div>
+            <div>
+                <div class="club-name" id="clubName">Select Team</div>
+                <div class="season-info">
+                    <span class="info-item">
+                        <span class="info-label">Budget</span>
+                        <span class="info-value" id="clubBudget">£0M</span>
+                    </span>
                 </div>
             </div>
         </div>
-
-        <!-- Squad Tab (Formation View) -->
-        <!-- FIFA MANAGER - Squad Formation Tab Structure -->
-        <!-- This should replace your existing squad tab content in game.html -->
-
-        <div id="tab-squad" class="tab-content">
-            <!-- Left Panel - Player Detail -->
-            <div id="playerDetailLeft">
-                <div class="no-player-selected">Select a player to view details</div>
+        <div class="season-info">
+            <div class="info-item">
+                <span class="info-label">Season</span>
+                <span class="info-value" id="currentSeason">2024/25</span>
             </div>
-
-            <!-- Center - Formation Pitch -->
-            <div id="formationPitchCenter">
-                <div class="formation-header">
-                    <div class="formation-team-name" id="formationTeamName">TEAM DEFAULT</div>
-                    <div class="formation-system" id="formationSystem">4-5-1</div>
-                </div>
-                
-                <div id="pitch3d">
-                    <!-- Players will be rendered here by JavaScript -->
-                </div>
-
-                <!-- Substitutes and Reserves -->
-                <div id="substitutesContainer">
-                    <!-- Will be populated by JavaScript -->
-                </div>
-            </div>
-
-            <!-- Right Panel - Stats -->
-            <div id="playerDetailRight">
-                <div class="no-stats-selected">Player stats will appear here</div>
-            </div>
-        </div>
-
-        <!-- Note: Add this CSS link to your game.html <head> section -->
-        <!-- <link rel="stylesheet" href="formation-styles.css"> -->
-
-
-        <!-- Squad List (sub-page) -->
-        <div id="tab-squad-list" class="tab-content">
-            <div class="main-content">
-                <button class="back-btn" onclick="showTab('squad')">← Back to Squad</button>
-                <div class="card">
-                    <div class="card-title">Your Squad</div>
-                    <div class="card-subtitle" id="squadSubtitle">Loading...</div>
-                    <div id="squadGrid" class="squad-grid"></div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Table Tab -->
-        <div id="tab-table" class="tab-content">
-            <div class="main-content">
-                <div class="card">
-                    <div class="card-title" id="leagueName">League Table</div>
-                    <div class="card-subtitle">Season 2024/25</div>
-                    <div id="leagueTable" class="league-table"></div>
-                </div>
-
-                <div class="card">
-                    <div class="card-title">Season Statistics</div>
-                    <div class="content-grid">
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: 700; color: #00d4ff;" id="matchesPlayed">0</div>
-                            <div style="color: rgba(255,255,255,0.6); margin-top: 5px;">Matches Played</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: 700; color: #00d4ff;" id="wins">0</div>
-                            <div style="color: rgba(255,255,255,0.6); margin-top: 5px;">Wins</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: 700; color: #00d4ff;" id="draws">0</div>
-                            <div style="color: rgba(255,255,255,0.6); margin-top: 5px;">Draws</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: 700; color: #00d4ff;" id="losses">0</div>
-                            <div style="color: rgba(255,255,255,0.6); margin-top: 5px;">Losses</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: 700; color: #00d4ff;" id="goalsScored">0</div>
-                            <div style="color: rgba(255,255,255,0.6); margin-top: 5px;">Goals Scored</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: 700; color: #00d4ff;" id="goalsConceded">0</div>
-                            <div style="color: rgba(255,255,255,0.6); margin-top: 5px;">Goals Conceded</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Fixtures Tab -->
-        <div id="tab-fixtures" class="tab-content">
-            <div class="main-content">
-                <div class="card">
-                    <div class="card-title">Upcoming Fixtures</div>
-                    <div id="fixturesContent" class="content-grid">Loading...</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Transfers Tab -->
-        <div id="tab-transfers" class="tab-content">
-            <div class="transfer-hub-layout">
-                <!-- TOP ROW -->
-                <div class="transfer-panel transfer-panel-search">
-                    <div class="tp-header">
-                        <span class="tp-title" id="tpTitle">ANY POSITION</span>
-                        <span class="tp-subtitle" id="tpPositionLabel">Promising</span>
-                    </div>
-                    <div class="tp-player-list" id="tpPlayerList"></div>
-                </div>
-                <div class="transfer-panel-right-col">
-                    <div class="transfer-panel transfer-panel-search-btn" onclick="openSearchOverlay()">
-                        <div class="tpsb-icon">🔍</div>
-                        <div class="tpsb-text">
-                            <div class="tpsb-title">SEARCH PLAYERS</div>
-                            <div class="tpsb-sub">Search for a specific player or use filters</div>
-                        </div>
-                    </div>
-                    <div class="transfer-panel transfer-panel-hub">
-                        <div class="tp-header"><span class="tp-title">TRANSFER HUB</span></div>
-                        <div class="thub-body">
-                            <div class="thub-budget">
-                                <div class="thub-budget-label">Transfer Budget</div>
-                                <div class="thub-budget-val" id="thubBudget">€0</div>
-                            </div>
-                            <div class="thub-offers-btn" onclick="openSearchOverlay()">📬 Incoming Offers <span id="offerCount" class="transfer-badge" style="display:none;">0</span></div>
-                        </div>
-                    </div>
-                </div>
-                <!-- BOTTOM ROW -->
-                <div class="transfer-panel transfer-panel-network">
-                    <div class="tp-header"><span class="tp-title">GLOBAL TRANSFER NETWORK</span></div>
-                    <div class="tnet-body" id="tnetOffers"></div>
-                </div>
-                <div class="transfer-panel transfer-panel-history">
-                    <div class="tp-header"><span class="tp-title">TRANSFER HISTORY</span></div>
-                    <div class="thist-body" id="thistContent"></div>
-                </div>
-            </div>
-
-            <!-- SEARCH OVERLAY -->
-            <div id="searchOverlay" class="search-overlay hidden">
-                <!-- Top nav bar -->
-                <div class="so-nav">
-                    <button class="so-nav-back" onclick="closeSearchOverlay()">◀ Back</button>
-                    <span class="so-nav-crumb">Transfers</span>
-                    <span style="color:rgba(255,255,255,0.2);">|</span>
-                    <span class="so-nav-crumb" style="color:#fff;">Search Players</span>
-                    <span style="color:rgba(255,255,255,0.2);">|</span>
-                    <span class="so-nav-sub">Search Filters</span>
-                </div>
-                <div class="search-overlay-inner">
-                    <div class="so-grid">
-                        <!-- 1: Player Name (spans both rows) -->
-                        <div class="so-tile so-tile-name">
-                            <div class="so-tile-label">Player Name</div>
-                            <!-- silhouette icon + input on same row -->
-                            <div style="display:flex;align-items:center;gap:8px;width:100%;">
-                                <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                                    <svg width="16" height="20" viewBox="0 0 32 36" fill="none"><ellipse cx="16" cy="11" rx="7" ry="8" fill="rgba(255,255,255,0.5)"/><ellipse cx="16" cy="33" rx="13" ry="9" fill="rgba(255,255,255,0.35)"/></svg>
-                                </div>
-                                <input type="text" class="so-name-input" id="soNameInput" placeholder="Any" oninput="soRunSearch()" style="flex:1;">
-                            </div>
-                            <div class="so-name-results" id="soNameResults"></div>
-                        </div>
-                        <!-- 2: Position -->
-                        <div class="so-tile">
-                            <div class="so-tile-icon-wrap">
-                                <svg width="28" height="32" viewBox="0 0 28 32" fill="none"><rect x="2" y="2" width="24" height="28" rx="3" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" fill="none"/><circle cx="14" cy="10" r="3.5" fill="rgba(255,255,255,0.4)"/><path d="M7 26 C7 20 14 17 14 17 C14 17 21 20 21 26" fill="rgba(255,255,255,0.25)"/></svg>
-                            </div>
-                            <div class="so-tile-label">Position</div>
-                            <div class="so-tile-sub" id="soPosRole">Role</div>
-                            <div class="so-arrows">
-                                <button class="so-arrow" onclick="cyclePosition(-1)">◀</button>
-                                <span class="so-arrow-val" id="soPosVal">Any</span>
-                                <button class="so-arrow" onclick="cyclePosition(1)">▶</button>
-                            </div>
-                        </div>
-                        <!-- 3: Nationality/Region -->
-                        <div class="so-tile">
-                            <div class="so-tile-icon-wrap">
-                                <svg width="30" height="24" viewBox="0 0 30 24" fill="none"><rect x="1" y="2" width="14" height="20" rx="1" stroke="rgba(255,255,255,0.22)" stroke-width="1.2" fill="none"/><rect x="2" y="3" width="6" height="8" fill="rgba(255,255,255,0.35)"/><rect x="9" y="3" width="5" height="8" fill="rgba(255,255,255,0.2)"/><rect x="2" y="12" width="12" height="9" fill="rgba(255,255,255,0.15)"/><line x1="16" y1="2" x2="16" y2="22" stroke="rgba(255,255,255,0.15)" stroke-width="1"/></svg>
-                            </div>
-                            <div class="so-tile-label">Nationality/Region</div>
-                            <div class="so-arrows">
-                                <button class="so-arrow" onclick="cycleNationality(-1)">◀</button>
-                                <span class="so-arrow-val" id="soNatVal">Any</span>
-                                <button class="so-arrow" onclick="cycleNationality(1)">▶</button>
-                            </div>
-                        </div>
-                        <!-- 4: Transfer Status -->
-                        <div class="so-tile">
-                            <div class="so-tile-icon-wrap">
-                                <svg width="30" height="22" viewBox="0 0 30 22" fill="none"><path d="M3 6 L12 6 L12 3 L18 8 L12 13 L12 10 L3 10 Z" fill="rgba(255,255,255,0.3)"/><path d="M27 16 L18 16 L18 13 L12 18 L18 23 L18 20 L27 20 Z" fill="rgba(255,255,255,0.2)" transform="translate(0,-4)"/></svg>
-                            </div>
-                            <div class="so-tile-label">Transfer Status</div>
-                            <div class="so-arrows">
-                                <button class="so-arrow" onclick="cycleStatus(-1)">◀</button>
-                                <span class="so-arrow-val" id="soStatusVal">Any</span>
-                                <button class="so-arrow" onclick="cycleStatus(1)">▶</button>
-                            </div>
-                        </div>
-                        <!-- 5: Age -->
-                        <div class="so-tile">
-                            <div class="so-tile-icon-wrap" style="flex-shrink:0;">
-                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9.5" stroke="rgba(255,255,255,0.25)" stroke-width="1.2" fill="none"/><path d="M11 5 L11 11 L15 14" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg>
-                            </div>
-                            <div class="so-tile-label">Age</div>
-                            <div class="so-age-row">
-                                <div class="so-age-field"><div class="so-age-label">MIN</div><input type="number" class="so-age-input" id="soAgeMin" value="16" min="16" max="40" oninput="soRunSearch()"></div>
-                                <div class="so-age-field"><div class="so-age-label">MAX</div><input type="number" class="so-age-input" id="soAgeMax" value="35" min="16" max="40" oninput="soRunSearch()"></div>
-                            </div>
-                        </div>
-                        <!-- 6: Country/Region -->
-                        <div class="so-tile">
-                            <div class="so-tile-icon-wrap">
-                                <svg width="30" height="24" viewBox="0 0 30 24" fill="none"><rect x="1" y="2" width="14" height="20" rx="1" stroke="rgba(255,255,255,0.22)" stroke-width="1.2" fill="none"/><rect x="2" y="3" width="12" height="6" fill="rgba(255,255,255,0.18)"/><rect x="2" y="10" width="12" height="5" fill="rgba(255,255,255,0.3)"/><rect x="2" y="16" width="12" height="5" fill="rgba(255,255,255,0.18)"/><line x1="16" y1="2" x2="16" y2="22" stroke="rgba(255,255,255,0.15)" stroke-width="1"/></svg>
-                            </div>
-                            <div class="so-tile-label">Country/Region</div>
-                            <div class="so-arrows">
-                                <button class="so-arrow" onclick="cycleCountry(-1)">◀</button>
-                                <span class="so-arrow-val" id="soCountryVal">Any</span>
-                                <button class="so-arrow" onclick="cycleCountry(1)">▶</button>
-                            </div>
-                        </div>
-                        <!-- 7: League -->
-                        <div class="so-tile">
-                            <div class="so-tile-icon-wrap">
-                                <svg width="26" height="28" viewBox="0 0 26 28" fill="none"><path d="M13 2 L5 7 L5 18 C5 22 9 26 13 27 C17 26 21 22 21 18 L21 7 Z" stroke="rgba(255,255,255,0.25)" stroke-width="1.2" fill="none"/><path d="M9 14 L11.5 17 L17 10" stroke="rgba(255,255,255,0.45)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-                            </div>
-                            <div class="so-tile-label">League</div>
-                            <div class="so-arrows">
-                                <button class="so-arrow" onclick="cycleLeague(-1)">◀</button>
-                                <span class="so-arrow-val" id="soLeagueVal">Any</span>
-                                <button class="so-arrow" onclick="cycleLeague(1)">▶</button>
-                            </div>
-                        </div>
-                        <!-- 8: Team (slightly dimmed) -->
-                        <div class="so-tile dimmed" id="soTeamTile">
-                            <div class="so-tile-icon-wrap">
-                                <svg width="26" height="28" viewBox="0 0 26 28" fill="none"><path d="M13 1 L3 5 L3 16 C3 21 8 26 13 27 C18 26 23 21 23 16 L23 5 Z" stroke="rgba(255,255,255,0.3)" stroke-width="1.2" fill="none"/><path d="M8 12 L13 9 L18 12 L18 18 L13 21 L8 18 Z" fill="rgba(255,255,255,0.15)"/></svg>
-                            </div>
-                            <div class="so-tile-label">Team</div>
-                            <div class="so-arrows">
-                                <button class="so-arrow" onclick="cycleTeam(-1)">◀</button>
-                                <span class="so-arrow-val" id="soTeamVal">Any</span>
-                                <button class="so-arrow" onclick="cycleTeam(1)">▶</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 50/50 Split: List on left, Preview on right -->
-                    <div class="so-split-container">
-                        <div class="so-split-left">
-                            <div class="so-list-header">
-                                <div class="so-list-count"><strong id="soListCount">0</strong> Players Found</div>
-                                <div class="so-list-sort">
-                                    <span class="active" onclick="soSetSort('potential')">Potential</span>
-                                    <span onclick="soSetSort('overall')">Overall</span>
-                                    <span onclick="soSetSort('value')">Value</span>
-                                    <span onclick="soSetSort('age')">Age</span>
-                                </div>
-                            </div>
-                            <div class="so-list-scroll" id="soListScroll"></div>
-                        </div>
-                        <div class="so-split-right">
-                            <div class="so-preview-wrap" id="soPreviewWrap">
-                                <div class="so-preview-empty">Select a player to view details</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Bottom bar -->
-                    <div class="so-bottom">
-                        <div class="so-bottom-left">
-                            <span class="so-bottom-hint"><span class="so-hint-key">⊗</span> Select</span>
-                            <span class="so-bottom-hint"><span class="so-hint-key">◀</span> Back</span>
-                            <span class="so-bottom-hint"><span class="so-hint-key">⟲</span> Reset</span>
-                            <span class="so-bottom-hint"><span class="so-hint-key">⊕</span> Submit Search</span>
-                        </div>
-                        <div style="display:flex;gap:10px;">
-                            <button class="so-btn so-btn-reset" onclick="soResetFilters()">⟲ Reset</button>
-                            <button class="so-btn so-btn-submit" onclick="soSubmitSearch()">Submit Search</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- SCOUT OVERLAY (click on player row) -->
-            <div id="scoutOverlay" class="scout-overlay hidden">
-                <div id="scoutOverlayContent" class="scout-overlay-content"></div>
-            </div>
-        </div>
-
-        <!-- Office Tab -->
-        <div id="tab-office" class="tab-content">
-            <div class="main-content" style="padding:20px 30px;">
-                <div id="officeBudgetCard" class="office-budget-card"></div>
-                <div class="card" style="margin-top:20px;">
-                    <div class="card-title">Squad Contracts</div>
-                    <div class="card-subtitle">Manage wages and contract status</div>
-                    <div id="contractsTable" class="contracts-table"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Player Detail Modal -->
-        <div id="playerDetailModal" class="modal hidden">
-            <div class="modal-content player-detail-modal" id="playerDetailContent"></div>
-        </div>
-
-        <!-- News Tab -->
-        <div id="tab-news" class="tab-content">
-            <div class="main-content">
-                <div class="card">
-                    <div class="card-title">Latest News</div>
-                    <div class="card-subtitle">Stay updated with the latest football news</div>
-                    <div id="newsGrid" class="news-grid"></div>
-                </div>
+            <div class="info-item">
+                <span class="info-label">Overall</span>
+                <span class="info-value" id="teamOverall">75</span>
             </div>
         </div>
     </div>
 
-    <script src="TransferSystem.js"></script>
-    <script src="MatchSimulation.js?v=3"></script>
-    <script src="game.js?v=3"></script>
+    <!-- Navigation -->
+    <div class="nav-menu">
+        <div class="nav-item active" onclick="showTab('central')">CENTRAL</div>
+        <div class="nav-item" onclick="showTab('squad')">SQUAD</div>
+        <div class="nav-item" onclick="showTab('table')">TABLE</div>
+        <div class="nav-item" onclick="showTab('fixtures')">FIXTURES</div>
+        <div class="nav-item" onclick="showTab('transfers')">TRANSFERS</div>
+        <div class="nav-item" onclick="showTab('office')">OFFICE</div>
+        <div class="nav-item" onclick="showTab('news')">NEWS</div>
+    </div>
+
+    <!-- Central Tab -->
+    <div id="tab-central" class="tab-content active">
+        <h2>Career Hub</h2>
+        <div id="centralContent"></div>
+    </div>
+
+    <!-- Squad Tab -->
+    <div id="tab-squad" class="tab-content">
+        <!-- Left Panel - Player Detail -->
+        <div id="playerDetailLeft">
+            <div class="no-player-selected">Select a player to view details</div>
+        </div>
+
+        <!-- Center - Formation Pitch -->
+        <div id="formationPitchCenter">
+            <div class="formation-header">
+                <div class="formation-team-name" id="formationTeamName">TEAM DEFAULT</div>
+                <div class="formation-system" id="formationSystem">4-5-1</div>
+            </div>
+            
+            <div id="pitch3d">
+                <!-- Players will be rendered here by JavaScript -->
+            </div>
+
+            <!-- Substitutes and Reserves -->
+            <div id="substitutesContainer">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Right Panel - Stats -->
+        <div id="playerDetailRight">
+            <div class="no-stats-selected">Player stats will appear here</div>
+        </div>
+    </div>
+
+    <!-- Table Tab -->
+    <div id="tab-table" class="tab-content">
+        <h2 id="leagueName">League Table</h2>
+        <div id="leagueTable"></div>
+    </div>
+
+    <!-- Fixtures Tab -->
+    <div id="tab-fixtures" class="tab-content">
+        <h2>Upcoming Fixtures</h2>
+        <div id="fixturesContent"></div>
+    </div>
+
+    <!-- Transfers Tab -->
+    <div id="tab-transfers" class="tab-content">
+        <h2>Transfer Market</h2>
+        <div id="transfersContent"></div>
+    </div>
+
+    <!-- Office Tab -->
+    <div id="tab-office" class="tab-content">
+        <h2>Club Office</h2>
+        <div id="officeContent"></div>
+    </div>
+
+    <!-- News Tab -->
+    <div id="tab-news" class="tab-content">
+        <h2>Latest News</h2>
+        <div id="newsGrid"></div>
+    </div>
+</div>
+
+<!-- Team Selection Modal -->
+<div id="teamSelectModal" class="modal hidden">
+    <div class="modal-content">
+        <h2 class="modal-title">SELECT YOUR TEAM</h2>
+        <div id="leagueFilter"></div>
+        <div id="teamGrid"></div>
+    </div>
+</div>
+
+<!-- Match Result Modal -->
+<div id="matchResultModal" class="modal hidden">
+    <div class="modal-content">
+        <div id="matchResultContent"></div>
+    </div>
+</div>
+
+<!-- Scripts - Load in correct order -->
+<script src="MatchSimulation.js"></script>
+<script src="TransferSystem.js"></script>
+<script src="core.js"></script>
+<script src="ui.js"></script>
+<script src="squad.js"></script>
+<script src="matches.js"></script>
+<script src="transfers.js"></script>
+<script src="office.js"></script>
+
 </body>
 </html>
