@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FIFA Manager - Career Mode</title>
+    <link rel="stylesheet" href="https://use.typekit.net/iys5clu.css">
+    <link rel="stylesheet" href="formation-styles.css">
     <link rel="stylesheet" href="style.css">
     <style>
         /* Additional styles for images */
@@ -192,81 +194,41 @@
         </div>
 
         <!-- Squad Tab (Formation View) -->
+        <!-- FIFA MANAGER - Squad Formation Tab Structure -->
+        <!-- This should replace your existing squad tab content in game.html -->
+
         <div id="tab-squad" class="tab-content">
-            <div class="squad-fifa-layout">
-                <!-- Left: Formation Display -->
-                <div class="formation-display">
-                    <div class="formation-header">
-                        <div class="formation-title" id="formationTeamName">TEAM DEFAULT</div>
-                        <div class="formation-name" id="formationSystem">4-3-3</div>
-                    </div>
-                    <div class="pitch-container">
-                        <div class="pitch-3d" id="pitch3d">
-                            <!-- Players will be positioned here by JS -->
-                        </div>
-                    </div>
+            <!-- Left Panel - Player Detail -->
+            <div id="playerDetailLeft">
+                <div class="no-player-selected">Select a player to view details</div>
+            </div>
+
+            <!-- Center - Formation Pitch -->
+            <div id="formationPitchCenter">
+                <div class="formation-header">
+                    <div class="formation-team-name" id="formationTeamName">TEAM DEFAULT</div>
+                    <div class="formation-system" id="formationSystem">4-5-1</div>
+                </div>
+                
+                <div id="pitch3d">
+                    <!-- Players will be rendered here by JavaScript -->
                 </div>
 
-                <!-- Right: Management Tiles -->
-                <div class="squad-tiles">
-                    <div class="squad-tile" onclick="showSquadList()">
-                        <div class="tile-badge" id="squadTileBadge">⚽</div>
-                        <div class="tile-info">
-                            <div class="tile-heading">CLUB SQUAD</div>
-                            <div class="tile-checkmark">✓</div>
-                            <div class="tile-subtext" id="squadTileTeam">Your Team</div>
-                        </div>
-                    </div>
-
-                    <div class="squad-tile disabled">
-                        <div class="tile-info">
-                            <div class="tile-heading">NATL SQUAD</div>
-                            <div class="tile-subtext">You are not managing a NATL Team right now</div>
-                        </div>
-                    </div>
-
-                    <div class="squad-tile" onclick="showSquadReport()">
-                        <div class="tile-image">
-                            <div style="width:100%;height:100%;background:rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;font-size:2rem;">📊</div>
-                        </div>
-                        <div class="tile-info">
-                            <div class="tile-heading">SQUAD REPORT</div>
-                            <div class="tile-subtext">Info on your current squad</div>
-                        </div>
-                    </div>
-
-                    <div class="squad-tile disabled">
-                        <div class="tile-image">
-                            <div style="width:100%;height:100%;background:rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;font-size:2rem;">🏴</div>
-                        </div>
-                        <div class="tile-info">
-                            <div class="tile-heading">NATL SQUAD SELECTION</div>
-                            <div class="tile-subtext">Only available for NATL Teams</div>
-                        </div>
-                    </div>
-
-                    <div class="squad-tile" onclick="alert('Team Sheets - Coming Soon')">
-                        <div class="tile-image">
-                            <div style="width:100%;height:100%;background:rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;font-size:2rem;">📋</div>
-                        </div>
-                        <div class="tile-info">
-                            <div class="tile-heading">TEAM SHEETS</div>
-                            <div class="tile-subtext">Edit existing team sheets and fully manage your team</div>
-                        </div>
-                    </div>
-
-                    <div class="squad-tile" onclick="alert('Kit Numbers - Coming Soon')">
-                        <div class="tile-image">
-                            <div style="width:100%;height:100%;background:rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;font-size:2rem;">🔢</div>
-                        </div>
-                        <div class="tile-info">
-                            <div class="tile-heading">KIT NUMBERS</div>
-                            <div class="tile-subtext">Assign your players' kit numbers</div>
-                        </div>
-                    </div>
+                <!-- Substitutes and Reserves -->
+                <div id="substitutesContainer">
+                    <!-- Will be populated by JavaScript -->
                 </div>
             </div>
+
+            <!-- Right Panel - Stats -->
+            <div id="playerDetailRight">
+                <div class="no-stats-selected">Player stats will appear here</div>
+            </div>
         </div>
+
+        <!-- Note: Add this CSS link to your game.html <head> section -->
+        <!-- <link rel="stylesheet" href="formation-styles.css"> -->
+
 
         <!-- Squad List (sub-page) -->
         <div id="tab-squad-list" class="tab-content">
